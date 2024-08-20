@@ -2,109 +2,636 @@
 %*******************************************************************************
 %****************************** Second Chapter *********************************
 %*******************************************************************************
+\chapter{Literature Review} \label{sec:Literature Review}
 
-\chapter{My second chapter}
-
-\ifpdf
-    \graphicspath{{Chapter2/Figs/Raster/}{Chapter2/Figs/PDF/}{Chapter2/Figs/}}
-\else
-    \graphicspath{{Chapter2/Figs/Vector/}{Chapter2/Figs/}}
-\fi
+\graphicspath{{Chapter2/Figs/}}
 
 
-\section[Short title]{Reasonably long section title}
-
-% Uncomment this line, when you have siunitx package loaded.
-%The SI Units for dynamic viscosity is \si{\newton\second\per\metre\squared}.
-I'm going to randomly include a picture Figure~\ref{fig:minion}.
+\textit{Note: \cref{sec:light} and \cref{sec:cgh} partly contains my masters project's report submitted in 2020 for M.Eng. degree.}
 
 
-If you have trouble viewing this document contact Krishna at: \href{mailto:kks32@cam.ac.uk}{kks32@cam.ac.uk} or raise an issue at \url{https://github.com/kks32/phd-thesis-template/}
+\section{Light} \label{sec:light}
+\subsection{Light Source}
+For any type of projection, a light source is needed, whether it's artificial or natural. The mechanism of holographic projection is to control the propagation of light in a way that, after diffraction and interference, reconstructs a wavefront that matches the target field. We usually prefer to start from a coherent and monochromatic light source rather than a random source which will be a lot more difficult or even impossible to analyse and predict the interference pattern. Laser, which stands for \textit{\textbf{l}ight \textbf{a}mplification by the \textbf{s}timulated \textbf{e}mission of \textbf{r}adiation}, was first invented by Theodore Maiman in 1959 \cite{Gordon1959, Cartlidge2007}. It differs from other sources of light in that it emits coherent light, which is suitable for holographic projection. However, the coherent and monochromatic property of laser also has a side effect of speckle noise in the reconstructed image \cite{John1966}.
 
-
-\begin{figure}[htbp!] 
-\centering    
-\includegraphics[width=1.0\textwidth]{minion}
-\caption[Minion]{This is just a long figure caption for the minion in Despicable Me from Pixar}
-\label{fig:minion}
-\end{figure}
-
-
-\section*{Enumeration}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae laoreet lectus. Donec lacus quam, malesuada ut erat vel, consectetur eleifend tellus. Aliquam non feugiat lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque a dolor sit amet dui malesuada malesuada id ac metus. Phasellus posuere egestas mauris, sed porta arcu vulputate ut. Donec arcu erat, ultrices et nisl ut, ultricies facilisis urna. Quisque iaculis, lorem non maximus pretium, dui eros auctor quam, sed sodales libero felis vel orci. Aliquam neque nunc, elementum id accumsan eu, varius eu enim. Aliquam blandit ante et ligula tempor pharetra. Donec molestie porttitor commodo. Integer rutrum turpis ac erat tristique cursus. Sed venenatis urna vel tempus venenatis. Nam eu rhoncus eros, et condimentum elit. Quisque risus turpis, aliquam eget euismod id, gravida in odio. Nunc elementum nibh risus, ut faucibus mauris molestie eu.
- Vivamus quis nunc nec nisl vulputate fringilla. Duis tempus libero ac justo laoreet tincidunt. Fusce sagittis gravida magna, pharetra venenatis mauris semper at. Nullam eleifend felis a elementum sagittis. In vel turpis eu metus euismod tempus eget sit amet tortor. Donec eu rhoncus libero, quis iaculis lectus. Aliquam erat volutpat. Proin id ullamcorper tortor. Fusce vestibulum a enim non volutpat. Nam ut interdum nulla. Proin lacinia felis malesuada arcu aliquet fringilla. Aliquam condimentum, tellus eget maximus porttitor, quam sem luctus massa, eu fermentum arcu diam ac massa. Praesent ut quam id leo molestie rhoncus. Praesent nec odio eget turpis bibendum eleifend non sit amet mi. Curabitur placerat finibus velit, eu ultricies risus imperdiet ut. Suspendisse lorem orci, luctus porta eros a, commodo maximus nisi.
-
-Nunc et dolor diam. Phasellus eu justo vitae diam vehicula tristique. Vestibulum vulputate cursus turpis nec commodo. Etiam elementum sit amet erat et pellentesque. In eu augue sed tortor mollis tincidunt. Mauris eros dui, sagittis vestibulum vestibulum vitae, molestie a velit. Donec non felis ut velit aliquam convallis sit amet sit amet velit. Aliquam vulputate, elit in lacinia lacinia, odio lacus consectetur quam, sit amet facilisis mi justo id magna. Curabitur aliquet pulvinar eros. Cras metus enim, tristique ut magna a, interdum egestas nibh. Aenean lorem odio, varius a sollicitudin non, cursus a odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
-\begin{enumerate}
-\item The first topic is dull
-\item The second topic is duller
-\begin{enumerate}
-\item The first subtopic is silly
-\item The second subtopic is stupid
-\end{enumerate}
-\item The third topic is the dullest
-\end{enumerate}
-Morbi bibendum est aliquam, hendrerit dolor ac, pretium sem. Nunc molestie, dui in euismod finibus, nunc enim viverra enim, eu mattis mi metus id libero. Cras sed accumsan justo, ut volutpat ipsum. Nam faucibus auctor molestie. Morbi sit amet eros a justo pretium aliquet. Maecenas tempor risus sit amet tincidunt tincidunt. Curabitur dapibus gravida gravida. Vivamus porta ullamcorper nisi eu molestie. Ut pretium nisl eu facilisis tempor. Nulla rutrum tincidunt justo, id placerat lacus laoreet et. Sed cursus lobortis vehicula. Donec sed tortor et est cursus pellentesque sit amet sed velit. Proin efficitur posuere felis, porta auctor nunc. Etiam non porta risus. Pellentesque lacinia eros at ante iaculis, sed aliquet ipsum volutpat. Suspendisse potenti.
-
-Ut ultrices lectus sed sagittis varius. Nulla facilisi. Nullam tortor sem, placerat nec condimentum eu, tristique eget ex. Nullam pretium tellus ut nibh accumsan elementum. Aliquam posuere gravida tellus, id imperdiet nulla rutrum imperdiet. Nulla pretium ullamcorper quam, non iaculis orci consectetur eget. Curabitur non laoreet nisl. Maecenas lacinia, lorem vel tincidunt cursus, odio lorem aliquet est, gravida auctor arcu urna id enim. Morbi accumsan bibendum ipsum, ut maximus dui placerat vitae. Nullam pretium ac tortor nec venenatis. Nunc non aliquet neque. 
-
-\section*{Itemize}
-\begin{itemize}
-\item The first topic is dull
-\item The second topic is duller
-\begin{itemize}
-\item The first subtopic is silly
-\item The second subtopic is stupid
-\end{itemize}
-\item The third topic is the dullest
-\end{itemize}
-
-\section*{Description}
-\begin{description}
-\item[The first topic] is dull
-\item[The second topic] is duller
-\begin{description}
-\item[The first subtopic] is silly
-\item[The second subtopic] is stupid
-\end{description}
-\item[The third topic] is the dullest
-\end{description}
-
-
-\clearpage
-
-\tochide\section{Hidden section}
-\textbf{Lorem ipsum dolor sit amet}, \textit{consectetur adipiscing elit}. In magna nisi, aliquam id blandit id, congue ac est. Fusce porta consequat leo. Proin feugiat at felis vel consectetur. Ut tempus ipsum sit amet congue posuere. Nulla varius rutrum quam. Donec sed purus luctus, faucibus velit id, ultrices sapien. Cras diam purus, tincidunt eget tristique ut, egestas quis nulla. Curabitur vel iaculis lectus. Nunc nulla urna, ultrices et eleifend in, accumsan ut erat. In ut ante leo. Aenean a lacinia nisl, sit amet ullamcorper dolor. Maecenas blandit, tortor ut scelerisque congue, velit diam volutpat metus, sed vestibulum eros justo ut nulla. Etiam nec ipsum non enim luctus porta in in massa. Cras arcu urna, malesuada ut tellus ut, pellentesque mollis risus.Morbi vel tortor imperdiet arcu auctor mattis sit amet eu nisi. Nulla gravida urna vel nisl egestas varius. Aliquam posuere ante quis malesuada dignissim. Mauris ultrices tristique eros, a dignissim nisl iaculis nec. Praesent dapibus tincidunt mauris nec tempor. Curabitur et consequat nisi. Quisque viverra egestas risus, ut sodales enim blandit at. Mauris quis odio nulla. Cras euismod turpis magna, in facilisis diam congue non. Mauris faucibus nisl a orci dictum, et tempus mi cursus.
-
-Etiam elementum tristique lacus, sit amet eleifend nibh eleifend sed \footnote{My footnote goes blah blah blah! \dots}. Maecenas dapibu augue ut urna malesuada, non tempor nibh mollis. Donec sed sem sollicitudin, convallis velit aliquam, tincidunt diam. In eu venenatis lorem. Aliquam non augue porttitor tellus faucibus porta et nec ante. Proin sodales, libero vitae commodo sodales, dolor nisi cursus magna, non tincidunt ipsum nibh eget purus. Nam rutrum tincidunt arcu, tincidunt vulputate mi sagittis id. Proin et nisi nec orci tincidunt auctor et porta elit. Praesent eu dolor ac magna cursus euismod. Integer non dictum nunc.
-
-
-\begin{landscape}
-
-\section*{Subplots}
-I can cite Wall-E (see Fig.~\ref{fig:WallE}) and Minions in despicable me (Fig.~\ref{fig:Minnion}) or I can cite the whole figure as Fig.~\ref{fig:animations}
-
-
-\begin{figure}
+\begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{TomandJerry}
-    \caption{Tom and Jerry}
-    \label{fig:TomJerry}   
-  \end{subfigure}             
-  \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{WallE}
-    \caption{Wall-E}
-    \label{fig:WallE}
-  \end{subfigure}             
-  \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{minion}
-    \caption{Minions}
-    \label{fig:Minnion}
-  \end{subfigure}
-  \caption{Best Animations}
-  \label{fig:animations}
+  \includegraphics[width=0.8\textwidth]{light-source-comparison.png}
+  \caption{Comparison of commercially available light sources for use of holographic projections. (a) Reconstructed images of the same target image for different light sources. (b) Enlarged images showing the details of speckle in the same area of interest for these light sources. (c) Enlarged images showing image edge in the same area of interest for these light sources \cite{Deng2017}}\label{fig:light-source-comparison}
+\end{figure}
+
+Previous work had compared several commercially available light sources (diode-pumped solid-state (DPSS) laser, laser diode (LD), light emitting diode (LED), super luminescent light emitting diode (sLED) and micro light emitting diode (mLED)) for use of holographic projections \cite{Deng2017}. It can be seen from \cref{fig:light-source-comparison} that, when laser (both DPSS laser and laser diode) are used as light source, the reconstruction has sharp edges, but suffers from speckles. When the three types of LEDs are used, the image speckle is greatly reduced, but the edges are a lot blurred due to its incoherence property.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{liquid-crystal-laser.png}
+  \caption{Liquid crystal laser. (a)-(c) Replay field images generated from a multi-level phase hologram illuminated with (a) DPSS laser, (b) LC laser, (c) LED. (d) Experimental setup for computer generated holographic projection, and corresponding images when illuminated by (e) DPSS laser, and (f) LC laser. (g) \& (h) show the speckle patterns and speckle contrast values for the highlighted regions in (e) \& (f) respectively. \cite{Hands2022}} \label{fig:liquid-crystal-laser}
+\end{figure}
+
+Despite lots of efforts trying to reduce the speckle \cite{Stangner2017, Deng2021}, the development of Liquid Crystal (LC) laser has shone a new light on holography as it not only has an advantage of being tunable in wavelength, but also has a unique feature of low spatial coherence and high temporal coherence \cite{Hands2022}. As shown in \cref{fig:liquid-crystal-laser}, the holographic projection using the LC laser has much less speckle than traditional DPSS laser, while there is a just a slight blurring of the edge. It is at a good balance between DPSS laser and LED.
+
+\subsection{Light Propagation}
+\subsubsection{Maxwell Equations}
+In 1864, James Clerk Maxwell proposed a set of four equations describing the space and time dependence of the electromagnetic field, which are:
+\begin{align}
+  \nabla \times \textbf{E} & = -\frac{\partial \textbf{B}}{\partial t}             \label{eq:maxwell1} \\
+  \nabla \times \textbf{H} & = \textbf{J} + \frac{\partial \textbf{D}}{\partial t} \label{eq:maxwell2} \\
+  \nabla \cdot \textbf{D}  & = \rho                                                \label{eq:maxwell3} \\
+  \nabla \cdot \textbf{B}  & = 0 \label{eq:maxwell4}
+\end{align}
+where $\textbf{D}$ is the electric flux density, $\textbf{E}$ is the electric field intensity, $\textbf{B}$ is the magnetic flux density, $\textbf{H}$ is the magnetic field intensity, $\rho$ is the volume charge density, and $\textbf{J}$ is the current density \cite{Daintith2009}.\\
+And the relation between $\textbf{D}$ and $\textbf{E}$ and between $\textbf{B}$ and $\textbf{H}$ for linear materials (such as free space) are:
+\begin{align}
+  \textbf{B} & = \mu \textbf{H}      \\
+  \textbf{D} & = \epsilon \textbf{E}
+\end{align}
+where $\mu$ is the magnetic permeability and $\epsilon$ is the dielectric permittivity of the material \cite{Wilkinson2017}.\\
+
+\subsubsection{Wave Equation}
+Light is an electromagnetic wave, so for propagation of light in any material in absence of free charge, the Maxwell equations in \cref{eq:maxwell1} - \cref{eq:maxwell4} can be simplified as:
+\begin{align}
+  \nabla \times \textbf{E}         & = -\mu \frac{\partial \textbf{H}}{\partial t}     \label{eq:simplified_maxwell1} \\
+  \nabla \times \textbf{H}         & = \epsilon \frac{\partial \textbf{E}}{\partial t} \label{eq:simplified_maxwell2} \\
+  \nabla \cdot \epsilon \textbf{E} & = 0                                               \label{eq:simplified_maxwell3} \\
+  \nabla \cdot \mu \textbf{H}      & = 0 \label{eq:simplified_maxwell4}
+\end{align}
+
+Taking the curl of \cref{eq:simplified_maxwell1}, and using the vector identity of $\nabla \times (\nabla \times \textbf{u}) = \nabla(\nabla \cdot \textbf{u}) - \nabla^2 \textbf{u}$:
+\begin{align}
+  \nabla \times (\nabla \times \textbf{E})               & = -\nabla \times (\mu \frac{\partial \textbf{H}}{\partial t}) \label{eq:wave_equation_derivation1} \\
+  \nabla (\nabla \cdot \textbf{E}) - \nabla^2 \textbf{E} & = -\frac{\partial}{\partial t} \nabla \times (\mu \textbf{H}) \label{eq:wave_equation_derivation2}
+\end{align}
+
+Then, by substituting \cref{eq:simplified_maxwell2} - \cref{eq:simplified_maxwell3} in, \cref{eq:wave_equation_derivation2} becomes:
+\begin{equation}
+  -\nabla^2 \textbf{E} = -\frac{\partial}{\partial t} (\mu \epsilon \frac{\partial \textbf{E}}{\partial t}) \label{eq:wave_equation_derivation3}
+\end{equation}
+
+Hence, we have a generic form of wave equation:
+\begin{equation}
+  \nabla^2 \textbf{E} = \mu \epsilon \frac{\partial^2 \textbf{E}}{\partial t^2} \label{eq:wave_equation}
+\end{equation}
+
+A valid solution to \cref{eq:wave_equation} is:
+\begin{equation}
+  \textbf{E} = \textbf{E}_0 e^{j(\omega t - k r)} \label{eq:wave_equation_solution}
+\end{equation}
+where $\omega$ is the angular velocity of the wave, $t$ is time, $r$ is the propagation distance and $k$ is called the wave number ($k=\frac{2\pi}{\lambda}$, where $\lambda$ is the wavelength). From \cref{eq:wave_equation_solution} we can see that the propagation of light in free space is simply a phase shift. This suggests that, if we have a coherent light source and a phase modulator, we can essentially manipulate the phase of light to produce an interference pattern reconstructing the target field we desire, and such method is called holographic projection.
+
+
+\subsection{Diffraction} \label{sec:Diffraction}
+
+\subsubsection{Diffraction Through a Two-Dimensional (2D) Aperture}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{diffraction_coordinate_definition.jpg}
+  \caption{Diffraction geometry}\label{fig:diffraction_coordinate_definition}
+\end{figure}
+
+To model how light diffracts through a 2D aperture, we first set up a coordinate system as shown in \cref{fig:diffraction_coordinate_definition}, where the aperture is denoted by $A(x, y)$ and the diffracted field is denoted by $E(\alpha, \beta, z)$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.2\textwidth]{huygens_wavelets_principle.png}
+  \caption{Huygens-Fresnel wavelet principle \cite{Nordmann2007}}\label{fig:huygens_wavelets_principle}
+\end{figure}
+
+Huygens-Fresnel principle states that every point on a wavefront is itself the source of outgoing secondary spherical wavelets, which can be expressed mathematically as follows when $r\gg \lambda$ \cite{Goodman2017}:
+\begin{equation}
+  E(\alpha, \beta, z) = \frac{1}{j\lambda} \iint A(x,y)\frac{e^{jkr}}{r} cos(\theta) dxdy \label{eq:huygens-fresnel-principle}
+\end{equation}
+
+And by trigonometry we can have the following identities:
+\begin{align}
+  cos(\theta) & = \frac{z}{r}                                               \\
+  R^2         & = \alpha ^2 + \beta ^2 + z^2       \label{eq:trignometry-R} \\
+  r^2         & = (\alpha-x)^2 + (\beta-y)^2 + z^2 \label{eq:trignometry-r}
+\end{align}
+
+Then \cref{eq:huygens-fresnel-principle} becomes:
+\begin{align}
+  E(\alpha, \beta, z) & = \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jkr}}{r^2} dxdy                    \label{eq:huygens-fresnel-principle-substituded-cos}                                                      \\
+                      & = \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jk\sqrt{(\alpha-x)^2 + (\beta-y)^2 + z^2}}}{(\alpha-x)^2 + (\beta-y)^2 + z^2} dxdy \label{eq:huygens-fresnel-principle-substituded-r-square}
+\end{align}
+
+Unfortunately, \cref{eq:huygens-fresnel-principle-substituded-r-square} can only be solved analytically for few specific aperture functions $A(x,y)$, so we have to make some approximations to solve for arbitrary $A(x,y)$, the common methods are \textit{Fresnel} and \textit{Fraunhofer} approximations for regions depicted in \cref{fig:fresnel_fraunhofer_approximations} below.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fresnel_fraunhofer_approximations.png}
+  \caption{Fresnel and Fraunhofer region \cite{Wilkinson2019}}\label{fig:fresnel_fraunhofer_approximations}
 \end{figure}
 
 
-\end{landscape}
+\subsubsection{Fresnel Approximation}
+
+Fesnel approximation replaces expressions for spherical waves by quadratic-phase exponentials, using the binomial expansion of the square root to approximate $r$ in \cref{eq:huygens-fresnel-principle-substituded-cos} \cite{Goodman2017}:
+\begin{equation}
+  \sqrt{1+d} = 1 + \frac{1}{2}d - \frac{1}{8}d^2 + \cdots \label{eq:binomial-expension}
+\end{equation}
+
+Retaining only the first two terms of the expansion in \cref{eq:binomial-expension}, and substituting in \cref{eq:trignometry-r} gives:
+\begin{align}
+  r & = \sqrt{(\alpha-x)^2 + (\beta-y)^2 + z^2}                                                                                                              \\
+    & = z \sqrt{1 + \left( \frac{\alpha-x}{z} \right)^2 + \left(\frac{\beta-y}{z}\right)^2}                                                                  \\
+    & \approx z \left[ 1 + \frac{1}{2} \left( \frac{\alpha-x}{z} \right)^2 + \frac{1}{2} \left(\frac{\beta-y}{z}\right)^2 \right] \label{eq:r-approximation}
+\end{align}
+
+For the $r^2$ in the denominator of \cref{eq:huygens-fresnel-principle-substituded-cos}, the error introduced by dropping all terms but $z$ is generally acceptably small, but for the $r$ appearing in the exponent in the numerator of \cref{eq:huygens-fresnel-principle-substituded-cos}, errors are much more critical \cite{Goodman2017}. So, by substituting \cref{eq:r-approximation} for the $r$ in the numerator of \cref{eq:huygens-fresnel-principle-substituded-cos} and substituting $z$ for the $r$ in the denominator, we have:
+\begin{align}
+  E(\alpha, \beta, z) & = \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jkz \left[ 1 + \frac{1}{2} \left( \frac{\alpha-x}{z} \right)^2 + \frac{1}{2} \left(\frac{\beta-y}{z}\right)^2 \right]}}{z^2} dxdy \\
+                      & = \frac{e^{jkz}}{j\lambda z} e^{j\frac{k}{2z}(\alpha^2+\beta^2)} \iint \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}e^{-j\frac{2\pi}{\lambda z}(\alpha x+\beta y)}dxdy    \\
+                      & = \frac{e^{jkz}}{j\lambda z} e^{j\frac{k}{2z}(\alpha^2+\beta^2)} \mathcal{F} \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}
+\end{align}
+where $\mathcal{F}$ is the Fourier Transform.
+
+Now we have a more simple and solvable expression than \cref{eq:huygens-fresnel-principle-substituded-r-square}. And also, as we are only interested in the scaling of relative points at $P$ with respect to each other, so it is safe to normalise the multiplier term before the Fourier Transform to 1 \cite{Wilkinson2019}. So we can express the diffraction pattern in Fresnel region as:
+\begin{equation}
+  E_{Fresnel\ region}(\alpha, \beta, z) = \mathcal{F} \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\} \label{eq:fresnel-diffraction}
+\end{equation}
+
+
+\subsubsection{Fraunhofer Approximation}
+Fraunhofer diffraction is a form of diffraction in which the distance between the light source and the receiving screen are in effect at infinite, so that the wave fronts can be treated as planar rather than spherical \cite{Daintith2009}. Fraunhofer approximation is very stringent, it assumes that the distance between the light source and the receiving screen are in effect at infinite:
+\begin{equation}
+  z\gg \frac{k(x^2+y^2)_{max}}{2}
+\end{equation}
+
+so that the wave fronts can be treated as planar rather than spherical \cite{Daintith2009}, then the $e^{j\frac{k}{2z}(x^2+y^2)}$ term tends to $1$, and \cref{eq:fresnel-diffraction} becomes:
+\begin{equation}
+  E_{Fraunhofer\ region}(\alpha, \beta) = \mathcal{F} \left\{A(x,y)\right\}
+\end{equation}
+
+which suggests that the far field pattern is simply the Fourier Transform of the aperture function.
+
+
+
+\newpage
+\section{Computer-Generated Hologram (CGH)}\label{sec:cgh}
+CGH is the method of digitally generating the interference patterns and displaying it via a spatial light modulator (SLM), therefore reconstructing the 3D target. This section discusses the available SLM's, and algorithms to compute the holograms.
+\subsection{Modulation Schemes}
+Currently, available display devices fall into four modulation categories, as illustrated in \cref{fig:modulation_loci} \cite{Cable2006}.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{modulation_loci.jpg}
+  \caption{Modulation loci in the complex plane \cite{Cable2006}} \label{fig:modulation_loci}
+\end{figure}
+
+The four modulation schemes are \cite{Cable2006}:
+\begin{itemize}
+  \item \textbf{Multi-level Amplitude} modulators can modulate each pixel from zero transmission (0) to full transmission (1), either continuously or in discrete steps. (e.g. nematic liquid crystal display \cite{Schadt1971}, found for example in laptops and many conventional video projectors)
+  \item \textbf{Binary Amplitude} modulators can switch each pixel to zero transmission (0) or full transmission (1), but nothing in between. (e.g. deformable mirror device \cite{Pape1983}, ferroelectric liquid crystal display \cite{Johnson1993}, both used in high-end video projectors)
+  \item \textbf{Multi-level Phase} modulators can modulate the phase shift imparted by each pixel from 0 to 2$\pi$ radians, either continuously or in discrete steps. (e.g. Nematic liquid crystal devices \cite{Lee2004})
+  \item \textbf{Binary Phase} modulators can switch each pixel for a phase shift of either 0 or $\pi$ radians. (e.g. Ferroelectric liquid crystal displays \cite{Broomfield1992})
+\end{itemize}
+
+Among the four modulation schemes, phase modulations are of higher interests, because amplitude modulations, either multi-level or binary, blocks light at the spatial light modulator (SLM), causing waste of energy, leading to poorer energy efficiency. And also, amplitude modulations always have a zero-order (forming a central bright spot), because the average amplitude is always between 0 and 1; on contrary, phase modulation can suppress the zero-order by forcing the hologram to have zero average, because the average of phase hologram can lie on 0 if well-designed.
+
+The most common phase modulators are still only providing binary phase modulation, as the binary phase modulation is purely real (as it's only switching between $0^\circ$ and $180^\circ$), the complex conjugate $A^*(x,y)$ is the same as $A(x,y)$:
+\begin{equation} \label{eq:AequalsAstar}
+  A^*(x,y) = A(x,y)
+\end{equation}
+because the Fourier transform of $A^*(x,y)$ is the same as the Fourier transform of $A(x,y)$
+\begin{equation} \label{eq:AAstar}
+  E(-\alpha, -\beta)=\mathcal{F}[A^*(x,y)]=\mathcal{F}[A(x,y)]=E(\alpha, \beta)
+\end{equation}
+So there is no distinction between the desired image and its $180^\circ$ rotation in the replay field, causing a symmetrical conjugate image rotated $180^\circ$ from the target image. The simplest workaround for this issue is to use only half of the reconstruction field, and the computation of CGH for binary SLM will naturally need binary quantisation. Although few multi-level phase modulators are available, their bit depth is still limited (e.g. 4-bit 8-bit), so quantisation is still needed for the discrete levels, the effect of which is analysed in \cite{Kadis2022}.
+
+In summary, before the invention of a complex modulator, we need algorithms to generate phase only hologram, such process is called phase retrieval. There are currently many algorithms for this purpose, which are discussed in \cref{sec:Naive algorithm} - \cref{sec:One Step Phase Retrieval (OSPR) Algorithm}.
+
+
+\subsection{Naive Algorithm}\label{sec:Naive algorithm}
+The naive algorithm to get a phase hologram is by directly using the phase of the reverse propagation from the target field to the hologram plane (e.g. for Fraunhofer propagation, the hologram is simply the inverse Fourier transform $\mathcal{F} ^{-1}$ of the target image), while discarding the amplitude component. The pseudocode of naive algorithm is shown in \cref{alg:Naive algorithm} below:
+\begin{algorithm}[H]
+  \caption{Naive algorithm}\label{alg:Naive algorithm}
+  \textbf{Input:} Target field $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
+  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \begin{algorithmic}
+    \State $H \gets \angle\{\mathcal{P}^{-1}[T]\}$
+    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert$
+  \end{algorithmic}
+\end{algorithm}
+where $j = \sqrt{-1} $. Naive algorithm (as described in \cref{alg:Naive algorithm}) was then implemented in MATLAB and the output results are shown in \cref{fig:Naive algorithm output} below:
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{mandrill.png}
+    \caption{Target field ($T$)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Naive_output_holo.png}
+    \caption{Hologram ($H$)}
+    \label{fig:Naive_output_holo}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Naive_output_recon.png}
+    \caption{Reconstruction ($R$)}
+    \label{fig:Naive_output_recon}
+  \end{subfigure}
+  \caption{Naive algorithm output}
+  \label{fig:Naive algorithm output}
+\end{figure}
+
+As shown in the simulation result, the reconstruction (\cref{fig:Naive_output_recon}) is very far from the desired target image. It has shown that, discarding amplitude introduces a significant loss of information.
+
+Moreover, in order to display the hologram on a binary phase modulator or multi level phase modulator with limited bit-depth, the phase needs to be quantised again, introducing additional quantisation error.
+
+
+\subsection{Direct Binary Search (DBS) Algorithm}\label{sec:Direct Binary Search (DBS) Algorithm}
+Direct Binary Search (DBS) algorithm \cite{Seldowitz1987} is specifically designed for binary phase modulators, it generates the hologram by randomly flipping each pixel in the SLM between binary states, one by one for many times in order to minimise the difference between its reconstruction $R$ and the target image $T$. The detailed algorithm is described in \cref{alg:DBS algorithm} below:
+\begin{algorithm}[H]
+  \caption{Direct Binary Search (DBS) algorithm}\label{alg:DBS algorithm}
+  \textbf{Input:} Target field $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$, Number of iterations $N$ \\
+  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \begin{algorithmic}
+    \State{// Start with a random hologram with a size matching $T$}
+    \State $H \gets$ Rand(Size($T$))
+    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert$
+    \State $L \gets \mathcal{L} [R, T]$
+
+    \For {$n$ = $1$ to $N$}
+    \State{// Flip a random pixel in the hologram}
+    \State $H_n \gets$ FlipRandomPixel($H$)\\
+    \State{// Calculate the loss function for the new hologram}
+    \State $R_n \gets \vert \mathcal{P}[e^{jH_n}] \vert$
+    \State $L_n \gets \mathcal{L} [R_n, T]$\\
+    \State{// Compare the new loss with the old one}
+    \If {$L_n < L$}
+    \State{// Accept the new hologram if loss is lower}
+    \State $H \gets H_n$
+    \State $R \gets R_n$
+    \State $L \gets L_n$
+    \EndIf
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{DBS_NMSE_plot.png}
+  \caption{DBS algorithm NMSE plot}
+  \label{fig:DBS_NMSE_plot}
+\end{figure}
+DBS algorithm can sometimes find very accurate hologram if the run is lucky; however, it is extremely slow, because it takes numerous iterations (as shown in \cref{fig:DBS_NMSE_plot}, even 1000 iterations has not reached good convergence) and each iteration requires a Fourier transform which is computationally heavy. And also, as it only cares about local optimality at each iteration, it is a greedy algorithm that only follow the steepest descent route, which could easily get trapped in a local minimum where flipping any bit is not getting better reconstruction. Another consequence of the random nature is that the generated hologram will be different at each run, so the quality of the resulting reconstruction ($R$) will depend on how "lucky" each run is.
+
+
+\subsection{Simulated Annealing (SA) Algorithm}\label{sec:Simulated Annealing (SA) Algorithm}
+Simulated Annealing (SA) is an improvement on the DBS algorithm,
+\cite{Kirkpatrick1983}. It adopts a probabilistic approach to avoid the steepest gradient descent. Its name derives from the fact that it approximates the recrystallisation process during metal annealing and is particularly well-suited to avoiding the trap of local minima \cite{Yang2009}. To implement this idea, we then need a function ($\mathcal{Q}$) to calculate the probability of the hologram ($H$), and a threshold $p_t$ to decide whether the probability is high enough for the according hologram to be accepted. The pseudocode for this algorithm is listed in \cref{alg:Simulated Annealing (SA) algorithm}.
+\begin{algorithm}[H]
+  \caption{Simulated Annealing (SA) algorithm}\label{alg:Simulated Annealing (SA) algorithm}
+  \textbf{Input:} Target field $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$, Number of iterations $N$, Probability function $\mathcal{Q}$ (e.g. Boltzmann Distribution), Probability threshold $p_t$ \\
+  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \begin{algorithmic}
+    \State{// Start with a random hologram with a size matching $T$}
+    \State $H \gets$ Rand(Size($T$))
+    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert$
+    \State $L \gets \mathcal{L} [R_0, T]$
+
+    \For {$n$ = $1$ to $N$}
+    \State{// Flip a random pixel in the hologram}
+    \State $H_n \gets$ FlipRandomPixel($H$)\\
+    \State{// Calculate the loss function for the new hologram}
+    \State $R_n \gets \vert \mathcal{P}[e^{jH_n}] \vert$
+    \State $L_n \gets \mathcal{L} [R_n, T]$\\
+    \State{// Compare the new loss with the old one}
+    \If {$L_n < L$}
+    \State{// Accept the new hologram if loss is lower}
+    \State $H \gets H_n$
+    \State $R \gets R_n$
+    \State $L \gets L_n$
+    \Else
+    \State{// Calculate the probability of the hologram}
+    \State $p_n \gets \mathcal{Q}[H_n]$
+    \If {$p_n > p_t$}
+    \State{// Accept the new hologram if the probability exceeds the threshold}
+    \State $H \gets H_n$
+    \State $R \gets R_n$
+    \State $L \gets L_n$
+    \EndIf
+    \EndIf
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{SA_NMSE_plot.png}
+  \caption{SA algorithm NMSE plot}
+  \label{fig:SA_NMSE_plot}
+\end{figure}
+An implementation of SA algorithm with $p_t = 0.8$ was carried out, and the result is as shown in \cref{fig:SA_NMSE_plot}. It can be seen that, instead of monotonic decrease observed in \cref{fig:DBS_NMSE_plot} for DBS algorithm, the SA algorithm has occasional rises in NMSE, where the probability $p_n$ exceeds the threshold $p_t$.
+
+\subsection{Gerchberg-Saxton (GS) algorithm}\label{sec:Gerchberg-Saxton (GS) Algorithm}
+Gerchberg-Saxton (GS) algorithm functions that it iteratively determines the phase profile of the hologram required to reconstruct a target image; it loops between the hologram and the reconstruction plane, and applying constraints to each plane accordingly during each iteration \cite{Gerchberg1972}. GS algorithm is very easy to implement, its pseudocode is shown in \cref{alg:Gerchberg-Saxton (GS) Algorithm}.
+\begin{algorithm}[H]
+  \caption{Gerchberg-Saxton (GS) Algorithm}\label{alg:Gerchberg-Saxton (GS) Algorithm}
+  \textbf{Input:} Target field $T$, Propagation function $\mathcal{P}$, Number of iterations $N$, Initial phase $\varPhi$ (e.g. random or zeros) \\
+  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \begin{algorithmic}
+    \State{// Initiate $E$ with amplitude $T$ and initial phase $\varPhi$}
+    \State $E \gets T * e^{j\varPhi}$
+    \For {$n$ = $1$ to $N$}
+    \State{// Compute the hologram plane}
+    \State $A \gets \mathcal{P}^{-1}[E]$
+    \State{// Apply the phase-only constraint at the hologram plane}
+    \State $A \gets e^{j\angle A}$\\
+    \State{// Compute the propagation for the new hologram}
+    \State $E \gets \mathcal{P}[A]$
+    \State{// Apply the target field amplitude constraint at the hologram plane}
+    \State $E \gets T * e^{j\angle E}$
+    \EndFor
+    \State $H \gets \angle A$
+    \State $R \gets \vert \mathcal{P}[A] \vert$
+  \end{algorithmic}
+\end{algorithm}
+
+The GS algorithm (described in \cref{alg:Gerchberg-Saxton (GS) Algorithm}) was implemented in MATLAB and the output results are shown in \cref{fig:GS algorithm output} below:
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{mandrill.png}
+    \caption{Target field ($T$)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{GS_holo_i_30.png}
+    \caption{Hologram ($H$)}
+    \label{fig:GS_holo_i_30}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{GS_recon_i_30.png}
+    \caption{Reconstruction ($R$)}
+    \label{fig:GS_recon_i_30}
+  \end{subfigure}
+  \caption{GS algorithm output for 30 iterations ($N = 30$)}
+  \label{fig:GS algorithm output}
+\end{figure}
+
+It can be seen from \cref{fig:GS_recon_i_30} that, the reconstruction of the hologram after 30 iterations of GS algorithm reached a very good result. Then the quantitative analysis was carried out by measuring the normalised mean squared error (NMSE) as the iteration number ($n$) increments, the result is plotted in \cref{fig:GS_NMSE_plot}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{GS_NMSE_plot.png}
+  \caption{GS algorithm NMSE plot}
+  \label{fig:GS_NMSE_plot}
+\end{figure}
+
+It can be seen from \cref{fig:GS_NMSE_plot} that GS algorithm converges quickly, providing very good result in tens of iterations. The major disadvantage of the GS algorithm is that it is more computationally expensive at every iteration, as it needs to compute both a forward and an inverse propagation function, causing the need for two Fourier transforms at each iteration. Nevertheless, the algorithm has very good performance over all.
+
+
+\subsection{One-Step Phase Retrieval (OSPR) Algorithm}\label{sec:One Step Phase Retrieval (OSPR) Algorithm}
+OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. OSPR is a solution to high-quality hologram reconstruction that relies on time multiplexing of holograms, exploiting the response time of eye in order to reduce noise in the replay field \cite{Cable2006}. The random noises are averaged by the eye, while the target image stays, hence the average noise is reduced. The perceived noise is lessened by the temporal average detected by the eye, rather than computational optimisation of the hologram \cite{Cable2006}.
+\begin{algorithm}[H]
+  \caption{One-Step Phase Retrieval (OSPR) algorithm}\label{alg:One Step Phase Retrieval (OSPR) Algorithm}
+  \textbf{Input:} Target field $T$, Propagation function $\mathcal{P}$, Number of sub-frames $S$ \\
+  \textbf{Output:} List of phase holograms $H[1\ldots S]$
+  \begin{algorithmic}
+    \State // Compute a list of hologram sub-frames based on different additive random phase
+    \For {$s$ = $1$ to $S$}
+    \State $E \gets T * $ RandomPhase()
+    \State $A \gets \mathcal{P}^{-1}[E]$
+    \State $H[s] \gets \angle A$
+    \EndFor\\
+    \State // Then display the sub-frames on the phase modulator sequentially
+    \State $s\gets 1$
+    \While {True}
+    \State Display(H[s])
+    \State $s\gets s + 1$
+    \If {$s > S$}
+    \State $s\gets 1$
+    \EndIf
+    \EndWhile
+  \end{algorithmic}
+\end{algorithm}
+
+The major advantage of the OSPR algorithm is that it is superfast, and also it can reduce the perceived speckle noise, providing a very good visual quality of holographic projection.
+
+
+\subsection{Three-Dimensional (3D) CGH}\label{sec:Three-Dimensional (3D) CGH methods}
+\cref{sec:Naive algorithm} - \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} described several algorithms to generate a phase hologram for a single slice target field. Then the problem arises as how to generate a hologram for 3D target, and hence making full use of the major benefit of holography, which is true 3D reconstruction. There are several ways to achieve this.
+
+\subsubsection{Multi-Layer Slicing}
+The simplest method is to slice the 3D target into a set of layers, and then generate a set of phase holograms for each slice at its according distance ($z$) using Fresnel propagation model. Then the set of phase holograms are added up to form the final phase hologram, based on the principle of superposition.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{intermediate_plane.png}
+  \caption{Schematic diagram of the intermediate plane method \cite{Chen2021}}
+  \label{fig:intermediate_plane}
+\end{figure}
+
+There is also an alternative solution, that is to propagate each slice of the 3D target into an intermediate plane, and then run the phase retrieval algorithms on the complex target field ($T$) with a loss function ($\mathcal{L} $), where needed, that accounts for both amplitude and phase components. The schematic of this method is shown in \cref{fig:intermediate_plane} \cite{Chen2021}.
+
+
+\subsubsection{Point Cloud Method}
+Point cloud method, as its name infers, divides a 3D target into a collection of points, each emitting a spherical wave, and then summed under the principle of superposition. The point cloud method is extremely computationally heavy and is very slow.
+
+
+
+\newpage
+\section{Numerical Optimisation Methods} \label{sec:Numerical Optimisation Methods}
+In addition to the conventional CGH algorithms described in \cref{sec:cgh}, literature review has also found some recent work that compute CGH using numerical optimisation methods \cite{Zhang2017, Liu2020, Choi2021, Chen2021, Kadis2022}. This section is a review on what numerical optimisation is and how it works. And the implementation of optimisation of CGH is further discussed in \cref{sec:Numerical Optimisation of Phase-Only CGH}.
+
+Numerical optimisation methods aim to find an optimal solution which minimise an objective function numerically. They begin with an initial guess of the optimal solution ($\textbf{x}_{0}$) and then, after iterations, generate a sequence of gradually improved estimates until they reach a solution \cite{Nocedal2006}. If we have $\textbf{x}$ as the vector of variables, and denote $f(\textbf{x})$ as the objective function, which is a function of $x$ we want to minimise, any unconstrained optimisation problem can be written as
+\begin{equation}
+  \underset{\textbf{x}\in R^n}{\text{minimise}}\quad f(\textbf{x})
+  \label{eq:minimise_F}
+\end{equation}
+
+Numerical optimisation then calculate the optimal solution $\textbf{x}^*$ iteratively, the iteration is given by
+\begin{equation}
+  \textbf{x}_{k+1} = \textbf{x}_k+\alpha_k \textbf{p}_k
+  \label{eq:optimisation_iteration}
+\end{equation}
+where the positive scalar $\alpha_k$ is called step length, or sometimes may be referred as `learning rate' in some context especially when related to machine learning, and the vector $\textbf{p}_k$ is the search direction, which usually takes the form of
+\begin{equation}
+  \textbf{p}_k = -\textbf{B}_k^{-1} \nabla f_{k} \label{eq:general-descent-direction}
+\end{equation}
+where $\textbf{B}_k$ is a nonsingular matrix that varies for different optimisation methods. The gradient $\nabla f_k$, if unable to evaluate directly, can be approximated by
+\begin{align}
+  \nabla f_k         & \approx \frac{f_{k+1}-f_{k}}{\textbf{x}_{k+1}-\textbf{x}_{k}} \nonumber \\
+  \text{where}\  f_k & \ \text{denotes}\  f(\textbf{x}_k)
+\end{align}
+
+The strategy used to determine $\textbf{p}_k$ distinguishes one algorithm from another. Most methods make use of the values of $f$, $\nabla f$ and $\nabla^2 f$, and some methods even make use of the accumulated historical values of those derivatives, which are further discussed in \cref{sec:GD} - \cref{sec:L-BFGS}.
+
+\subsection{Gradient Descent}\label{sec:GD}
+Gradient descent (GD) is a first-order optimisation method, it finds a local minimum by following the negative of the gradient (i.e. the steepest descent direction). The $\textbf{B}_k$ (in \cref{eq:general-descent-direction}) for gradient descent simply takes the value of $\textbf{I}$, which is the identity matrix. And the search direction becomes:
+\begin{equation}
+  \textbf{p}_k = -\nabla f_k
+\end{equation}
+The steepest descent method is very intuitive: among all possible directions to move away from $\textbf{x}_{k}$, the steepest gradient direction is the one which $f$ decreases most rapidly. The advantage of this method is that it requires few computation and memory resource, because it only requires a computation of the first derivative, and it does not require any accumulation of historical gradients. However, it is a greedy method that only considers the current iteration without any global consideration, so it can be extremely slow on complicated problems. \cite{Nocedal2006}
+
+To work around the disadvantage, a few variants have emerged, such as AdaGrad \cite{Duchi2011}, RMSProp \cite{Tieleman2012} and Adam \cite{Kingma2015} which combines the advantages of AdaGrad and RMSProp. It can be said to be an iconic variant of the gradient descent, often referred to as gradient descent with momentum. The name Adam is derived from adaptive moment estimation. Adam algorithm is based on adaptive estimates of lower-order moments \cite{Kingma2015}. Adam method computes individual adaptive learning rates for different parameters from estimates of first and second moments of the gradients \cite{Kingma2015}. Although some improvements are observed, it still does not fix entirely.
+
+
+\subsection{Newton's Method}
+Newton's method is a second-order optimisation method. Its search direction is derived from the second-order Taylor series approximation to $f(\textbf{x}_k+\textbf{p})$, which is
+\begin{equation}
+  f(\textbf{x}_k+\textbf{p}) \approx f_k + \textbf{p}^T \nabla f_k + \frac{1}{2}\textbf{p}^T \nabla^2 f_k \textbf{p} \stackrel{\text{def}}{=}m_k(\textbf{p})
+\end{equation}
+The Newton direction can then be obtained by finding the vector $\textbf{p}$ that minimises $m_k(\textbf{p})$. By setting the derivative of $m_k(\textbf{p})$ to zero, $\textbf{p}$ can be obtained as:
+\begin{equation}
+  \textbf{p}_k=-\nabla^2 f_k^{-1}\nabla f_k \label{eq:Newton-direction}
+\end{equation}
+By comparing \cref{eq:Newton-direction} to \cref{eq:general-descent-direction}, it can be seen that the Newton's method has a $\textbf{B}_k$ of $\nabla^2 f_k$. Unlike the gradient descent method, there is a "natural" step length of 1 associated with the Newton direction, so $\alpha_k = 1$ by default and is only adjusted when it does not produce a satisfactory reduction in the value of $f$.
+
+The Newton direction is reliable when the difference between the true function $f(\textbf{x}_k+\textbf{p})$ and its quadratic model $m_k(\textbf{p})$ is not too large. Methods that use the Newton direction have a fast rate of local convergence, typically quadratic. After a neighbourhood of the solution is reached, convergence to high accuracy often occurs in just a few iterations. The main drawback of the Newton direction is the need for the Hessian $\nabla^2 f_k$. Explicit computation of this matrix of second derivatives can sometimes be a cumbersome, error-prone, and expensive process. \cite{Nocedal2006}
+
+
+
+\subsection{Quasi-Newton Method: Broyden-Fletcher-Goldfarb-Shanno (BFGS)}\label{sec:BFGS}
+Quasi-Newton method provides an attractive alternative to Newton's method, in that they do not require computation of the Hessian and yet still attain a super linear rate of convergence. In place of the true Hessian $\nabla^2 f_k$, they use an approximation $\textbf{H}_k \stackrel{\text{def}}{=} \textbf{B}_k^{-1}$, which is updated after each step to take account of the additional knowledge gained during the step. The updates make use of the fact that changes in the gradient provide information about the second derivative of $f$ along the search direction. The most popular quasi-Newton algorithm is the BFGS method, named for its discoverers Broyden, Fletcher, Goldfarb, and Shanno. \cite{Nocedal2006}
+
+The process of the BFGS method is shown below:
+\begin{align}
+  denote   & \                       \left\{
+  \begin{array}{ll}
+    \textbf{H}_k & = \textbf{B}_k^{-1}          \\
+    \textbf{p}_k & = -\textbf{H}_k \nabla f_{k}
+  \end{array}
+  \right.                                                                                                                                                                                                        \\
+  Initiate & \ \textbf{H}_0     \leftarrow \frac{\textbf{y}_k^T\textbf{s}_k}{\textbf{y}_k^T\textbf{y}_k}\textbf{I}                                                           \label{eq:BFGS_initiate_H_0}        \\
+  update   & \ \textbf{H}_{k+1}  = (\textbf{I} - \rho_k\textbf{s}_k\textbf{y}_k^T) \textbf{H}_{k} (\textbf{I} - \rho_k\textbf{y}_k\textbf{s}_k^T) +\rho_k\textbf{s}_k\textbf{s}_k^T \label{eq:BFGS_update_H_k+1} \\
+  where    & \                        \left\{
+  \begin{array}{ll}
+    \textbf{s}_k & = \textbf{x}_{k+1} - \textbf{x}_{k}                               \\
+    \textbf{y}_k & = \nabla f_{k+1} - \nabla f_{k}                                   \\
+    \rho_k       & = \frac{1}{\textbf{y}_k^T\textbf{s}_k} \label{eq:BFGS_calc_rho_k}
+  \end{array}
+  \right.
+\end{align}
+
+The algorithm is robust, and its rate of convergence is super linear, which is fast enough for most practical purposes. Even though Newton's method converges more rapidly (that is, quadratically), its cost per iteration usually is higher, because of its need for second derivatives and solution of a linear system. The drawback is that, it is not directly applicable to large optimisation problems because $\textbf{H}_k$'s are usually dense, requiring large storage and computational requirements. \cite{Nocedal2006}
+
+
+
+\subsection{Large Scale Quasi-Newton Method: Limited Memory BFGS (L-BFGS)}\label{sec:L-BFGS}
+L-BFGS algorithm \cite{Liu1989} modifies the technique described in \cref{sec:BFGS} to obtain Hessian approximations that can be stored compactly in just a few vectors of length $n$, where $n$ is the number of unknowns in the problem. The main idea of this method is to use curvature information from only the most recent iterations to construct the Hessian approximation. Curvature information from earlier iterations, which is less likely to be relevant to the actual behaviour of the Hessian at the current iteration, is discarded in the interest of saving storage. \cite{Nocedal2006}
+
+Denoting $\textbf{V}_k = \textbf{I} - \rho_k\textbf{y}_k\textbf{s}_k^T$, \cref{eq:BFGS_update_H_k+1} can be written as:
+\begin{equation}
+  \textbf{H}_{k+1} = \textbf{V}_k^T \textbf{H}_{k} \textbf{V}_k +\rho_k\textbf{s}_k\textbf{s}_k^T
+\end{equation}
+
+The inverse Hessian approximation $\textbf{H}_{k}$ will generally be dense, so that the cost of storing and manipulating it is prohibitive when the number of variables is large. To circumvent this problem, we store a modified version of $\textbf{H}_{k}$ implicitly, by storing a certain number (say, $m$) of the vector pairs $\{\textbf{s}_i, \textbf{y}_i\}$ used in the \cref{eq:BFGS_update_H_k+1} and \cref{eq:BFGS_calc_rho_k}. The product $\textbf{H}_{k} \nabla f_k$ can be obtained by performing a sequence of inner products and vector summations involving $\nabla f_k$ and the pairs $\{\textbf{s}_i, \textbf{y}_i\}$. After the new iterate is computed, the oldest vector pair in the set of pairs $\{\textbf{s}_i, \textbf{y}_i\}$ is replaced by the new pair $\{\textbf{s}_k, \textbf{y}_k\}$ obtained from the current step (\cref{eq:BFGS_calc_rho_k}). In this way, the set of vector pairs includes curvature information from the $m$ most recent iterations. Practical experience has shown that modest values of $m$ (between 3 and 20, say) often produce satisfactory results. We now describe the updating process in a little more detail. At iteration $k$, the current iterate is $\textbf{x}_k$ and the set of vector pairs is given by $\{\textbf{s}_i, \textbf{y}_i\}$ for $i=k-m,\ldots,k-1$. We first choose some initial Hessian approximation $\textbf{H}_{k}^0$ (in contrast to the standard BFGS iteration, this initial approximation is allowed to vary from iteration to iteration) and find by repeated application of \cref{eq:BFGS_update_H_k+1} that the L-BFGS approximation $\textbf{H}_{k}$ satisfies the following formula: \cite{Nocedal2006}
+
+\begin{align}
+  \textbf{H}_{k} =\  & (\textbf{V}_{k-1}^T \cdots \textbf{V}_{k-m}^T) \textbf{H}_{k}^0 (\textbf{V}_{k-m} \cdots \textbf{V}_{k-1})                                  \nonumber          \\
+                     & + \rho_{k-m} (\textbf{V}_{k-1}^T \cdots \textbf{V}_{k-m+1}^T) \textbf{s}_{k-m} \textbf{s}_{k-m}^T (\textbf{V}_{k-m+1} \cdots \textbf{V}_{k-1}) \nonumber       \\
+                     & + \rho_{k-m+1} (\textbf{V}_{k-1}^T \cdots \textbf{V}_{k-m+2}^T) \textbf{s}_{k-m+1} \textbf{s}_{k-m+1}^T (\textbf{V}_{k-m+2} \cdots \textbf{V}_{k-1}) \nonumber \\
+                     & + \cdots \nonumber                                                                                                                                             \\
+                     & + \rho_{k-1} \textbf{s}_{k-1} \textbf{s}_{k-1}^T
+\end{align}
+
+From this expression we can derive a recursive procedure (\cref{alg:L-BFGS}) to compute the product $\textbf{H}_{k} \nabla f_k$ efficiently.
+
+\begin{algorithm}[H]
+  \caption{L-BFGS two-loop recursion \cite{Nocedal2006}}\label{alg:L-BFGS}
+  \begin{algorithmic}
+    \State $\textbf{q} \gets \nabla f_k$
+    \For{$i = k-1, k-2, ..., k-m$}
+    \State $\alpha_i \gets \rho_i \textbf{s}_i^T \textbf{q}$
+    \State $ \textbf{q} \gets \textbf{q} - \alpha_i\textbf{y}_i$
+    \EndFor
+    \State $\textbf{r}\gets \textbf{H}_k^0 \textbf{q}$
+    \For{$i = k-m, k-m+1, ..., k-1$}
+    \State $\beta \gets \rho_i \textbf{y}_i^T \textbf{r}$
+    \State $ \textbf{r} \gets \textbf{r} +\textbf{s}_i (\alpha_i-\beta)$
+    \EndFor
+    \State Step with $\textbf{p}_k \gets -\textbf{H}_k \nabla f_{k} = -\textbf{r}$
+  \end{algorithmic}
+\end{algorithm}
+
+Apart from being inexpensive, L-BFGS has the advantage that the multiplication by the initial matrix $\textbf{H}_k^0$ is isolated from the rest of the computations, allowing this matrix to be chosen freely and to vary between iterations. A method for choosing $\textbf{H}_k^0$ that has proved effective in practice is to use the same as BFGS as stated in \cref{eq:BFGS_initiate_H_0}. \cite{Nocedal2006}
+
+
+
+
+
+
+\newpage
+\section{Analytical Solution for Fourier Transforms of Polygons}\label{sec:Analytical Solution for Fourier Transforms of Polygons}
+Most CGH methods are based on pixelated target images and discrete Fourier transforms, and the generated hologram is then displayed on a pixelated spatial light modulator (SLM). However, the real world is not pixelated. So this section aims to investigate the plausibility of finding the analytical solutions of Fourier transforms for non-pixelated shapes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{polygon_analytical_FT_symbol_definition.png}
+  \caption{$N$-sided polygon ($\varSigma$) symbol definition \cite{Lee1983}}
+  \label{fig:polygon_analytical_FT_symbol_definition}
+\end{figure}
+
+For an $N$-sided polygon ($\varSigma$) as shown in \cref{fig:polygon_analytical_FT_symbol_definition}, its shape function can be defined as:
+\begin{equation}
+  s(x,y) = \begin{cases}
+    1 & \text{if $(x,y)$ is in $\varSigma$} \\
+    0 & \text{otherwise}
+  \end{cases}
+\end{equation}
+
+Then 2D Fourier transform of $s(x,y)$ is defined as:
+\begin{equation}
+  S(u,v) = \iint_{-\infty }^{\infty} s(x,y)e^{j(ux+vy)}dxdy
+\end{equation}
+
+For rectangular and circular aperture ($\varSigma$), $S(u,v)$ are well known, which are expressed in terms of $Bessel$ and $sinc$ functions respectively. But for a general $N$-sided polygon, it is much more complicated. In 1983, Lee and Mittra \cite{Lee1983} derived the solution of $S(u,v)$ for the polygon $\varSigma$ in \cref{fig:polygon_analytical_FT_symbol_definition} as:
+\begin{align}
+  S(u,v)                    & = \sum_{n = 1}^{N} e^{j\overrightarrow{\omega}  \cdot \overrightarrow{\gamma_n} } \left[\frac{\hat{n}\times \hat{\alpha_n} \cdot \hat{\alpha_{n-1}}}{(\overrightarrow{\omega} \cdot \hat{\alpha_n})(\overrightarrow{\omega}  \cdot \hat{\alpha_{n-1}})}\right] \label{eq:analytical_solution_FT_polygon_original} \\
+  \text{where}\quad \hat{n} & = + \hat{z}                                                                                                                                                                                                                                                                                                       \\
+  \overrightarrow{\gamma_n} & = x_n \hat{x} + y_n \hat{y}                                                                                                                                                                                                                                                                                       \\
+  \hat{\alpha_n}            & = \frac{\overrightarrow{\gamma_{n+1}}-\overrightarrow{\gamma_n}}{\vert \overrightarrow{\gamma_{n+1}}-\overrightarrow{\gamma_n}\vert}                                                                                                                                                                              \\
+  \overrightarrow{\omega}   & = u\hat{x} + v\hat{y}
+\end{align}
+
+Alternatively, \cref{eq:analytical_solution_FT_polygon_original} can also be written in terms of the slopes of the polygon sides:
+\begin{align}
+  S(u,v)                & = \sum_{n = 1}^{N} e^{j\overrightarrow{\omega}  \cdot \overrightarrow{\gamma_n} } \left[\frac{p_{n-1}-p_n}{(u+p_{n-1}v)(u+p_{n}v)}\right] \label{eq:analytical_solution_FT_polygon_slope_form} \\
+  \text{where}\quad p_n & = \frac{y_{n+1}-y_n}{x_{n+1}-x_n} = tan(\theta_n)
+\end{align}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{Triangle.png}
+  \caption{Triangle}
+  \label{fig:Triangle}
+\end{figure}
+
+Taking an example equilateral triangle as shown in \cref{fig:Triangle} of side length $L$, we have:
+\begin{align}
+  \overrightarrow{\gamma_n} \left\{
+  \begin{array}{ll}
+    \overrightarrow{\gamma_1} & = \frac{L}{2}\hat{x} + (-\frac{L}{2\sqrt{3}}\hat{y})  \\
+    \overrightarrow{\gamma_2} & = -\frac{L}{2}\hat{x} + (-\frac{L}{2\sqrt{3}}\hat{y}) \\
+    \overrightarrow{\gamma_3} & = 0\hat{x} + \frac{L}{\sqrt{3}}\hat{y}
+  \end{array}
+  \right. \\
+  p_n \left\{
+  \begin{array}{ll}
+    p_1 & = tan(0) = 0                      \\
+    p_2 & = tan(\frac{\pi}{3}) = \sqrt{3}   \\
+    p_3 & = tan(-\frac{\pi}{3}) = -\sqrt{3}
+  \end{array}
+  \right.
+\end{align}
+
+Then, using \cref{eq:analytical_solution_FT_polygon_slope_form}, the analytical solution of the Fourier transform $S_\Delta(u,v)$ of the equilateral triangle with side length $L$ can be obtained:
+\begin{align}
+  S_\Delta(u,v)  =\  & e^{j(\frac{L}{2}u - \frac{L}{2\sqrt{3}}y)} \left[\frac{-\sqrt{3} - 0}{(u-\sqrt{3}v)(u + 0v)}\right]  \nonumber                                     \\
+                     & +                e^{j(-\frac{L}{2}u - \frac{L}{2\sqrt{3}}v)} \left[\frac{0 - \sqrt{3}}{(u + 0v)(u - \sqrt{3}v)}\right] \nonumber                   \\
+                     & +                e^{j(0u + \frac{L}{\sqrt{3}}v)} \left[\frac{\sqrt{3} - (-\sqrt{3})}{(u + \sqrt{3}v)(u - \sqrt{3}v)}\right]                        \\
+  =\                 & \frac{-\sqrt{3}}{u(u-\sqrt{3}v)}\left[e^{jL(\frac{1}{2}u - \frac{1}{2\sqrt{3}}v)} + e^{jL(-\frac{1}{2}u - \frac{1}{2\sqrt{3}}v)}\right]  \nonumber \\
+                     & +                 \frac{2\sqrt{3}}{(u+\sqrt{3}v)(u-\sqrt{3}v)} e^{j\frac{L}{\sqrt{3}}v}
+\end{align}
+So theoretically, we can analytically compute continuous hologram for any $N$-sided polygons. But as non-pixelated complex spatial light modulator is not currently possible, and won't be invented in the near (and probably far) future, the holograms generated by this method still needs to be sampled and quantised. Literature review has found some work that compute CGH based on triangular primitives \cite{Pan2013, Maranville2021, Zhang2022}, but none of them uses this method to compute CGH. Further discussion on my current progress of implementing this method will be discussed in \cref{sec:Analytical Hologram}.

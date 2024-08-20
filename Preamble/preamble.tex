@@ -11,6 +11,7 @@
 
 % Add spaces between paragraphs
 %\setlength{\parskip}{0.5em}
+\usepackage[skip=10pt plus1pt, indent=0pt]{parskip}
 % Ragged bottom avoids extra whitespaces between paragraphs
 \raggedbottom
 % To remove the excess top spacing for enumeration, list and description
@@ -45,7 +46,7 @@
 % **************************** Custom Packages ********************************
 
 % ************************* Algorithms and Pseudocode **************************
-
+\usepackage{algorithm, algpseudocode} % algorithms listing
 %\usepackage{algpseudocode}
 
 
@@ -65,7 +66,7 @@
 
 % Uncomment the following two lines to force Latex to place the figure.
 % Use [H] when including graphics. Note 'H' instead of 'h'
-%\usepackage{float}
+\usepackage{float}
 %\restylefloat{figure}
 
 % Subcaption package is also available in the sty folder you can use that by
@@ -93,7 +94,7 @@
 % University guidelines
 
 % \doublespacing
-% \onehalfspacing
+\onehalfspacing
 % \singlespacing
 
 
@@ -109,7 +110,10 @@
 % *****************************************************************************
 % *************************** Bibliography  and References ********************
 
-%\usepackage{cleveref} %Referencing without need to explicitly state fig /table
+\usepackage{bibentry}
+\nobibliography*
+
+\usepackage[capitalise]{cleveref} %Referencing without need to explicitly state fig /table
 
 % Add `custombib' in the document class option to use this section
 \ifuseCustomBib
@@ -121,6 +125,7 @@
 %\addbibresource{References/references} %Location of references.bib only for biblatex, Do not omit the .bib extension from the filename.
 
 \fi
+
 
 % changes the default name `Bibliography` -> `References'
 \renewcommand{\bibname}{References}

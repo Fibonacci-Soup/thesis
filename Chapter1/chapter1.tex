@@ -3,98 +3,19 @@
 %*********************************** First Chapter *****************************
 %*******************************************************************************
 
-\chapter{Getting started}  %Title of the First Chapter
+\chapter{Introduction}  %Title of the First Chapter
+\graphicspath{{Chapter1/Figs/}}
 
-\ifpdf
-    \graphicspath{{Chapter1/Figs/Raster/}{Chapter1/Figs/PDF/}{Chapter1/Figs/}}
-\else
-    \graphicspath{{Chapter1/Figs/Vector/}{Chapter1/Figs/}}
-\fi
+The pursuit of three-dimensional (3D) display has never stopped. Currently, most commercially available so-called `3D display' products such as 3D cinema, 3D TV, handheld 3D devices (e.g. Nintendo 3DS, HTC Evo 3D) and Virtual Reality (VR) and Augmented Reality (AR) head sets are in fact stereoscopic displays where two different two-dimensional (2D) images are displayed to the left and right eye respectively, creating a 3D illusion in the brain. Despite its high image quality, the major issue with stereoscopic displays is that they cannot provide real defocusing effect in depth. Modern 3D cinema are able to provide good comfort because the polarisation glasses are as light as regular glasses, and the variable defocusing issue can be avoided by the combination of good design of point of interest in each scene and the according defocusing effect as captured by the camera, so most audience won't experience much discomfort for around 2 to 3 hours. But the content, viewing angle and depth of focus are fixed at how they are captured. To provide an interactive and real-time rendered immersive experience, the VR/AR headset has frequently been advertised as the `gateway to metaverse' in recent years. However, my personal experience with VR headset is far from comfortable, not only because of its heavy weight, but also because the display is physically at a very near distance, while my brain thinks the objects are at various distances and yet are still all in focus, which is very unnatural, because in real life, when the eye is focused on a near object, the far backgrounds would blur out. And also, the two displays in the VR headset needs to be rendered in real-time based on the location and angle of the user, which is nowhere near practical. Hence, the heavy weight, the lack of defocusing, the delay between the rendering and the change in my position are the three major factors causing my dizziness using VR headsets, either of which is quite impractical to solve, especially the weight issue. Only if VR/AR headsets could be reduced to the weight of eyeglasses would I ever consider the possibility of those head-mounted devices leading us to the `metaverse'.
 
+In comparison, the holography technique can produce the full 3D light field, which does not rely on any head mounted device, has the true depth of focus, and does not need to re-render according to change in viewer positions and viewing angle.
 
-%********************************** %First Section  **************************************
-\section{What is loren ipsum? Title with math \texorpdfstring{$\sigma$}{[sigma]}} %Section - 1.1 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Dennis-Gabor-Hologram-2.jpg}
+    \caption{A photo of the holographic portrait of Dennis Gabor \cite{Lo2018}}\label{fig:Dennis-Gabor-Hologram-2}
+\end{figure}
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry (see 
-Section~\ref{section1.3}). Lorem Ipsum~\citep{Aup91} has been the industry's 
-standard dummy text ever since the 1500s, when an unknown printer took a galley 
-of type and scrambled it to make a type specimen book. It has survived not only 
-five centuries, but also the leap into electronic typesetting, remaining 
-essentially unchanged. It was popularised in the 1960s with the release of 
-Letraset sheets containing Lorem Ipsum passages, and more recently with desktop 
-publishing software like Aldus PageMaker including versions of Lorem 
-Ipsum~\citep{AAB95,Con90,LM65}.
+Holography, taking its name from the Greek word $o \lambda o \sigma $ (holos), meaning \textit{whole}, was first introduced in 1948 by Dennis Gabor \cite{Gabor1948}, originally named as \textit{wavefront reconstruction} \cite{Hecht2017}. It is a cool technology which generates 3D images via the diffraction of light. Similar to 2D photography, the earliest holography uses a piece of film to record the diffraction pattern, which can then reconstruct the 3D field, as shown in \cref{fig:Dennis-Gabor-Hologram-2} which is a holographic recording of Dennis Gabor himself. After the invention of digital cameras, digital holography emerged. The limitation of both methods is that they require a physical object as a priori to record the hologram. In order to generate hologram for objects that do not physically exist, computer-generated holography (CGH) emerged where a hologram can be calculated through various algorithmic approaches and then displayed on a spatial light modulator (SLM) in order to create an image in the replay field through diffraction \cite{Cable2006,Seldowitz1987,Yang2009,Gerchberg1972}. Although being a fancy technology of true 3D display, CGH still has some fundamental issues, mainly its image quality and the heavy computation required, the solutions of which are my ultimate goals.
 
-The most famous equation in the world: $E^2 = (m_0c^2)^2 + (pc)^2$, which is 
-known as the \textbf{energy-mass-momentum} relation as an in-line equation.
-
-A {\em \LaTeX{} class file}\index{\LaTeX{} class file@LaTeX class file} is a file, which holds style information for a particular \LaTeX{}.
-
-
-\begin{align}
-CIF: \hspace*{5mm}F_0^j(a) = \frac{1}{2\pi \iota} \oint_{\gamma} \frac{F_0^j(z)}{z - a} dz
-\end{align}
-
-\nomenclature[z-cif]{$CIF$}{Cauchy's Integral Formula}                                % first letter Z is for Acronyms 
-\nomenclature[a-F]{$F$}{complex function}                                                   % first letter A is for Roman symbols
-\nomenclature[g-p]{$\pi$}{ $\simeq 3.14\ldots$}                                             % first letter G is for Greek Symbols
-\nomenclature[g-i]{$\iota$}{unit imaginary number $\sqrt{-1}$}                      % first letter G is for Greek Symbols
-\nomenclature[g-g]{$\gamma$}{a simply closed curve on a complex plane}  % first letter G is for Greek Symbols
-\nomenclature[x-i]{$\oint_\gamma$}{integration around a curve $\gamma$} % first letter X is for Other Symbols
-\nomenclature[r-j]{$j$}{superscript index}                                                       % first letter R is for superscripts
-\nomenclature[s-0]{$0$}{subscript index}                                                        % first letter S is for subscripts
-
-
-%********************************** %Second Section  *************************************
-\section{Why do we use loren ipsum?} %Section - 1.2
-
-
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using `Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for `lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-%********************************** % Third Section  *************************************
-\section{Where does it come from?}  %Section - 1.3 
-\label{section1.3}
-
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from ``de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham
-
-``Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-
-Section 1.10.32 of ``de Finibus Bonorum et Malorum", written by Cicero in 45 BC: ``Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-
-1914 translation by H. Rackham: ``But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
-
-Section 1.10.33 of ``de Finibus Bonorum et Malorum", written by Cicero in 45 BC: ``At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
-
-1914 translation by H. Rackham: ``On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
-
-\nomenclature[z-DEM]{DEM}{Discrete Element Method}
-\nomenclature[z-FEM]{FEM}{Finite Element Method}
-\nomenclature[z-PFEM]{PFEM}{Particle Finite Element Method}
-\nomenclature[z-FVM]{FVM}{Finite Volume Method}
-\nomenclature[z-BEM]{BEM}{Boundary Element Method}
-\nomenclature[z-MPM]{MPM}{Material Point Method}
-\nomenclature[z-LBM]{LBM}{Lattice Boltzmann Method}
-\nomenclature[z-MRT]{MRT}{Multi-Relaxation 
-Time}
-\nomenclature[z-RVE]{RVE}{Representative Elemental Volume}
-\nomenclature[z-GPU]{GPU}{Graphics Processing Unit}
-\nomenclature[z-SH]{SH}{Savage Hutter}
-\nomenclature[z-CFD]{CFD}{Computational Fluid Dynamics}
-\nomenclature[z-LES]{LES}{Large Eddy Simulation}
-\nomenclature[z-FLOP]{FLOP}{Floating Point Operations}
-\nomenclature[z-ALU]{ALU}{Arithmetic Logic Unit}
-\nomenclature[z-FPU]{FPU}{Floating Point Unit}
-\nomenclature[z-SM]{SM}{Streaming Multiprocessors}
-\nomenclature[z-PCI]{PCI}{Peripheral Component Interconnect}
-\nomenclature[z-CK]{CK}{Carman - Kozeny}
-\nomenclature[z-CD]{CD}{Contact Dynamics}
-\nomenclature[z-DNS]{DNS}{Direct Numerical Simulation}
-\nomenclature[z-EFG]{EFG}{Element-Free Galerkin}
-\nomenclature[z-PIC]{PIC}{Particle-in-cell}
-\nomenclature[z-USF]{USF}{Update Stress First}
-\nomenclature[z-USL]{USL}{Update Stress Last}
-\nomenclature[s-crit]{crit}{Critical state}
-\nomenclature[z-DKT]{DKT}{Draft Kiss Tumble}
-\nomenclature[z-PPC]{PPC}{Particles per cell}
+This report starts from the literature review in \cref{sec:Literature Review}, then records my current progress of research in \cref{sec:Gamma Correction in Holographic Projection} and \cref{sec:Numerical Optimisation of Phase-Only CGH}, and lastly, concludes with the future plan for the upcoming years of my PhD study in \cref{sec:Conclusions and Future Work}. Because I did my masters project on the same topic in the 2019-2020 academic year for my M.Eng. degree, the literature review in \cref{sec:Literature Review} contains some basic theories in my masters report, and the progress in \cref{sec:Gamma Correction in Holographic Projection} continues from where I left off from the unexpected cancellation of Easter term 2020.

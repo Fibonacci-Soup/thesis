@@ -5,78 +5,76 @@
 \chapter{Literature Review} \label{sec:Literature Review}
 
 \graphicspath{{Chapter2/Figs/}}
+This chapter lays down the fundamental theories of optoelectronics and search algorithms, which are essential to the research outlined in the later chapters of this thesis.
 
+\section{Fourier Optics}
 
-\textit{Note: \cref{sec:light} and \cref{sec:cgh} partly contains my masters project's report submitted in 2020 for M.Eng. degree.}
-
-
-\section{Light} \label{sec:light}
-\subsection{Light Source}
-For any type of projection, a light source is needed, whether it's artificial or natural. The mechanism of holographic projection is to control the propagation of light in a way that, after diffraction and interference, reconstructs a wavefront that matches the target field. We usually prefer to start from a coherent and monochromatic light source rather than a random source which will be a lot more difficult or even impossible to analyse and predict the interference pattern. Laser, which stands for \textit{\textbf{l}ight \textbf{a}mplification by the \textbf{s}timulated \textbf{e}mission of \textbf{r}adiation}, was first invented by Theodore Maiman in 1959 \cite{Gordon1959, Cartlidge2007}. It differs from other sources of light in that it emits coherent light, which is suitable for holographic projection. However, the coherent and monochromatic property of laser also has a side effect of speckle noise in the reconstructed image \cite{John1966}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{light-source-comparison.png}
-  \caption{Comparison of commercially available light sources for use of holographic projections. (a) Reconstructed images of the same target image for different light sources. (b) Enlarged images showing the details of speckle in the same area of interest for these light sources. (c) Enlarged images showing image edge in the same area of interest for these light sources \cite{Deng2017}}\label{fig:light-source-comparison}
-\end{figure}
-
-Previous work had compared several commercially available light sources (diode-pumped solid-state (DPSS) laser, laser diode (LD), light emitting diode (LED), super luminescent light emitting diode (sLED) and micro light emitting diode (mLED)) for use of holographic projections \cite{Deng2017}. It can be seen from \cref{fig:light-source-comparison} that, when laser (both DPSS laser and laser diode) are used as light source, the reconstruction has sharp edges, but suffers from speckles. When the three types of LEDs are used, the image speckle is greatly reduced, but the edges are a lot blurred due to its incoherence property.
+\subsection{The Propagation of Light}
+\subsubsection{Wave-Particle Duality}
+The problem of how light propagates has been troubling scientists for centuries. The journey began with Sir Isaac Newton, who advocated the particle theory of light in the 17th century. Newton proposed that light consists of particles, or `corpuscles', which explained phenomena such as reflection and refraction \cite{Newton1704}. In contrast, Christiaan Huygens, a contemporary of Newton, demonstrated that light behaves as a wave, as it is capable of diffraction and interference \cite{Huygens1690}.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{liquid-crystal-laser.png}
-  \caption{Liquid crystal laser. (a)-(c) Replay field images generated from a multi-level phase hologram illuminated with (a) DPSS laser, (b) LC laser, (c) LED. (d) Experimental setup for computer generated holographic projection, and corresponding images when illuminated by (e) DPSS laser, and (f) LC laser. (g) \& (h) show the speckle patterns and speckle contrast values for the highlighted regions in (e) \& (f) respectively. \cite{Hands2022}} \label{fig:liquid-crystal-laser}
+	\centering
+	\includegraphics[width=0.7\textwidth]{Double-slit.eps}
+	\caption{An illustration of the Young's Double-slit experiment \cite{Kalliauer2017}}
+	\label{fig:Double-slit.eps}
 \end{figure}
 
-Despite lots of efforts trying to reduce the speckle \cite{Stangner2017, Deng2021}, the development of Liquid Crystal (LC) laser has shone a new light on holography as it not only has an advantage of being tunable in wavelength, but also has a unique feature of low spatial coherence and high temporal coherence \cite{Hands2022}. As shown in \cref{fig:liquid-crystal-laser}, the holographic projection using the LC laser has much less speckle than traditional DPSS laser, while there is a just a slight blurring of the edge. It is at a good balance between DPSS laser and LED.
+The wave theory gained significant support in the early 19th century through the experiments of Thomas Young. Young's double-slit experiment in 1801 provided clear evidence of the wave nature of light by showing that light passing through two slits creates an interference pattern on a screen \cite{Young1802}, as illustrated in \cref{fig:Double-slit.eps}. Augustin-Jean Fresnel further advanced the wave theory by developing a comprehensive mathematical framework to describe light as a wave, explaining phenomena such as polarization and the diffraction of light \cite{Fresnel1826}.
 
-\subsection{Light Propagation}
-\subsubsection{Maxwell Equations}
-In 1864, James Clerk Maxwell proposed a set of four equations describing the space and time dependence of the electromagnetic field, which are:
+This understanding was further reinforced by James Clerk Maxwell in the mid-19th century. In 1864, James Clerk Maxwell organised a set of four equations describing the space and time dependence of the electromagnetic field, which are:
 \begin{align}
-  \nabla \times \textbf{E} & = -\frac{\partial \textbf{B}}{\partial t}             \label{eq:maxwell1} \\
-  \nabla \times \textbf{H} & = \textbf{J} + \frac{\partial \textbf{D}}{\partial t} \label{eq:maxwell2} \\
-  \nabla \cdot \textbf{D}  & = \rho                                                \label{eq:maxwell3} \\
-  \nabla \cdot \textbf{B}  & = 0 \label{eq:maxwell4}
+  \nabla \times \mathbb{E} & = -\frac{\partial \mathbb{B}}{\partial t}             \label{eq:maxwell1} \\
+  \nabla \times \mathbb{H} & = \mathbb{J} + \frac{\partial \mathbb{D}}{\partial t} \label{eq:maxwell2} \\
+  \nabla \cdot \mathbb{D}  & = \rho                                                \label{eq:maxwell3} \\
+  \nabla \cdot \mathbb{B}  & = 0 \label{eq:maxwell4}
 \end{align}
-where $\textbf{D}$ is the electric flux density, $\textbf{E}$ is the electric field intensity, $\textbf{B}$ is the magnetic flux density, $\textbf{H}$ is the magnetic field intensity, $\rho$ is the volume charge density, and $\textbf{J}$ is the current density \cite{Daintith2009}.\\
-And the relation between $\textbf{D}$ and $\textbf{E}$ and between $\textbf{B}$ and $\textbf{H}$ for linear materials (such as free space) are:
+where $\mathbb{D}$ is the electric flux density, $\mathbb{E}$ is the electric field intensity, $\mathbb{B}$ is the magnetic flux density, $\mathbb{H}$ is the magnetic field intensity, $\rho$ is the volume charge density, and $\mathbb{J}$ is the current density \cite{Daintith2009}.
+
+And the relation between $\mathbb{D}$ and $\mathbb{E}$ and between $\mathbb{B}$ and $\mathbb{H}$ for linear materials are:
 \begin{align}
-  \textbf{B} & = \mu \textbf{H}      \\
-  \textbf{D} & = \epsilon \textbf{E}
+  \mathbb{B} & = \mu \mathbb{H}      \\
+  \mathbb{D} & = \epsilon \mathbb{E}
 \end{align}
-where $\mu$ is the magnetic permeability and $\epsilon$ is the dielectric permittivity of the material \cite{Wilkinson2017}.\\
+where $\mu$ is the magnetic permeability and $\epsilon$ is the dielectric permittivity of the material \cite{Wilkinson2017}.
+
+Maxwell's equations unified electricity and magnetism into a single theory of electromagnetism, predicting that light is an electromagnetic wave that propagates through space \cite{Maxwell1865}.
+
+Despite the success of the wave theory, it could not explain all light-related phenomena. The early 20th century brought a pivotal development with Albert Einstein's explanation of the photoelectric effect. In 1905, Einstein proposed that light also behaves as particles, or `quanta' (later called photons), which could eject electrons from a metal surface when light is shone upon it \cite{Einstein1905}. This particle nature of light was critical in explaining observations that wave theory alone could not address and earned Einstein the Nobel Prize in Physics in 1921.
+
+These discoveries collectively revealed that light exhibits both wave and particle properties, depending on the experimental context. This wave-particle duality became a cornerstone of quantum mechanics, fundamentally altering human's understanding of the nature of light. Although to date, it is still not yet known what light exactly is, it is now known how light behaves.
 
 \subsubsection{Wave Equation}
-Light is an electromagnetic wave, so for propagation of light in any material in absence of free charge, the Maxwell equations in \cref{eq:maxwell1} - \cref{eq:maxwell4} can be simplified as:
+To mathematically describe the propagation of light in free space (i.e. in absence of free charge), the Maxwell equations in \cref{eq:maxwell1} - \cref{eq:maxwell4} can be simplified as:
 \begin{align}
-  \nabla \times \textbf{E}         & = -\mu \frac{\partial \textbf{H}}{\partial t}     \label{eq:simplified_maxwell1} \\
-  \nabla \times \textbf{H}         & = \epsilon \frac{\partial \textbf{E}}{\partial t} \label{eq:simplified_maxwell2} \\
-  \nabla \cdot \epsilon \textbf{E} & = 0                                               \label{eq:simplified_maxwell3} \\
-  \nabla \cdot \mu \textbf{H}      & = 0 \label{eq:simplified_maxwell4}
+  \nabla \times \mathbb{E}         & = -\mu \frac{\partial \mathbb{H}}{\partial t}     \label{eq:simplified_maxwell1} \\
+  \nabla \times \mathbb{H}         & = \epsilon \frac{\partial \mathbb{E}}{\partial t} \label{eq:simplified_maxwell2} \\
+  \nabla \cdot \epsilon \mathbb{E} & = 0                                               \label{eq:simplified_maxwell3} \\
+  \nabla \cdot \mu \mathbb{H}      & = 0 \label{eq:simplified_maxwell4}
 \end{align}
 
-Taking the curl of \cref{eq:simplified_maxwell1}, and using the vector identity of $\nabla \times (\nabla \times \textbf{u}) = \nabla(\nabla \cdot \textbf{u}) - \nabla^2 \textbf{u}$:
+Taking the curl on both the left and right hand sides of \cref{eq:simplified_maxwell1}, and using the vector identity of $\nabla \times (\nabla \times \textbf{u}) = \nabla(\nabla \cdot \textbf{u}) - \nabla^2 \textbf{u}$, we get:
 \begin{align}
-  \nabla \times (\nabla \times \textbf{E})               & = -\nabla \times (\mu \frac{\partial \textbf{H}}{\partial t}) \label{eq:wave_equation_derivation1} \\
-  \nabla (\nabla \cdot \textbf{E}) - \nabla^2 \textbf{E} & = -\frac{\partial}{\partial t} \nabla \times (\mu \textbf{H}) \label{eq:wave_equation_derivation2}
+  \nabla \times (\nabla \times \mathbb{E})               & = -\nabla \times (\mu \frac{\partial \mathbb{H}}{\partial t}) \label{eq:wave_equation_derivation1} \\
+  \nabla (\nabla \cdot \mathbb{E}) - \nabla^2 \mathbb{E} & = -\frac{\partial}{\partial t} \nabla \times (\mu \mathbb{H}) \label{eq:wave_equation_derivation2}
 \end{align}
 
-Then, by substituting \cref{eq:simplified_maxwell2} - \cref{eq:simplified_maxwell3} in, \cref{eq:wave_equation_derivation2} becomes:
+Then, by substituting \cref{eq:simplified_maxwell2} and \cref{eq:simplified_maxwell3} in, \cref{eq:wave_equation_derivation2} becomes:
 \begin{equation}
-  -\nabla^2 \textbf{E} = -\frac{\partial}{\partial t} (\mu \epsilon \frac{\partial \textbf{E}}{\partial t}) \label{eq:wave_equation_derivation3}
+  -\nabla^2 \mathbb{E} = -\frac{\partial}{\partial t} (\mu \epsilon \frac{\partial \mathbb{E}}{\partial t}) \label{eq:wave_equation_derivation3}
 \end{equation}
 
-Hence, we have a generic form of wave equation:
+Hence, we have a generic form of wave equation, relating the space and time domain relation of electromagnetic waves propagating in free space:
 \begin{equation}
-  \nabla^2 \textbf{E} = \mu \epsilon \frac{\partial^2 \textbf{E}}{\partial t^2} \label{eq:wave_equation}
+  \nabla^2 \mathbb{E} = \mu \epsilon \frac{\partial^2 \mathbb{E}}{\partial t^2} \label{eq:wave_equation}
 \end{equation}
 
 A valid solution to \cref{eq:wave_equation} is:
 \begin{equation}
-  \textbf{E} = \textbf{E}_0 e^{j(\omega t - k r)} \label{eq:wave_equation_solution}
+  \mathbb{E} = \mathbb{E}_0 e^{j(\omega t - k r)} \label{eq:wave_equation_solution}
 \end{equation}
-where $\omega$ is the angular velocity of the wave, $t$ is time, $r$ is the propagation distance and $k$ is called the wave number ($k=\frac{2\pi}{\lambda}$, where $\lambda$ is the wavelength). From \cref{eq:wave_equation_solution} we can see that the propagation of light in free space is simply a phase shift. This suggests that, if we have a coherent light source and a phase modulator, we can essentially manipulate the phase of light to produce an interference pattern reconstructing the target field we desire, and such method is called holographic projection.
+where $\omega$ is the angular velocity of the wave, $t$ is time, $r$ is the propagation distance and $k$ is called the wave number ($k=\frac{2\pi}{\lambda}$, where $\lambda$ is the wavelength). From \cref{eq:wave_equation_solution} we can see that the propagation of light in free space is essentially a phase shift. This suggests that, if we have a coherent light source and a device to manipulate light (called spatial light modulator, further explained in \cref{sec:SLM}), we can produce an interference pattern reconstructing the target field we desire, and such method is called holographic projection.
+
 
 
 \subsection{Diffraction} \label{sec:Diffraction}
@@ -169,7 +167,7 @@ which suggests that the far field pattern is simply the Fourier Transform of the
 \newpage
 \section{Computer-Generated Hologram (CGH)}\label{sec:cgh}
 CGH is the method of digitally generating the interference patterns and displaying it via a spatial light modulator (SLM), therefore reconstructing the 3D target. This section discusses the available SLM's, and algorithms to compute the holograms.
-\subsection{Modulation Schemes}
+\subsection{Spatial Light Modulator (SLM)} \label{sec:SLM}
 Currently, available display devices fall into four modulation categories, as illustrated in \cref{fig:modulation_loci} \cite{Cable2006}.
 \begin{figure}[H]
   \centering

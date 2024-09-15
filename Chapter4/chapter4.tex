@@ -101,13 +101,7 @@ The optimization algorithms used for CGH in this paper are GD and L-BFGS. The ph
 	\label{fig:Fresnel_slice_illustration}
 \end{figure}
 
-As shown in \cref{fig:Fresnel_slice_illustration}, the multi-depth target is set up as a collection of $n$ slices ($\textbf{T}_1$ to $\textbf{T}_n$), each slice $\textbf{T}_i$ is at a distance $z_i$ to the hologram plane. And for the hologram $\textbf{H}$, its reconstruction at each distance $z_i$ is computed using Fresnel diffraction formula, as shown in \cref{eq:fresnel-diffraction}.
-
-\begin{equation}
-	\textbf{R}_i = \left\lvert \mathcal{F} \left\{\textbf{H}(x,y) \cdot e^{j\frac{k}{2z_i}(x^2+y^2)}\right\} \right\rvert \stackrel{\text{def}}{=} \mathcal{P}(\textbf{H}, z_i)
-	\label{eq:fresnel-diffraction}
-\end{equation}
-where $\mathcal{F}$ denotes the Fourier Transform, and the formula is defined as a propagation function $\mathcal{P}(\textbf{H}, z_i)$.
+As shown in \cref{fig:Fresnel_slice_illustration}, the multi-depth target is set up as a collection of $n$ slices ($\textbf{T}_1$ to $\textbf{T}_n$), each slice $\textbf{T}_i$ is at a distance $z_i$ to the hologram plane. And for the hologram $\textbf{H}$, its reconstruction at each distance $z_i$ is computed using Fresnel diffraction formula in \cref{eq:fresnel-diffraction}, which is labelled as the propagation function $\mathcal{P}(\textbf{H}, z_i)$.
 
 Then, to create an objective function ($f(\textbf{x})$ in \cref{eq:minimise_F}) to optimize, we need to quantify the difference between each target slice ($\textbf{T}_i$) and the respective reconstruction ($\textbf{R}_i$) numerically, and minimize such difference. Among the lots of options available, the loss functions selected are mean squared error (MSE) \cite{MSE_REF}, cross entropy (CE) \cite{cybenko1998mathematics} and relative entropy (RE) \cite{Kullback1951}. To adapt the loss functions for two-dimensional (2D) target image $\textbf{T}_i$ and reconstructed image $\textbf{R}_i$ of dimension $X\times Y$, the loss functions are adapted as shown in \cref{eq:MSE_holo} to \cref{eq:RE_holo}.
 

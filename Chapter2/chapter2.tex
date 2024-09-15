@@ -79,7 +79,7 @@ where $\omega$ is the angular velocity of the wave, $t$ is time, $r$ is the prop
 \section{Fundamentals of Holography}
 Holography is a technology that can fully reconstruct the wavefront of 3D objects, which is usually achieved by modulating a coherent light source. This section explains what a coherent light source is and how it is modulated and diffracted.
 
-\subsection{Light Source}
+\subsection{Light Source} \label{sec:Light Source}
 
 The mechanism of holographic projection is to control the propagation of light in a way that, after diffraction, reconstructs a wavefront that matches the target field. We usually prefer to start from a coherent light source rather than a random one which will be a lot more difficult or even impossible to analyse and predict the interference pattern.
 
@@ -96,39 +96,32 @@ The coherence of light refers to the property of light waves where the phase rel
   \item \textbf{Spatial coherence:} Spatial coherence describes the correlation between the phases of a light wave at different points across the wavefront, perpendicular to the direction of propagation. It indicates the uniformity of the phase across the wavefront, as illustrated in \cref{fig:coherent-vs-incoherent.eps}. High spatial coherence means that the light waves across different points on the wavefront are in phase.
 \end{itemize}
 
-
-The most common coherent light source is Laser, which stands for \textit{\textbf{L}ight \textbf{A}mplification by the \textbf{S}timulated \textbf{E}mission of \textbf{R}adiation}. It was first invented by Theodore Maiman in 1959 \cite{Gordon1959, Cartlidge2007}. It differs from other sources of light in that it emits coherent light, which is suitable for holographic projection. However, the coherent and monochromatic property of laser also has a side effect of speckle noise in the reconstructed image \cite{John1966}, which is one of the major problems affecting the image quality of holographic projections.
-
-
-
-\subsection{Spatial Light Modulator (SLM)} \label{sec:SLM}
-SLMs are critical components in computer-generated holography (CGH). SLM is a device used to control the amplitude or phase of light waves in a spatially varying manner. SLMs typically consist of a two-dimensional(2D) array of pixels, each of which can modulate the light either passing through or reflected from it. These pixels are usually addressed by electronic signals, allowing precise manipulation of the light wavefront.
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=1.0\textwidth]{modulation_loci.jpg}
-  \caption{Modulation loci in the complex plane \cite{Cable2006}} \label{fig:modulation_loci}
+	\centering
+	\includegraphics[width=0.9\textwidth]{first_laser.jpg}
+	\caption{Structure of the first laser \cite{Hecht2008}}
+	\label{fig:first_laser}
 \end{figure}
-The modulation can be achieved through various mechanisms, such as liquid crystal SLMs(LC-SLM), magneto-optic SLMs, deformable mirror SLMs, multiple-quantum-well SLMs, or acousto-optic Bragg cells \cite{Goodman2017}, which all fall into the four modulation categories, as illustrated in \cref{fig:modulation_loci} \cite{Cable2006}. The four modulation schemes are:
-\begin{itemize}
-  \item \textbf{Multi-level Amplitude} modulators can modulate each pixel from zero transmission (0) to full transmission (1), either continuously or in discrete steps. (e.g. nematic liquid crystal display \cite{Schadt1971}, found for example in laptops and many conventional video projectors)
-  \item \textbf{Binary Amplitude} modulators can switch each pixel to zero transmission (0) or full transmission (1), but nothing in between. (e.g. deformable mirror device \cite{Pape1983}, ferroelectric liquid crystal display \cite{Johnson1993}, both used in high-end video projectors)
-  \item \textbf{Multi-level Phase} modulators can modulate the phase shift imparted by each pixel from 0 to 2$\pi$ radians, either continuously or in discrete steps. (e.g. Nematic liquid crystal devices \cite{Lee2004})
-  \item \textbf{Binary Phase} modulators can switch each pixel for a phase shift of either 0 or $\pi$ radians. (e.g. Ferroelectric liquid crystal displays \cite{Broomfield1992})
-\end{itemize}
 
-Among the four modulation schemes, phase modulations are of higher interests for the purpose of holography, because amplitude modulators, either multi-level or binary, blocks light at the SLM, causing waste of energy, leading to poorer energy efficiency. And also, amplitude modulations always have a zero-order (forming a central bright spot), because the average amplitude is always between 0 and 1; on contrary, phase modulation can suppress the zero-order by designing the hologram to have zero average.
-
-As there is no complex modulator available yet, we need algorithms to generate phase-only holograms, such process is called phase retrieval. There are currently many algorithms for such purpose, which are discussed in \cref{sec:cgh}.
+The most common coherent light source is Laser, which stands for \textit{\textbf{L}ight \textbf{A}mplification by the \textbf{S}timulated \textbf{E}mission of \textbf{R}adiation}. It was first invented by Theodore Maiman in 1959, with the structure shown in \cref{fig:first_laser} \cite{Hecht2008, Gordon1959, Cartlidge2007}. It differs from other sources of light in that it emits coherent light, which is suitable for holographic projection. However, the coherent and monochromatic property of laser also has a side effect of speckle noise in the reconstructed image \cite{John1966}, which is one of the major problems affecting the image quality of holographic projections and has seen lots of efforts to cope with it in the literature \cite{Cable2004,Stangner2017, Deng2021,Hands2022}.
 
 
 \subsection{Diffraction}
+
+This section delves into how light interacts with apertures, leading to diffractions. Understanding diffraction is essential for holography, as it explains how light can be manipulated to reconstruct three-dimensional light fields. The principles of diffraction and interference underpin the essential process of holographic projection, making it possible to accurately recreate complex wavefronts and achieve true 3D visualization.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{diffraction_coordinate_definition.jpg}
   \caption{Diffraction geometry}\label{fig:diffraction_coordinate_definition}
 \end{figure}
 
-To model how light diffracts through a 2D aperture, we first set up a coordinate system as shown in \cref{fig:diffraction_coordinate_definition}, where the aperture is denoted by $A(x, y)$ and the diffracted field is denoted by $E(\alpha, \beta, z)$.
+To model how light diffracts through a 2D aperture, we first set up a coordinate system as shown in \cref{fig:diffraction_coordinate_definition}, where the aperture is denoted by $A(x, y)$ and the diffracted field is denoted by $E(\alpha, \beta, z)$. $R$ defines the distance between point $P$ and the origin of the aperture ($(x,y)=(0,0)$), $r$ defines the distance between point $P$ and a point on the aperture, and $\theta$ defines the angle $r$ from the $z$-axis. Then by trigonometry we can have the following identities:
+\begin{align}
+  cos(\theta) & = \frac{z}{r}                      \label{eq:trignometry-theta} \\
+  R^2         & = \alpha ^2 + \beta ^2 + z^2       \label{eq:trignometry-R} \\
+  r^2         & = (\alpha-x)^2 + (\beta-y)^2 + z^2 \label{eq:trignometry-r}
+\end{align}
 
 \begin{figure}[H]
   \centering
@@ -141,49 +134,41 @@ The Huygens-Fresnel principle states that every point on a wavefront is itself t
   E(\alpha, \beta, z) = \frac{1}{j\lambda} \iint A(x,y)\frac{e^{jkr}}{r} cos(\theta) dxdy \label{eq:huygens-fresnel-principle}
 \end{equation}
 
-And by trigonometry we can have the following identities:
-\begin{align}
-  cos(\theta) & = \frac{z}{r}                                               \\
-  R^2         & = \alpha ^2 + \beta ^2 + z^2       \label{eq:trignometry-R} \\
-  r^2         & = (\alpha-x)^2 + (\beta-y)^2 + z^2 \label{eq:trignometry-r}
-\end{align}
-
-Then \cref{eq:huygens-fresnel-principle} becomes:
+Applying the identities in \cref{eq:trignometry-theta} - \cref{eq:trignometry-r},  \cref{eq:huygens-fresnel-principle} becomes:
 \begin{align}
   E(\alpha, \beta, z) & = \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jkr}}{r^2} dxdy                    \label{eq:huygens-fresnel-principle-substituded-cos}                                                      \\
                       & = \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jk\sqrt{(\alpha-x)^2 + (\beta-y)^2 + z^2}}}{(\alpha-x)^2 + (\beta-y)^2 + z^2} dxdy \label{eq:huygens-fresnel-principle-substituded-r-square}
 \end{align}
 
-Unfortunately, \cref{eq:huygens-fresnel-principle-substituded-r-square} can only be solved analytically for few specific aperture functions $A(x,y)$, so we have to make some approximations to solve for arbitrary $A(x,y)$, the common methods are \textit{Fresnel} and \textit{Fraunhofer} approximations for regions depicted in \cref{fig:fresnel_fraunhofer_approximations} below.
+Unfortunately, \cref{eq:huygens-fresnel-principle-substituded-r-square} cannot be solved analytically except for few specific aperture functions $A(x,y)$, so we have to make some approximations in order to solve for arbitrary $A(x,y)$, the common methods are \textit{Fresnel} and \textit{Fraunhofer} approximations for regions depicted in \cref{fig:fresnel_fraunhofer_approximations}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{fresnel_fraunhofer_approximations.png}
+  \includegraphics[width=0.9\textwidth]{fresnel_fraunhofer_approximations.png}
   \caption{Fresnel and Fraunhofer region \cite{Wilkinson2019}}\label{fig:fresnel_fraunhofer_approximations}
 \end{figure}
 
 
 \subsubsection{Fresnel Approximation}
-
-Fesnel approximation replaces expressions for spherical waves by quadratic-phase exponentials, using the binomial expansion of the square root to approximate $r$ in \cref{eq:huygens-fresnel-principle-substituded-cos} \cite{Goodman2017}:
 \begin{equation}
   \sqrt{1+d} = 1 + \frac{1}{2}d - \frac{1}{8}d^2 + \cdots \label{eq:binomial-expension}
 \end{equation}
+Fesnel approximation replaces expressions for spherical waves by quadratic-phase exponentials, using the binomial expansion of the square root (given in \cref{eq:binomial-expension}) to approximate $r$ in \cref{eq:huygens-fresnel-principle-substituded-cos} \cite{Goodman2017}.
 
-Retaining only the first two terms of the expansion in \cref{eq:binomial-expension}, and substituting in \cref{eq:trignometry-r} gives:
+Retaining only the first two terms of the expansion gives:
 \begin{align}
   r & = \sqrt{(\alpha-x)^2 + (\beta-y)^2 + z^2}                                                                                                              \\
     & = z \sqrt{1 + \left( \frac{\alpha-x}{z} \right)^2 + \left(\frac{\beta-y}{z}\right)^2}                                                                  \\
     & \approx z \left[ 1 + \frac{1}{2} \left( \frac{\alpha-x}{z} \right)^2 + \frac{1}{2} \left(\frac{\beta-y}{z}\right)^2 \right] \label{eq:r-approximation}
 \end{align}
 
-For the $r^2$ in the denominator of \cref{eq:huygens-fresnel-principle-substituded-cos}, the error introduced by dropping all terms but $z$ is generally acceptably small, but for the $r$ appearing in the exponent in the numerator of \cref{eq:huygens-fresnel-principle-substituded-cos}, errors are much more critical \cite{Goodman2017}. So, by substituting \cref{eq:r-approximation} for the $r$ in the numerator of \cref{eq:huygens-fresnel-principle-substituded-cos} and substituting $z$ for the $r$ in the denominator, we have:
+For the $r^2$ in the denominator of \cref{eq:huygens-fresnel-principle-substituded-cos}, the error introduced by dropping all terms but $z$ is generally acceptably small (i.e. $r^2\approx z^2$), and for the $r$ appearing in the exponent in the numerator of \cref{eq:huygens-fresnel-principle-substituded-cos}, errors are much more critical \cite{Goodman2017}. So, by substituting \cref{eq:r-approximation} for the $r$ in the numerator of \cref{eq:huygens-fresnel-principle-substituded-cos} and substituting $z$ for the $r$ in the denominator, we have:
 \begin{align}
-  E(\alpha, \beta, z) & = \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jkz \left[ 1 + \frac{1}{2} \left( \frac{\alpha-x}{z} \right)^2 + \frac{1}{2} \left(\frac{\beta-y}{z}\right)^2 \right]}}{z^2} dxdy \\
+  E(\alpha, \beta, z) & \approx \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jkz \left[ 1 + \frac{1}{2} \left( \frac{\alpha-x}{z} \right)^2 + \frac{1}{2} \left(\frac{\beta-y}{z}\right)^2 \right]}}{z^2} dxdy \\
                       & = \frac{e^{jkz}}{j\lambda z} e^{j\frac{k}{2z}(\alpha^2+\beta^2)} \iint \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}e^{-j\frac{2\pi}{\lambda z}(\alpha x+\beta y)}dxdy    \\
                       & = \frac{e^{jkz}}{j\lambda z} e^{j\frac{k}{2z}(\alpha^2+\beta^2)} \mathcal{F} \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}
 \end{align}
-where $\mathcal{F}$ is the Fourier Transform.
+where $\mathcal{F}$ is the Fourier Transform. Such method of including Fourier Transform (FT) in the study of optics is also named `Fourier Optics'.
 
 Now we have a more simple and solvable expression than \cref{eq:huygens-fresnel-principle-substituded-r-square}. And also, as we are only interested in the scaling of relative points at $P$ with respect to each other, so it is safe to normalise the multiplier term before the Fourier Transform to 1 \cite{Wilkinson2019}. So we can express the diffraction pattern in Fresnel region as:
 \begin{equation}
@@ -204,8 +189,7 @@ so that the wave fronts can be treated as planar rather than spherical \cite{Dai
 
 which suggests that the far field pattern is simply the Fourier Transform of the aperture function.
 
-
-The SLM used in this thesis is a binary phase modulator. As the binary phase modulation is purely real (i.e. it's only switching between $0^\circ$ and $180^\circ$), the complex conjugate $A^*(x,y)$ is the same as $A(x,y)$:
+The spatial light modulator (SLM) used in this thesis is a binary phase modulator, which will be further explained in detail in \cref{sec:SLM}. As the binary phase modulation is purely real (i.e. it's only switching between $0^\circ$ and $180^\circ$, corresponding to 1 and -1 values of $A^*(x,y)$), the complex conjugate $A^*(x,y)$ is the same as $A(x,y)$:
 \begin{equation} \label{eq:AequalsAstar}
   A^*(x,y) = A(x,y)
 \end{equation}
@@ -213,8 +197,27 @@ because the Fourier transform of $A^*(x,y)$ is the same as the Fourier transform
 \begin{equation} \label{eq:AAstar}
   E(-\alpha, -\beta)=\mathcal{F}[A^*(x,y)]=\mathcal{F}[A(x,y)]=E(\alpha, \beta)
 \end{equation}
-So there is no distinction between the desired image and its $180^\circ$ rotation in the replay field, causing a symmetrical conjugate image rotated $180^\circ$ from the target image. The simplest workaround for this issue is to use only half of the reconstruction field, and the computation of CGH for binary SLM will naturally need binary quantisation. Although few multi-level phase modulators are available, their bit depth is still limited (e.g. 4-bit 8-bit), so quantisation is still needed for the discrete levels.
+So, at the Fraunhofer region, there is no distinction between the desired image and its $180^\circ$ rotation in the replay field, causing a symmetrical conjugate image rotated $180^\circ$ from the target image. The simplest workaround for this issue is to use only half of the reconstruction field, and the computation of CGH for binary SLM will also need a binary quantisation step. Although few multi-level phase modulators are available, their bit depth is still limited (e.g. 4-bit 8-bit), so quantisation is still needed for the discrete levels.
 
+
+\subsection{Spatial Light Modulator (SLM)} \label{sec:SLM}
+SLMs are critical components in computer-generated holography (CGH). SLM is a device used to control the amplitude or phase of light waves in a spatially varying manner. SLMs typically consist of a two-dimensional(2D) array of pixels, each of which can modulate the light either passing through or reflected from it. These pixels are usually addressed by electronic signals, allowing precise manipulation of the light wavefront.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.0\textwidth]{modulation_loci.jpg}
+  \caption{Modulation loci in the complex plane \cite{Cable2006}} \label{fig:modulation_loci}
+\end{figure}
+The modulation can be achieved through various mechanisms, such as liquid crystal SLMs(LC-SLM), magneto-optic SLMs, deformable mirror SLMs, multiple-quantum-well SLMs, or acousto-optic Bragg cells \cite{Goodman2017}, which all fall into the four modulation categories, as illustrated in \cref{fig:modulation_loci} \cite{Cable2006}. The four modulation schemes are:
+\begin{itemize}
+  \item \textbf{Multi-level Amplitude} modulators can modulate each pixel from zero transmission (0) to full transmission (1), either continuously or in discrete steps. (e.g. nematic liquid crystal display \cite{Schadt1971}, found for example in laptops and many conventional video projectors)
+  \item \textbf{Binary Amplitude} modulators can switch each pixel to zero transmission (0) or full transmission (1), but nothing in between. (e.g. deformable mirror device \cite{Pape1983}, ferroelectric liquid crystal display \cite{Johnson1993}, both used in high-end video projectors)
+  \item \textbf{Multi-level Phase} modulators can modulate the phase shift imparted by each pixel from 0 to 2$\pi$ radians, either continuously or in discrete steps. (e.g. Nematic liquid crystal devices \cite{Lee2004})
+  \item \textbf{Binary Phase} modulators can switch each pixel for a phase shift of either 0 or $\pi$ radians. (e.g. Ferroelectric liquid crystal displays \cite{Broomfield1992})
+\end{itemize}
+
+Among the four modulation schemes, phase modulations are of higher interests for the purpose of holography, because amplitude modulators, either multi-level or binary, blocks light at the SLM, causing waste of energy, leading to poorer energy efficiency. And also, amplitude modulations always have a zero-order (forming a central bright spot), because the average amplitude is always between 0 and 1; on contrary, phase modulation can suppress the zero-order by designing the hologram to have zero average.
+
+As there is no complex modulator available yet, we need algorithms to generate phase-only holograms, such process is called phase retrieval. There are currently many algorithms for such purpose, which are discussed in \cref{sec:cgh}.
 
 
 \section{Computer-Generated Hologram (CGH)}\label{sec:cgh}

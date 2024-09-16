@@ -75,7 +75,7 @@ A valid solution to \cref{eq:wave_equation} is:
 where $\omega$ is the angular velocity of the wave, $t$ is time, $r$ is the propagation distance and $k$ is called the wave number ($k=\frac{2\pi}{\lambda}$, where $\lambda$ is the wavelength). From \cref{eq:wave_equation_solution} we can see that the propagation of light in free space is essentially a phase shift. This suggests that, if we have a coherent light source and a device to manipulate light (called SLM, further explained in \cref{sec:SLM}), we can produce an interference pattern reconstructing the target field we desire, and such method is called holographic projection.
 
 
-
+\newpage
 \section{Fundamentals of Holography}
 Holography is a technology that can fully reconstruct the wavefront of 3D objects, which is usually achieved by modulating a coherent light source. This section explains what a coherent light source is and how it is modulated and diffracted.
 
@@ -103,10 +103,10 @@ The coherence of light refers to the property of light waves where the phase rel
 	\label{fig:first_laser}
 \end{figure}
 
-The most common coherent light source is Laser, which stands for \textit{\textbf{L}ight \textbf{A}mplification by the \textbf{S}timulated \textbf{E}mission of \textbf{R}adiation}. It was first invented by Theodore Maiman in 1959, with the structure shown in \cref{fig:first_laser} \cite{Hecht2008, Gordon1959, Cartlidge2007}. It differs from other sources of light in that it emits coherent light, which is suitable for holographic projection. However, the coherent and monochromatic property of laser also has a side effect of speckle noise in the reconstructed image \cite{John1966}, which is one of the major problems affecting the image quality of holographic projections and has seen lots of efforts to cope with it in the literature \cite{Cable2004,Stangner2017, Deng2021,Hands2022}.
+The most common coherent light source is Laser, which stands for \textit{\textbf{L}ight \textbf{A}mplification by the \textbf{S}timulated \textbf{E}mission of \textbf{R}adiation}. It was first invented by Theodore Maiman in 1959, with the structure shown in \cref{fig:first_laser} \cite{Hecht2008, Gordon1959, Cartlidge2007}. It differs from other sources of light in that it emits coherent light, which is suitable for holographic projection. However, the coherent and monochromatic property of laser also has a side effect of speckle noise in the reconstructed image \cite{John1966}, which is one of the major problems affecting the image quality of holographic projections and has seen lots of efforts to cope with it in the literature \cite{Cable2004,Stangner2017,Deng2021,Hands2022}.
 
 
-\subsection{Diffraction}
+\subsection{Diffraction} \label{sec:Diffraction}
 
 This section delves into how light interacts with apertures, leading to diffractions. Understanding diffraction is essential for holography, as it explains how light can be manipulated to reconstruct three-dimensional light fields. The principles of diffraction and interference underpin the essential process of holographic projection, making it possible to accurately recreate complex wavefronts and achieve true 3D visualization.
 
@@ -189,16 +189,6 @@ so that the wave fronts can be treated as planar rather than spherical \cite{Dai
 
 which suggests that the far field pattern is simply the Fourier Transform of the aperture function.
 
-The spatial light modulator (SLM) used in this thesis is a binary phase modulator, which will be further explained in detail in \cref{sec:SLM}. As the binary phase modulation is purely real (i.e. it's only switching between $0^\circ$ and $180^\circ$, corresponding to 1 and -1 values of $A^*(x,y)$), the complex conjugate $A^*(x,y)$ is the same as $A(x,y)$:
-\begin{equation} \label{eq:AequalsAstar}
-  A^*(x,y) = A(x,y)
-\end{equation}
-because the Fourier transform of $A^*(x,y)$ is the same as the Fourier transform of $A(x,y)$
-\begin{equation} \label{eq:AAstar}
-  E(-\alpha, -\beta)=\mathcal{F}[A^*(x,y)]=\mathcal{F}[A(x,y)]=E(\alpha, \beta)
-\end{equation}
-So, at the Fraunhofer region, there is no distinction between the desired image and its $180^\circ$ rotation in the replay field, causing a symmetrical conjugate image rotated $180^\circ$ from the target image. The simplest workaround for this issue is to use only half of the reconstruction field, and the computation of CGH for binary SLM will also need a binary quantisation step. Although few multi-level phase modulators are available, their bit depth is still limited (e.g. 4-bit 8-bit), so quantisation is still needed for the discrete levels.
-
 
 \subsection{Spatial Light Modulator (SLM)} \label{sec:SLM}
 SLMs are critical components in computer-generated holography (CGH). SLM is a device used to control the amplitude or phase of light waves in a spatially varying manner. SLMs typically consist of a two-dimensional(2D) array of pixels, each of which can modulate the light either passing through or reflected from it. These pixels are usually addressed by electronic signals, allowing precise manipulation of the light wavefront.
@@ -217,15 +207,54 @@ The modulation can be achieved through various mechanisms, such as liquid crysta
 
 Among the four modulation schemes, phase modulations are of higher interests for the purpose of holography, because amplitude modulators, either multi-level or binary, blocks light at the SLM, causing waste of energy, leading to poorer energy efficiency. And also, amplitude modulations always have a zero-order (forming a central bright spot), because the average amplitude is always between 0 and 1; on contrary, phase modulation can suppress the zero-order by designing the hologram to have zero average.
 
-As there is no complex modulator available yet, we need algorithms to generate phase-only holograms, such process is called phase retrieval. There are currently many algorithms for such purpose, which are discussed in \cref{sec:cgh}.
+As there is no complex modulator available yet, we need algorithms to generate phase-only holograms, such process is called phase retrieval. There are currently many algorithms for such purpose, which will be discussed in \cref{sec:cgh}.
+
+\subsubsection{Rotational symmetries in the binary phase modulation}
+
+The spatial light modulator (SLM) used in this thesis is a binary phase modulator. As the binary phase modulation is purely real (i.e. it's only switching between $0^\circ$ and $180^\circ$, corresponding to 1 and -1 values of $A^*(x,y)$), the complex conjugate $A^*(x,y)$ is the same as $A(x,y)$:
+\begin{equation} \label{eq:AequalsAstar}
+  A^*(x,y) = A(x,y)
+\end{equation}
+because the Fourier transform of $A^*(x,y)$ is the same as the Fourier transform of $A(x,y)$
+\begin{equation} \label{eq:AAstar}
+  E(-\alpha, -\beta)=\mathcal{F}[A^*(x,y)]=\mathcal{F}[A(x,y)]=E(\alpha, \beta)
+\end{equation}
+So, at the Fraunhofer region, there is no distinction between the desired image and its $180^\circ$ rotation in the replay field, causing a symmetrical conjugate image rotated $180^\circ$ from the target image.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{10_step_target.jpg}
+    \caption{Target field}
+    \label{fig:10_step_target}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{binary_phase_SLM_symmetry.jpg}
+    \caption{Projection result}
+    \label{fig:binary_phase_SLM_symmetry}
+  \end{subfigure}
+
+  \caption{Rotational symmetry in the projection result using the binary phase SLM}
+  \label{fig:Rotational symmetry Binary SLM}
+\end{figure}
+
+To demonstrate such phenomena, the example target image shown in \cref{fig:10_step_target} ran through the binary-phase hologram generation algorithm called one-step phase-retrieval (OSPR), which will be explained in detail in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm}, and the projection output is shown in \cref{fig:binary_phase_SLM_symmetry}. The simplest workaround for this issue is to use only half of the reconstruction field, like the target image in \cref{fig:10_step_target}. However, the side effect of this workaround is that half of the energy will be wasted, leading to higher power consumption and heat dissipation.
+
+%@TODO: the computation of CGH for binary SLM also need a binary quantisation step. Although few multi-level phase modulators are available, their bit depth is limited (e.g. 4-bit 8-bit), so the quantisation step is still inevitable.
 
 
-\section{Computer-Generated Hologram (CGH)}\label{sec:cgh}
-CGH is the method of digitally generating the interference patterns and displaying it via an SLM, therefore reconstructing the 3D target. This section discusses the available SLM's, and algorithms to compute the holograms.
+\newpage
+\section{Computer-Generated Holography (CGH)}\label{sec:cgh}
+Different from the traditional analogue optical holography and digital holography which both need a physically existing object to record the hologram, CGH is a method to use computer algorithms to generate holograms without the need for the physical target object. Ideally, holograms can be simply computed using the inverse Fourier Transform, using the inverse functions of \cref{eq:fresnel-diffraction} and \cref{eq:fraunhofer-diffraction} derived in \cref{sec:Diffraction}. The inverse Fourier Transforms on most targets will end up with results in complex numbers; however, as mentioned in \cref{sec:SLM}, currently available SLMs cannot achieve complex modulation yet. Therefore, computer algorithms are needed to compute either phase-only or amplitude-only holograms, among which the former is preferred, as explained in \cref{sec:SLM}.
+
+This section reviews the existing methods for calculating phase-only holograms. The phase-only hologram is labelled as $H$, so that it differs from the previous notation of $A$ for complex-valued hologram apertures. And the propagation function is unified as $\mathcal{P}$, which can be either the Fraunhofer propagation equation in \cref{eq:fresnel-diffraction} or the Fresnel propagation equation in \cref{eq:fraunhofer-diffraction} depending on the distance of the target field.
 
 
 \subsection{Naive Algorithm}\label{sec:Naive algorithm}
-The naive algorithm to get a phase hologram is by directly using the phase of the reverse propagation from the target field to the hologram plane (e.g. for Fraunhofer propagation, the hologram is simply the inverse Fourier transform $\mathcal{F} ^{-1}$ of the target image), while discarding the amplitude component. The pseudocode of naive algorithm is shown in \cref{alg:Naive algorithm} below:
+The simplest method to get a phase hologram is by directly extracting the phase of the reverse propagation from the target field, and discarding the amplitude component (e.g. for Fraunhofer propagation, the phase hologram will simply be the phase of the inverse Fourier transform $\mathcal{F} ^{-1}$ of the target image). This method is named as `Naive' algorithm here for its simplicity. The pseudocode of Naive algorithm is shown in \cref{alg:Naive algorithm} below:
 \begin{algorithm}[H]
   \caption{Naive algorithm}\label{alg:Naive algorithm}
   \textbf{Input:} Target field $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
@@ -235,7 +264,7 @@ The naive algorithm to get a phase hologram is by directly using the phase of th
     \State $R \gets \vert \mathcal{P}[e^{jH}] \vert$
   \end{algorithmic}
 \end{algorithm}
-where $j = \sqrt{-1} $. Naive algorithm (as described in \cref{alg:Naive algorithm}) was then implemented in MATLAB and the output results are shown in \cref{fig:Naive algorithm output} below:
+where $j = \sqrt{-1} $. The Naive algorithm (as described in \cref{alg:Naive algorithm}) was then implemented in MATLAB and the output results are shown in \cref{fig:Naive algorithm output} below:
 
 \begin{figure}[H]
   \centering

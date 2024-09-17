@@ -209,7 +209,7 @@ Among the four modulation schemes, phase modulations are of higher interests for
 
 As there is no complex modulator available yet, we need algorithms to generate phase-only holograms, such process is called phase retrieval. There are currently many algorithms for such purpose, which will be discussed in \cref{sec:cgh}.
 
-\subsubsection{Rotational symmetries in the binary phase modulation}
+\subsubsection{Rotational symmetries in the binary phase modulation} \label{sec:Rotational symmetries in the binary phase modulation}
 
 The spatial light modulator (SLM) used in this thesis is a binary phase modulator. As the binary phase modulation is purely real (i.e. it's only switching between $0^\circ$ and $180^\circ$, corresponding to 1 and -1 values of $A^*(x,y)$), the complex conjugate $A^*(x,y)$ is the same as $A(x,y)$:
 \begin{equation} \label{eq:AequalsAstar}
@@ -250,34 +250,47 @@ To demonstrate such phenomena, the example target image shown in \cref{fig:10_st
 \section{Computer-Generated Holography (CGH)}\label{sec:cgh}
 Different from the traditional analogue optical holography and digital holography which both need a physically existing object to record the hologram, CGH is a method to use computer algorithms to generate holograms without the need for the physical target object. Ideally, holograms can be simply computed using the inverse Fourier Transform, using the inverse functions of \cref{eq:fresnel-diffraction} and \cref{eq:fraunhofer-diffraction} derived in \cref{sec:Diffraction}. The inverse Fourier Transforms on most targets will end up with results in complex numbers; however, as mentioned in \cref{sec:SLM}, currently available SLMs cannot achieve complex modulation yet. Therefore, computer algorithms are needed to compute either phase-only or amplitude-only holograms, among which the former is preferred, as explained in \cref{sec:SLM}.
 
-This section reviews the existing methods for calculating phase-only holograms. The phase-only hologram is labelled as $H$, so that it differs from the previous notation of $A$ for complex-valued hologram apertures. And the propagation function is unified as $\mathcal{P}$, which can be either the Fraunhofer propagation equation in \cref{eq:fresnel-diffraction} or the Fresnel propagation equation in \cref{eq:fraunhofer-diffraction} depending on the distance of the target field.
+This section reviews the existing methods in the literature for calculating phase-only holograms. The phase-only hologram is labelled as $H$, so that it differs from the previous notation of $A$ for complex-valued hologram apertures. And the propagation function is unified as $\mathcal{P}$, which can be either the Fraunhofer propagation equation in \cref{eq:fresnel-diffraction} or the Fresnel propagation equation in \cref{eq:fraunhofer-diffraction} depending on the distance of the target field. Lastly, $R$ denotes the reconstruction from the hologram, which is the amplitude of the result from $\mathcal{P}$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.3\textwidth]{mandrill.png}
+  \caption{Sample target image of a mandrill ($T$) \cite{MANDRILL_REF}}\label{fig:mandrill.png}
+\end{figure}
+
+A sample image of a mandrill (shown in \cref{fig:mandrill.png}) is chosen from the University of Southern California Signal and Image Processing Institute (USC-SIPI) Image Database \cite{MANDRILL_REF} to test and compare the classical phase retrieval algorithms in the literature. As the square of the amplitude, also known as the `intensity' of light, is the only visible component with human eyes \cite{Huang2024}, the diffracted electric field's amplitude ($\vert E \vert$) will be targeted to match the square root of $T$.
 
 
-\subsection{Naive Algorithm}\label{sec:Naive algorithm}
-The simplest method to get a phase hologram is by directly extracting the phase of the reverse propagation from the target field, and discarding the amplitude component (e.g. for Fraunhofer propagation, the phase hologram will simply be the phase of the inverse Fourier transform $\mathcal{F} ^{-1}$ of the target image). This method is named as `Naive' algorithm here for its simplicity. The pseudocode of Naive algorithm is shown in \cref{alg:Naive algorithm} below:
+\subsection{Naive Method}\label{sec:Naive algorithm}
+The simplest method to get a phase-only hologram $H$ is by directly extracting the phase of the reverse propagation from the target field, discarding the amplitude component (e.g. for Fraunhofer propagation, $H$ will simply be the phase of the inverse Fourier transform $\mathcal{F} ^{-1}$ of the target field). This method is named as `Naive' method in this thesis for its simplicity. The pseudocode of the Naive method is shown in \cref{alg:Naive algorithm} below:
 \begin{algorithm}[H]
-  \caption{Naive algorithm}\label{alg:Naive algorithm}
-  \textbf{Input:} Target field $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
+  \caption{Naive method}\label{alg:Naive algorithm}
+  \textbf{Input:} Target intensity $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
   \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
   \begin{algorithmic}
-    \State $H \gets \angle\{\mathcal{P}^{-1}[T]\}$
-    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert$
+    \State $E \gets \sqrt{T}$
+    \State $A \gets \mathcal{P}^{-1}[E]$
+    \State $H \gets \angle A$
+    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert ^2 $
   \end{algorithmic}
 \end{algorithm}
-where $j = \sqrt{-1} $. The Naive algorithm (as described in \cref{alg:Naive algorithm}) was then implemented in MATLAB and the output results are shown in \cref{fig:Naive algorithm output} below:
+where $j = \sqrt{-1} $, the $\angle$ sign means phase extraction (i.e. arguments of complex numbers element-wise in the matrix), and $e^{jH}$ converts the angles back to complex numbers. All exponentials, modulus and square-root operators are carried out in an element-wise manner, so that the dimensions of $T$, $A$, $H$, $R$ and $E$ are all the same.
+
+The Naive method (described in \cref{alg:Naive algorithm}) was then implemented in MATLAB and ran on the sample target image shown in \cref{fig:mandrill.png}, with the distance set to infinity (i.e. in the Fraunhofer region using the propagation formula \cref{eq:fraunhofer-diffraction}). The results are shown in \cref{fig:Naive algorithm output} below:
 
 \begin{figure}[H]
   \centering
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{mandrill.png}
-    \caption{Target field ($T$)}
+    \includegraphics[width=\textwidth]{Naive_discarded_amplitude.png}
+    \caption{Discarded amplitude ($\vert A\vert$)}
+    \label{fig:Naive_discarded_amplitude}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Naive_output_holo.png}
-    \caption{Hologram ($H$)}
+    \caption{Phase Hologram ($H$)}
     \label{fig:Naive_output_holo}
   \end{subfigure}
   \hfill
@@ -287,15 +300,87 @@ where $j = \sqrt{-1} $. The Naive algorithm (as described in \cref{alg:Naive alg
     \caption{Reconstruction ($R$)}
     \label{fig:Naive_output_recon}
   \end{subfigure}
-  \caption{Naive algorithm output}
+  \caption{Naive method output}
   \label{fig:Naive algorithm output}
 \end{figure}
 
-As shown in the simulation result, the reconstruction (\cref{fig:Naive_output_recon}) is very far from the desired target image. It has shown that, discarding amplitude introduces a significant loss of information.
+After taking the inverse Fourier Transform, the amplitude and the phase of $A$ are shown in \cref{fig:Naive_discarded_amplitude} and \cref{fig:Naive_output_holo} respectively. The next step then discards the amplitude component (\cref{fig:Naive_discarded_amplitude}) and uses the phase component (in \cref{fig:Naive_output_holo}) as the phase hologram $H$. Then the phase hologram went through a forward propagation and the resulting reconstruction intensity is shown in \cref{fig:Naive algorithm output}.
 
-Moreover, in order to display the hologram on a binary phase modulator or multi level phase modulator with limited bit-depth, the phase needs to be quantised again, introducing additional quantisation error.
+The reconstruction intensity is very far from the desired target image in \cref{fig:mandrill.png}. It shows that, discarding amplitude has introduced a significant loss of information. From a signal processing point of view, the peak around the centre in \cref{fig:Naive_discarded_amplitude} corresponds to low spatial frequency signals, and discarding them causes the reconstruction in \cref{fig:Naive_output_recon} to lose low frequency components and effectively becomes an edge detector. Another explanation of the poor reconstruction quality is that, this method is assuming a uniform phase profile for the target image, which is physically difficult to achieve. A simple improvement can be made by adding a random phase to the target, as shown in the pseudocode below:
 
+\begin{algorithm}[H]
+  \caption{Improved Naive method with random phase added to the target field}\label{alg:Naive algorithm with random phase}
+  \textbf{Input:} Target intensity $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
+  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \begin{algorithmic}
+    \State $E \gets \sqrt{T} * RandomPhase()$
+    \State $A \gets \mathcal{P}^{-1}[E]$
+    \State $H \gets \angle A$
+    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert ^2 $
+  \end{algorithmic}
+\end{algorithm}
 
+The improved Naive method was implemented in MATLAB and produced the results in \cref{fig:Output of the improved Naive method} below:
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Naive_rand_discarded_amplitude.png}
+    \caption{Discarded amplitude ($\vert A\vert$)}
+    \label{fig:Naive_rand_discarded_amplitude}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Naive_rand_holo.png}
+    \caption{Phase Hologram ($H$)}
+    \label{fig:Naive_rand_holo}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Naive_rand_recon.png}
+    \caption{Reconstruction ($R$)}
+    \label{fig:Naive_rand_recon}
+  \end{subfigure}
+  \caption{Output of the improved Naive method}
+  \label{fig:Output of the improved Naive method}
+\end{figure}
+
+As shown in \cref{fig:Naive_rand_recon}, the reconstruction quality has been greatly improved, although still quite noisy. The amplitude of the hologram being discarded (shown in \cref{fig:Naive_rand_discarded_amplitude}) is a lot more uniformly distributed than the one in \cref{fig:Naive_discarded_amplitude}, so that the loss of information evenly spread across all spatial frequencies, leading to the much better reconstruction quality. However, the reconstruction quality is still quite noisy, with a normalised mean squared error (NMSE) of \num{1.0228e-06} and a structural similarity index (SSIM \cite{Wang2004_SSIM}) of 0.1603.
+
+Moreover, additional error will be introduced during the quantisation step, which is necessary for the phase hologram to be displayed on SLMs with limited bit depth. As the SLM used in this thesis is a binary phase SLM, which has a rotational symmetry property as explained in \cref{sec:Rotational symmetries in the binary phase modulation}, a target image is specifically designed as shown in \cref{fig:mandrill_2} which is rotational symmetrical by itself.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{mandrill_2.png}
+    \caption{Target image for the binary-phase SLM}
+    \label{fig:mandrill_2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Naive_binary_Holo.png}
+    \caption{Binary-phase Hologram}
+    \label{fig:Naive_binary_Holo}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Naive_binary_Recon.png}
+    \caption{Reconstruction}
+    \label{fig:Naive_binary_Recon}
+  \end{subfigure}
+  \caption{Output of the improved Naive method with binary-phase quantisation}
+  \label{fig:Output of the improved Naive method with binary-phase quantisation}
+\end{figure}
+
+The binary phase hologram in \cref{fig:Naive_binary_Holo} is generated by adding an additional binary quantisation step on the phase hologram computed using \cref{alg:Naive algorithm with random phase}, which is simply rounding all phases to 0 rad and $\pi$ rad. The reconstruction of the binary-phase hologram is shown in \cref{fig:Naive_binary_Recon}, which is of poor quality with NMSE being \num{4.5452e-07} and SSIM being 0.0603. The only advantage of this method is its speed, as it only requires one inverse Fourier Transform calculation. To improve the reconstruction quality, better algorithms are needed. The following sections explores predecessors' efforts in quality improvement.
+
+\newpage
 \subsection{Direct Binary Search (DBS) Algorithm}\label{sec:Direct Binary Search (DBS) Algorithm}
 Direct Binary Search (DBS) algorithm \cite{Seldowitz1987} is specifically designed for binary phase modulators, it generates the hologram by randomly flipping each pixel in the SLM between binary states, one by one for many times in order to minimise the difference between its reconstruction $R$ and the target image $T$. The detailed algorithm is described in \cref{alg:DBS algorithm} below:
 \begin{algorithm}[H]

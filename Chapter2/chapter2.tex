@@ -153,7 +153,7 @@ Unfortunately, \cref{eq:huygens-fresnel-principle-substituded-r-square} cannot b
 \begin{equation}
   \sqrt{1+d} = 1 + \frac{1}{2}d - \frac{1}{8}d^2 + \cdots \label{eq:binomial-expension}
 \end{equation}
-Fesnel approximation replaces expressions for spherical waves by quadratic-phase exponentials, using the binomial expansion of the square root (given in \cref{eq:binomial-expension}) to approximate $r$ in \cref{eq:huygens-fresnel-principle-substituded-cos} \cite{Goodman2017}.
+Fresnel approximation replaces expressions for spherical waves by quadratic-phase exponentials, using the binomial expansion of the square root (given in \cref{eq:binomial-expension}) to approximate $r$ in \cref{eq:huygens-fresnel-principle-substituded-cos} \cite{Goodman2017}.
 
 Retaining only the first two terms of the expansion gives:
 \begin{align}
@@ -192,12 +192,15 @@ which suggests that the far field pattern is simply the Fourier Transform of the
 
 \subsection{Spatial Light Modulator (SLM)} \label{sec:SLM}
 SLMs are critical components in computer-generated holography (CGH). SLM is a device used to control the amplitude or phase of light waves in a spatially varying manner. SLMs typically consist of a two-dimensional(2D) array of pixels, each of which can modulate the light either passing through or reflected from it. These pixels are usually addressed by electronic signals, allowing precise manipulation of the light wavefront.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=1.0\textwidth]{modulation_loci.jpg}
   \caption{Modulation loci in the complex plane \cite{Cable2006}} \label{fig:modulation_loci}
 \end{figure}
+
 The modulation can be achieved through various mechanisms, such as liquid crystal SLMs(LC-SLM), magneto-optic SLMs, deformable mirror SLMs, multiple-quantum-well SLMs, or acousto-optic Bragg cells \cite{Goodman2017}, which all fall into the four modulation categories, as illustrated in \cref{fig:modulation_loci} \cite{Cable2006}. The four modulation schemes are:
+
 \begin{itemize}
   \item \textbf{Multi-level Amplitude} modulators can modulate each pixel from zero transmission (0) to full transmission (1), either continuously or in discrete steps. (e.g. nematic liquid crystal display \cite{Schadt1971}, found for example in laptops and many conventional video projectors)
   \item \textbf{Binary Amplitude} modulators can switch each pixel to zero transmission (0) or full transmission (1), but nothing in between. (e.g. deformable mirror device \cite{Pape1983}, ferroelectric liquid crystal display \cite{Johnson1993}, both used in high-end video projectors)
@@ -226,7 +229,7 @@ So, at the Fraunhofer region, there is no distinction between the desired image 
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{10_step_target.jpg}
-    \caption{Target field}
+    \caption{Target image}
     \label{fig:10_step_target}
   \end{subfigure}
   \hfill
@@ -243,7 +246,6 @@ So, at the Fraunhofer region, there is no distinction between the desired image 
 
 To demonstrate such phenomena, the example target image shown in \cref{fig:10_step_target} ran through the binary-phase hologram generation algorithm called one-step phase-retrieval (OSPR), which will be explained in detail in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm}, and the projection output is shown in \cref{fig:binary_phase_SLM_symmetry}. The simplest workaround for this issue is to use only half of the reconstruction field, like the target image in \cref{fig:10_step_target}. However, the side effect of this workaround is that half of the energy will be wasted, leading to higher power consumption and heat dissipation.
 
-%@TODO: the computation of CGH for binary SLM also need a binary quantisation step. Although few multi-level phase modulators are available, their bit depth is limited (e.g. 4-bit 8-bit), so the quantisation step is still inevitable.
 
 
 \newpage
@@ -266,7 +268,7 @@ The simplest method to get a phase-only hologram $H$ is by directly extracting t
 \begin{algorithm}[H]
   \caption{Naive method}\label{alg:Naive algorithm}
   \textbf{Input:} Target intensity $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
   \begin{algorithmic}
     \State $E \gets \sqrt{T}$
     \State $A \gets \mathcal{P}^{-1}[E]$
@@ -311,7 +313,7 @@ The reconstruction intensity is very far from the desired target image in \cref{
 \begin{algorithm}[H]
   \caption{Improved Naive method with random phase added to the target field}\label{alg:Naive algorithm with random phase}
   \textbf{Input:} Target intensity $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
   \begin{algorithmic}
     \State $E \gets \sqrt{T} * RandomPhase()$
     \State $A \gets \mathcal{P}^{-1}[E]$
@@ -378,15 +380,15 @@ Moreover, additional error will be introduced during the quantisation step, whic
   \label{fig:Output of the improved Naive method with binary-phase quantisation}
 \end{figure}
 
-The binary phase hologram in \cref{fig:Naive_binary_Holo} is generated by adding an additional binary quantisation step on the phase hologram computed using \cref{alg:Naive algorithm with random phase}, which is simply rounding all phases to 0 rad and $\pi$ rad. The reconstruction of the binary-phase hologram is shown in \cref{fig:Naive_binary_Recon}, which is of poor quality with NMSE being \num{4.5452e-07} and SSIM being 0.0603. The only advantage of this method is its speed, as it only requires one inverse Fourier Transform calculation. To improve the reconstruction quality, better algorithms are needed. The following sections explores predecessors' efforts in quality improvement.
+The binary phase hologram in \cref{fig:Naive_binary_Holo} is generated by adding an additional binary quantisation step ($\mathcal{Q}$) on the phase hologram computed using \cref{alg:Naive algorithm with random phase}, which is simply rounding all phases to 0 rad and $\pi$ rad. The reconstruction of the binary-phase hologram is shown in \cref{fig:Naive_binary_Recon}, which is of poor quality with NMSE being \num{4.5452e-07} and SSIM being 0.0603. The only advantage of this method is its speed, as it only requires one inverse Fourier Transform calculation. To improve the reconstruction quality, better algorithms are needed. The following sections explores predecessors' efforts in quality improvement.
 
 \newpage
 \subsection{Direct Binary Search (DBS) Algorithm}\label{sec:Direct Binary Search (DBS) Algorithm}
-Direct Binary Search (DBS) algorithm \cite{Seldowitz1987} is an algorithm that generates the hologram by randomly flipping each pixel in the SLM between binary states (0 and $\pi$), one by one for many times in order to minimise the difference between its reconstruction $R$ and the target image $T$. The detailed algorithm is described in \cref{alg:DBS algorithm} below:
+Direct Binary Search (DBS) algorithm \cite{Seldowitz1987} is an algorithm that generates the hologram by randomly flipping each pixel in the SLM between binary states (0 and $\pi$), one by one for many times in order to minimise the difference between its reconstruction intensity $R$ and the target image $T$. The detailed algorithm is described in \cref{alg:DBS algorithm} below:
 \begin{algorithm}[H]
   \caption{Direct Binary Search (DBS) algorithm}\label{alg:DBS algorithm}
   \textbf{Input:} Target intensity $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$ (e.g. mean-squared error), Number of iterations $N$ \\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
   \begin{algorithmic}
     \State{// Start with a random hologram with a size matching $T$}
     \State $H \gets$ Rand(Size($T$))
@@ -486,11 +488,11 @@ In summary, the DBS algorithm is a slow but working algorithm for binary phase h
 
 
 \subsection{Simulated Annealing (SA) Algorithm}\label{sec:Simulated Annealing (SA) Algorithm}
-Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DBS algorithm. It adopts a probabilistic approach to avoid the steepest gradient descent. Its name derives from the fact that it approximates the recrystallisation process during metal annealing and is particularly well-suited to avoiding the trap of local minima \cite{Yang2009}. To implement this idea, we then need a function ($\mathcal{Q}$) to calculate the probability of the hologram ($H$), and a threshold $p_t$ to decide whether the probability is high enough for the according hologram to be accepted. In this thesis, the probability is selected to be a random function and the threshold is chosen to be 0.9. The pseudocode for this algorithm is listed in \cref{alg:Simulated Annealing (SA) algorithm}.
+Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DBS algorithm. It adopts a probabilistic approach to avoid the steepest gradient descent. Its name derives from the fact that it approximates the recrystallisation process during metal annealing and is particularly well-suited to avoiding the trap of local minima \cite{Yang2009}. To implement this idea, we then need a function ($\mathcal{Z}$) to calculate the probability of the hologram ($H$), and a threshold $p_t$ to decide whether the probability is high enough for the according hologram to be accepted. In this thesis, the probability is selected to be a random function and the threshold is chosen to be 0.9. The pseudocode for this algorithm is listed in \cref{alg:Simulated Annealing (SA) algorithm}.
 \begin{algorithm}[H]
   \caption{Simulated Annealing (SA) algorithm}\label{alg:Simulated Annealing (SA) algorithm}
-  \textbf{Input:} Target intensity $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$, Number of iterations $N$, Probability function $\mathcal{Q}$, Probability threshold $p_t$ \\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \textbf{Input:} Target intensity $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$, Number of iterations $N$, Probability function $\mathcal{Z}$, Probability threshold $p_t$ \\
+  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
   \begin{algorithmic}
     \State{// Start with a random hologram with a size matching $T$}
     \State $H \gets$ Rand(Size($T$))
@@ -511,7 +513,7 @@ Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DB
     \State $L \gets L_n$
     \Else
     \State{// Calculate the probability of the hologram}
-    \State $p_n \gets \mathcal{Q}[H_n]$
+    \State $p_n \gets \mathcal{Z}[H_n]$
     \If {$p_n > p_t$}
     \State{// Accept the new hologram if the probability exceeds the threshold}
     \State $H \gets H_n$
@@ -558,15 +560,17 @@ Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DB
 
 An implementation of SA algorithm with $p_t = 0.9$ was carried out on the low resolution target in \cref{fig:test_128_SA}, and the resulting binary-phase hologram and its reconstruction are shown in shown in \cref{fig:SA_test_128_Holo} and \cref{fig:SA_test_128_recon_intensity} respectively. From the NMSE v.s. iteration plot in \cref{fig:SA_test_128_convergence}, it can be seen that, instead of the monotonic decrease observed in \cref{fig:DBS_test_128_convergence} for DBS algorithm, the SA algorithm has occasional rises in NMSE, which happens when the probability $p_n$ exceeds the threshold $p_t$. The final NMSE was recorded to be \num{1.0542e-05} and the final SSIM was 0.2750, which are both slightly worse than the DBS algorithm in this case. Due to the probabilistic nature of the SA algorithm, although it can avoid being trapped in local optimal points, the `jump backs' can also cause delays in convergence. The SA algorithm also did not converge for the mandrill target within one hour. Both the DBS and the SA algorithms rely on flipping a single pixel per iteration, which is very inefficient. A better algorithm should certainly flip (or change the value of) multiple pixels per iteration for better efficiency.
 
-\subsection{Gerchberg-Saxton (GS) algorithm}\label{sec:Gerchberg-Saxton (GS) Algorithm}
-Gerchberg-Saxton (GS) algorithm functions that it iteratively determines the phase profile of the hologram required to reconstruct a target image; it loops between the hologram and the reconstruction plane, and applying constraints to each plane accordingly during each iteration \cite{Gerchberg1972}. GS algorithm is very easy to implement, its pseudocode is shown in \cref{alg:Gerchberg-Saxton (GS) Algorithm}.
+
+\subsection{Gerchberg-Saxton (GS) Algorithm}\label{sec:Gerchberg-Saxton (GS) Algorithm}
+The Gerchberg-Saxton (GS) algorithm \cite{Gerchberg1972} is a revolutionary algorithm and is much better and more robust than the algorithms introduced in the previous sections. Although being more than 50 years old, the GS algorithm is still frequently used and has lots of variants \cite{Yang1994, WANG2017, Zhou2019}. It functions by iteratively determining the phase profile of the hologram required to reconstruct a target image, looping between the hologram and the reconstruction plane, and applying constraints to each plane accordingly during each iteration. GS algorithm is very easy to implement, its pseudocode is shown in \cref{alg:Gerchberg-Saxton (GS) Algorithm}.
+
 \begin{algorithm}[H]
   \caption{Gerchberg-Saxton (GS) Algorithm}\label{alg:Gerchberg-Saxton (GS) Algorithm}
-  \textbf{Input:} Target field $T$, Propagation function $\mathcal{P}$, Number of iterations $N$, Initial phase $\varPhi$ (e.g. random or zeros) \\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction $R$
+  \textbf{Input:} Target intensity $T$, Propagation function $\mathcal{P}$, Number of iterations $N$, Initial phase $\varPhi$ (e.g. random, zeros, or other patterns) \\
+  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
   \begin{algorithmic}
-    \State{// Initiate $E$ with amplitude $T$ and initial phase $\varPhi$}
-    \State $E \gets T * e^{j\varPhi}$
+    \State{// Initiate $E$ with amplitude $\sqrt{T}$ and initial phase $\varPhi$}
+    \State $E \gets \sqrt{T} * e^{j\varPhi}$
     \For {$n$ = $1$ to $N$}
     \State{// Compute the hologram plane}
     \State $A \gets \mathcal{P}^{-1}[E]$
@@ -574,22 +578,22 @@ Gerchberg-Saxton (GS) algorithm functions that it iteratively determines the pha
     \State $A \gets e^{j\angle A}$\\
     \State{// Compute the propagation for the new hologram}
     \State $E \gets \mathcal{P}[A]$
-    \State{// Apply the target field amplitude constraint at the hologram plane}
-    \State $E \gets T * e^{j\angle E}$
+    \State{// Apply the target field amplitude constraint at the reconstruction plane}
+    \State $E \gets \sqrt{T} * e^{j\angle E}$
     \EndFor
     \State $H \gets \angle A$
-    \State $R \gets \vert \mathcal{P}[A] \vert$
+    \State $R \gets \vert \mathcal{P}[A] \vert ^2$
   \end{algorithmic}
 \end{algorithm}
 
-The GS algorithm (described in \cref{alg:Gerchberg-Saxton (GS) Algorithm}) was implemented in MATLAB and the output results are shown in \cref{fig:GS algorithm output} below:
+The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was implemented in MATLAB and was first run on the mandrill target image in \cref{fig:mandrill.png} the output results are shown in \cref{fig:GS algorithm output}. It can be seen from \cref{fig:GS_recon_i_30} that, the reconstruction after 30 iterations of GS algorithm reached a very good result, having an NMSE of \num{2.6612e-08} and an SSIM of 0.7940, which are both much better than the single-iteration Naive method's result in \cref{fig:Naive_rand_recon}.
 
 \begin{figure}[H]
   \centering
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{mandrill.png}
-    \caption{Target field ($T$)}
+    \caption{Target image ($T$)}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.3\textwidth}
@@ -605,20 +609,21 @@ The GS algorithm (described in \cref{alg:Gerchberg-Saxton (GS) Algorithm}) was i
     \caption{Reconstruction ($R$)}
     \label{fig:GS_recon_i_30}
   \end{subfigure}
+  \\
+  \begin{subfigure}[t]{0.7\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{GS_NMSE_plot.png}
+    \caption{NMSE v.s. iteration plot}
+    \label{fig:GS_NMSE_plot}
+  \end{subfigure}
   \caption{GS algorithm output for 30 iterations ($N = 30$)}
   \label{fig:GS algorithm output}
 \end{figure}
 
-It can be seen from \cref{fig:GS_recon_i_30} that, the reconstruction of the hologram after 30 iterations of GS algorithm reached a very good result. Then the quantitative analysis was carried out by measuring the normalised mean squared error (NMSE) as the iteration number ($n$) increments, the result is plotted in \cref{fig:GS_NMSE_plot}.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{GS_NMSE_plot.png}
-  \caption{GS algorithm NMSE plot}
-  \label{fig:GS_NMSE_plot}
-\end{figure}
+The NMSE v.s. iteration plot in \cref{fig:GS_NMSE_plot} shows that the GS algorithm converges quickly, providing very good result in tens of iterations, which is much fewer than the DBS and SA algorithms. Although the GS algorithm is more computationally expensive at each iteration, as it needs to compute both a forward and an backward propagation, leading to two Fourier transforms every iteration. Nevertheless, the GS algorithm is still much faster and provides much better reconstruction quality than the DBS and SA algorithms.
 
-It can be seen from \cref{fig:GS_NMSE_plot} that GS algorithm converges quickly, providing very good result in tens of iterations. The major disadvantage of the GS algorithm is that it is more computationally expensive at every iteration, as it needs to compute both a forward and an inverse propagation function, causing the need for two Fourier transforms at each iteration. Nevertheless, the algorithm has very good performance over all.
+Then the GS algorithm was adapted to generate binary-phase holograms, for use on the binary-phase SLM in this thesis. The change was simply implemented by adding a quantisation function ($\mathcal{Q}$) when applying the phase-only constraint at the hologram plane (i.e. the line `$A \gets e^{j\angle A}$' in \cref{alg:Gerchberg-Saxton (GS) Algorithm} is changed to `$A \gets e^{j\mathcal{Q}[\angle A]}$')
 
 
 \subsection{One-Step Phase Retrieval (OSPR) Algorithm}\label{sec:One Step Phase Retrieval (OSPR) Algorithm}

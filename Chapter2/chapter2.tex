@@ -656,7 +656,7 @@ The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was imp
 \end{figure}
 
 
-The NMSE v.s. iteration plot in \cref{fig:GS_NMSE_plot} shows that the GS algorithm converged quickly, providing very good result in tens of iterations, which is much fewer than the DBS and SA algorithms. Although the GS algorithm is more computationally expensive at each iteration, as it needs to compute both a forward and an backward propagation, leading to two Fourier transforms every iteration. Nevertheless, the GS algorithm is still much faster and provides much better reconstruction quality than the DBS and SA algorithms.
+The NMSE v.s. iteration plot in \cref{fig:GS_NMSE_plot} shows that the GS algorithm converged quickly, providing very good result in tens of iterations, which is much fewer than the DBS and SA algorithms. Although the GS algorithm is more computationally expensive at each iteration, as it needs to compute both a forward and an backward propagation, leading to two Fourier transforms every iteration, the GS algorithm is still much faster and provides much better reconstruction quality than the DBS and SA algorithms.
 
 \begin{figure}[H]
   \centering
@@ -691,11 +691,12 @@ The NMSE v.s. iteration plot in \cref{fig:GS_NMSE_plot} shows that the GS algori
   \label{fig:GS algorithm running on the rotationally symmetrical mandrill target}
 \end{figure}
 
-Then the GS algorithm was adapted to generate binary-phase holograms, for use on the binary-phase SLM in this thesis. The change was simply implemented by adding a quantisation function ($\mathcal{Q}$) when applying the phase-only constraint at the hologram plane (i.e. the line `$A \gets e^{j\angle A}$' in \cref{alg:Gerchberg-Saxton (GS) Algorithm} is changed to `$A \gets e^{j\mathcal{Q}[\angle A]}$'). The results are shown in \cref{fig:GS algorithm running on the rotationally symmetrical mandrill target}. \cref{fig:GS_mandrill_2_convergence} shows good convergence within 20 iterations. The resulting binary-phase hologram is shown in \cref{fig:GS_Holo_mandrill_2} and its corresponding reconstruction in \cref{fig:GS_Recon_mandrill_2} has an NMSE of 1.6968e-07 and an SSIM of 0.0619, which are both better than the Naive method's result in \cref{fig:Output of the improved Naive method with binary-phase quantisation}. In summary, the GS algorithm is quick and robust. It can reach convergence in tens of iterations. However, as it is still iterative, generating holograms in real-time is still a challenge, and the reconstruction still subjects to noise.
+Then the GS algorithm was adapted to generate binary-phase holograms, for use on the binary-phase SLM in this thesis. The change was simply implemented by adding a quantisation function ($\mathcal{Q}$) when applying the phase-only constraint at the hologram plane (i.e. the line `$A \gets e^{j\angle A}$' in \cref{alg:Gerchberg-Saxton (GS) Algorithm} is changed to `$A \gets e^{j\mathcal{Q}[\angle A]}$'). The results are shown in \cref{fig:GS algorithm running on the rotationally symmetrical mandrill target}. \cref{fig:GS_mandrill_2_convergence} shows good convergence within 20 iterations. The resulting binary-phase hologram is shown in \cref{fig:GS_Holo_mandrill_2} and its corresponding reconstruction in \cref{fig:GS_Recon_mandrill_2} has an NMSE of 1.6968e-07 and an SSIM of 0.0619, which are both better than the Naive method's result in \cref{fig:Output of the improved Naive method with binary-phase quantisation}. In summary, the GS algorithm is quick and robust. On my laptop computer of model ASUS ROG Zephyrus M16, which has a CPU of model i7-11800H and a GPU of model RTX3060, the 30 iterations took 1.5 seconds to complete. It reached convergence in tens of iterations. However, as it is still iterative, generating holograms in real-time is still a challenge, and the reconstruction still suffers from noise.
 
 
 \subsection{One-Step Phase Retrieval (OSPR) Algorithm}\label{sec:One Step Phase Retrieval (OSPR) Algorithm}
 OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. It is a solution to high-quality hologram reconstruction that relies on time multiplexing of holograms, exploiting the response time of eye in order to reduce noise in the replay field \cite{Cable2006}. The random noises are averaged by the eye, while the target image stays, so that the average noise can be reduced. The perceived noise is lessened by the temporal average detected by the eye, rather than computational optimisation of the hologram \cite{Cable2006}. The pseudocode for OSPR is shown in \cref{alg:One Step Phase Retrieval (OSPR) Algorithm} below.
+
 \begin{algorithm}[H]
   \caption{One-Step Phase Retrieval (OSPR) algorithm}\label{alg:One Step Phase Retrieval (OSPR) Algorithm}
   \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Number of sub-frames $S$, Quantisation function $\mathcal{Q}$\\
@@ -710,7 +711,7 @@ OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. It is a sol
     \State // Then display the sub-frames on the phase modulator sequentially
     \State $s\gets 1$
     \While {True}
-    \State Display(H[s])
+    \State Display($H[s]$)
     \State $s\gets s + 1$
     \If {$s > S$}
     \State $s\gets 1$
@@ -719,7 +720,20 @@ OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. It is a sol
   \end{algorithmic}
 \end{algorithm}
 
-The major advantage of the OSPR algorithm is that it is superfast, and also it can reduce the perceived speckle noise, providing a very good visual quality of holographic projection.
+When generating the list of holograms, it repetitively computes the inverse propagation of the target amplitude (which is the square-root of the target intensity $T$) multiplied by different random phases, for a total of $S$ times to generate $S$ hologram sub-frames ($H[1\ldots S]$). The computation of each hologram sub-frame is the same as the Naive method in \cref{alg:Naive algorithm with random phase} discussed in \cref{sec:Naive algorithm}. Then the $S$ hologram sub-frames are displayed sequentially on a SLM having a refresh rate being so fast that the average reconstruction intensity is perceived by the human eyes. As currently available fast SLMs are binary-phase modulators, an example run on the rotationally symmetrical target previously used in \cref{fig:mandrill_2_DBS} was carried out for 24 sub-frames ($S=24$). The results are summarised in \cref{fig:ospr_mandrill_2}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{ospr_mandrill_2.pdf}
+	\caption{OSPR algorithm running on the rotationally symmetrical mandrill target}
+	\label{fig:ospr_mandrill_2}
+\end{figure}
+
+In \cref{fig:ospr_mandrill_2}, a total of 24 binary-phase hologram sub-frames ($H_1, H_2, \ldots, H_{24}$) were generated for the target image $T$. For easier data transfer and to fit with the common display signal formats, the 24 binary-phase hologram sub-frames are encoded into a single file with 8 bit depth and RGB (red-green-blue) channels, so that each of the $(8\times 3 = )24$ bit-planes corresponds to a single binary-phase hologram sub-frame. For a quantitative analysis, the reconstruction intensities of the hologram sub-frames are computed in $R_1, R_2, \ldots, R_{24}$ respectively, whose average is $R_{avg}$ in \cref{fig:ospr_mandrill_2}. The average reconstruction intensity $R_{avg}$ has an NMSE of \num{9.8632e-08} and an SSIM of 0.1321, which are both significantly better than the GS algorithm (NMSE=\num{1.6968e-7}, SSIM=0.0619) and the Naive method (NMSE=\num{4.5452e-7}, SSIM=0.0603).
+
+The major advantage of the OSPR algorithm is that it is superfast. It is non-iterative and requires only one Fourier Transform per frame, taking less than a second to generate a 24-frame hologram set. Its non-iterative nature also allows it to be parallelised to further improve computation speed, which is crucial in how the Light Blue Optics made real-time holographic laser projector possible in 2010 \cite{Buckley2008}, although the product was later discontinued for commercial reasons.
+
+\subsection{Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm}\label{sec:One Step Phase Retrieval (AD-OSPR) Algorithm}
 
 
 \subsection{3D CGH}

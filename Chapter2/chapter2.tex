@@ -698,23 +698,23 @@ Then the GS algorithm was adapted to generate binary-phase holograms, for use on
 OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. It is a solution to high-quality hologram reconstruction that relies on time multiplexing of holograms, exploiting the response time of eye in order to reduce noise in the replay field \cite{Cable2006}. The random noises are averaged by the eye, while the target image stays, so that the average noise can be reduced. The perceived noise is lessened by the temporal average detected by the eye, rather than computational optimisation of the hologram \cite{Cable2006}. The pseudocode for OSPR is shown in \cref{alg:One Step Phase Retrieval (OSPR) Algorithm} below.
 
 \begin{algorithm}[H]
-  \caption{One-Step Phase Retrieval (OSPR) algorithm}\label{alg:One Step Phase Retrieval (OSPR) Algorithm}
+  \caption{One-Step Phase Retrieval (OSPR) algorithm}\label{alg:One-Step Phase Retrieval (OSPR) algorithm}
   \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Number of sub-frames $S$, Quantisation function $\mathcal{Q}$\\
   \textbf{Output:} List of phase holograms $H[1\ldots S]$
   \begin{algorithmic}
-    \State // Compute a list of hologram sub-frames based on different additive random phase
-    \For {$s$ = $1$ to $S$}
+    \State // Compute a list of hologram sub-frames
+    \For {$i$ = $1$ to $S$}
     \State $E \gets \sqrt{T} * $ RandomPhase()
     \State $A \gets \mathcal{P}^{-1}[E]$
-    \State $H[s] \gets \mathcal{Q}[\angle A]$
+    \State $H[i] \gets \mathcal{Q}[\angle A]$
     \EndFor\\
     \State // Then display the sub-frames on the phase modulator sequentially
-    \State $s\gets 1$
+    \State $i\gets 1$
     \While {True}
-    \State Display($H[s]$)
-    \State $s\gets s + 1$
-    \If {$s > S$}
-    \State $s\gets 1$
+    \State Display($H[i]$)
+    \State $i\gets i + 1$
+    \If {$i > S$}
+    \State $i\gets 1$
     \EndIf
     \EndWhile
   \end{algorithmic}
@@ -731,10 +731,57 @@ When generating the list of holograms, it repetitively computes the inverse prop
 
 In \cref{fig:ospr_mandrill_2}, a total of 24 binary-phase hologram sub-frames ($H_1, H_2, \ldots, H_{24}$) were generated for the target image $T$. For easier data transfer and to fit with the common display signal formats, the 24 binary-phase hologram sub-frames are encoded into a single file with 8 bit depth and RGB (red-green-blue) channels, so that each of the $(8\times 3 = )24$ bit-planes corresponds to a single binary-phase hologram sub-frame. For a quantitative analysis, the reconstruction intensities of the hologram sub-frames are computed in $R_1, R_2, \ldots, R_{24}$ respectively, whose average is $R_{avg}$ in \cref{fig:ospr_mandrill_2}. The average reconstruction intensity $R_{avg}$ has an NMSE of \num{9.8632e-08} and an SSIM of 0.1321, which are both significantly better than the GS algorithm (NMSE=\num{1.6968e-7}, SSIM=0.0619) and the Naive method (NMSE=\num{4.5452e-7}, SSIM=0.0603).
 
-The major advantage of the OSPR algorithm is that it is superfast. It is non-iterative and requires only one Fourier Transform per frame, taking less than a second to generate a 24-frame hologram set. Its non-iterative nature also allows it to be parallelised to further improve computation speed, which is crucial in how the Light Blue Optics made real-time holographic laser projector possible in 2010 \cite{Buckley2008}, although the product was later discontinued for commercial reasons.
+The major advantage of the OSPR algorithm is that it is superfast. It is non-iterative and requires only one Fourier Transform per frame, taking less than a second to generate a 24-frame hologram set. Its non-iterative nature also allows it to be parallelised to further improve computation speed, which is crucial for the Light Blue Optics who made the real-time holographic laser projector commercially available in 2010 \cite{Buckley2008}, although the product was later discontinued for financial reasons. The downside of this algorithm is that the sub-frames are independent from each other, and the final reconstruction output is still subject to some noise, as they are only more randomly distributed instead of being reduced. There is a variant of slight improvement on the OSPR algorithm, called Adaptive OSPR (AD-OSPR), to be introduced in \cref{sec:Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm}.
 
-\subsection{Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm}\label{sec:One Step Phase Retrieval (AD-OSPR) Algorithm}
 
+
+\subsection{Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm}\label{sec:Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm}
+
+The AD-OSPR algorithm \cite{Kaczorowski2016} is a variant of the OSPR algorithm. It aims to improve the reconstruction quality without introducing a significant amount of additional computational cost. It functions in such a way that, when computing the second sub-frame onwards, it subtracts the average reconstruction from the target image to get the error, so that it can compensated in the next iteration. To help explain the process in detail, a pseudocode is written for the AD-OSPR algorithm, as shown in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}.
+
+\begin{algorithm}[H]
+  \caption{Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}\label{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}
+  \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Number of sub-frames $S$, Quantisation function $\mathcal{Q}$\\
+  \textbf{Output:} List of phase holograms $H[1\ldots S]$
+  \begin{algorithmic}
+    \State // Compute a list of hologram sub-frames
+    \State $T[1] \gets T$
+    \State $R_{avg}[0] \gets 0$
+    \For {$i$ = $1$ to $S$}
+    \State $E \gets \sqrt{T[s]} *$ RandomPhase()
+    \State $A \gets \mathcal{P}^{-1}[E]$
+    \State $H[i] \gets \mathcal{Q}[\angle A]$\\
+
+    \State // Compute average reconstruction
+    \State $R \gets \vert \mathcal{P}[e^{jH[i]}] \vert ^2$
+    \State $R_{avg}[i] \gets (R_{avg}[i-1] \times (i-1) + R)/i$\\
+
+    \State // Update the target for the next iteration
+    \State $T[i+1] \gets T + T - R_{avg}[i]$
+    \EndFor\\
+
+    \State // Then display the sub-frames on the phase modulator sequentially
+    \State $i\gets 1$
+    \While {True}
+    \State Display($H[i]$)
+    \State $i\gets i + 1$
+    \If {$i > S$}
+    \State $i\gets 1$
+    \EndIf
+    \EndWhile
+  \end{algorithmic}
+\end{algorithm}
+
+In the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}, the target intensity for the first iteration ($T[1]$) is initialised as the input target image $T$, and the average reconstruction intensity for the holograms generated up to each iteration ($R_{avg}[i]$) is initialised as 0. Then the $\textbf{for}$ loop starts from the same routine as the OSPR algorithm, multiplying a random phase to the square root of target intensity, taking a inverse propagation, and applying the binary phase quantisation. Then, the average reconstruction is computed by propagating the quantised hologram of each iteration and take the weighted average between the current reconstruction intensity and the historical average reconstruction value. The average reconstruction is then used to update the target intensity for the next iteration, by subtracting the average from the target and adding the difference to the input target image. To provide a visual illustration, an example run of the AD-OSPR algorithm was carried out on the mandrill target as shown in \cref{fig:adospr_mandrill_2}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{adospr_mandrill_2.pdf}
+	\caption{AD-OSPR algorithm running on the rotationally symmetrical mandrill target}
+	\label{fig:adospr_mandrill_2}
+\end{figure}
+
+In \cref{fig:adospr_mandrill_2}, each row of images correspond to one iteration that is indexed in the `i' column, where only iterations 1, 2, 3, 24 are shown here, while iterations 4-23 are omitted to save space. At each iteration, the binary-phase hologram $H_i$ is computed from its target $T_i$, and the corresponding reconstruction is shown in $R_i$. For the first iteration, the target image of the same one as in \cref{fig:ospr_mandrill_2} is used, and the first average reconstruction $R_{avg, 1}$ is just the first reconstruction $R_1$. Then, from the second iteration, the target intensity $T_i$ is updated as the target image ($T$) plus the difference between the target image and the average reconstruction so far ($T-R_{avg, i}$). After computing new reconstructions $R_i$, the average reconstruction $R_{avg, i}$ is updated using the weighted average function $R_{avg}[i] \gets (R_{avg}[i-1] \times (i-1) + R)/i$. After 24 iterations, the 24 hologram sub-frames are computed and their average reconstruction ($R_{avg, 24}$) had an NMSE of \num{9.1161e-08} and a SSIM of 0.1992, which are both better than the OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} who achieved an NMSE of \num{9.8632e-08} and an SSIM of 0.1321. The programme running time of the AD-OSPR algorithm is nearly the same as the OSPR algorithm, both being around 0.7 second. Therefore the improvement is quite effective, achieving a 7.6\% reduction in NMSE and 50.8\% improvement in SSIM without adding much computation. The disadvantage is however, that it cannot be parallelised, unlike the OSPR algorithm. As it needs to have the average reconstruction intensity result from the previous iteration for use in the next iteration.
 
 \subsection{3D CGH}
 \cref{sec:Naive algorithm} - \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} described several algorithms to generate a phase hologram for a single slice target field. Then the problem arises as how to generate a hologram for 3D target, and hence making full use of the major benefit of holography, which is true 3D reconstruction. There are several ways to achieve this.

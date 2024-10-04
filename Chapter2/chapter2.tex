@@ -315,7 +315,7 @@ The reconstruction intensity is very far from the desired target image in \cref{
   \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
   \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
   \begin{algorithmic}
-    \State $E \gets \sqrt{T} * RandomPhase()$
+    \State $E \gets \sqrt{T} \times RandomPhase()$
     \State $A \gets \mathcal{P}^{-1}[E]$
     \State $H \gets \angle A$
     \State $R \gets \vert \mathcal{P}[e^{jH}] \vert ^2 $
@@ -605,7 +605,7 @@ The Gerchberg-Saxton (GS) algorithm \cite{Gerchberg1972} is a revolutionary algo
   \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
   \begin{algorithmic}
     \State{// Initiate $E$ with amplitude $\sqrt{T}$ and initial phase $\varPhi$}
-    \State $E \gets \sqrt{T} * e^{j\varPhi}$
+    \State $E \gets \sqrt{T} \times e^{j\varPhi}$
     \For {$n$ = $1$ to $N$}
     \State{// Compute the hologram plane}
     \State $A \gets \mathcal{P}^{-1}[E]$
@@ -614,7 +614,7 @@ The Gerchberg-Saxton (GS) algorithm \cite{Gerchberg1972} is a revolutionary algo
     \State{// Compute the propagation for the new hologram}
     \State $E \gets \mathcal{P}[A]$
     \State{// Apply the target field amplitude constraint at the reconstruction plane}
-    \State $E \gets \sqrt{T} * e^{j\angle E}$
+    \State $E \gets \sqrt{T} \times e^{j\angle E}$
     \EndFor
     \State $H \gets \angle A$
     \State $R \gets \vert \mathcal{P}[A] \vert ^2$
@@ -695,7 +695,7 @@ Then the GS algorithm was adapted to generate binary-phase holograms, for use on
 
 
 \subsection{One-Step Phase Retrieval (OSPR) Algorithm}\label{sec:One Step Phase Retrieval (OSPR) Algorithm}
-OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. It is a solution to high-quality hologram reconstruction that relies on time multiplexing of holograms, exploiting the response time of eye in order to reduce noise in the replay field \cite{Cable2006}. The random noises are averaged by the eye, while the target image stays, so that the average noise can be reduced. The perceived noise is lessened by the temporal average detected by the eye, rather than computational optimisation of the hologram \cite{Cable2006}. The pseudocode for OSPR is shown in \cref{alg:One Step Phase Retrieval (OSPR) Algorithm} below.
+OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. It is a solution to high-quality hologram reconstruction that relies on time multiplexing of holograms, exploiting the response time of eye in order to reduce noise in the replay field \cite{Cable2006}. The random noises are averaged by the eye, while the target image stays, so that the average noise can be reduced. The perceived noise is lessened by the temporal average detected by the eye, rather than computational optimisation of the hologram \cite{Cable2006}. The pseudocode for OSPR is shown in \cref{alg:One-Step Phase Retrieval (OSPR) algorithm} below.
 
 \begin{algorithm}[H]
   \caption{One-Step Phase Retrieval (OSPR) algorithm}\label{alg:One-Step Phase Retrieval (OSPR) algorithm}
@@ -704,7 +704,7 @@ OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. It is a sol
   \begin{algorithmic}
     \State // Compute a list of hologram sub-frames
     \For {$i$ = $1$ to $S$}
-    \State $E \gets \sqrt{T} * $ RandomPhase()
+    \State $E \gets \sqrt{T} \times $ RandomPhase()
     \State $A \gets \mathcal{P}^{-1}[E]$
     \State $H[i] \gets \mathcal{Q}[\angle A]$
     \EndFor\\
@@ -748,7 +748,7 @@ The AD-OSPR algorithm \cite{Kaczorowski2016} is a variant of the OSPR algorithm.
     \State $T[1] \gets T$
     \State $R_{avg}[0] \gets 0$
     \For {$i$ = $1$ to $S$}
-    \State $E \gets \sqrt{T[s]} *$ RandomPhase()
+    \State $E \gets \sqrt{T[s]} \times$ RandomPhase()
     \State $A \gets \mathcal{P}^{-1}[E]$
     \State $H[i] \gets \mathcal{Q}[\angle A]$\\
 
@@ -781,27 +781,97 @@ In the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algor
 	\label{fig:adospr_mandrill_2}
 \end{figure}
 
-In \cref{fig:adospr_mandrill_2}, each row of images correspond to one iteration that is indexed in the `i' column, where only iterations 1, 2, 3, 24 are shown here, while iterations 4-23 are omitted to save space. At each iteration, the binary-phase hologram $H_i$ is computed from its target $T_i$, and the corresponding reconstruction is shown in $R_i$. For the first iteration, the target image of the same one as in \cref{fig:ospr_mandrill_2} is used, and the first average reconstruction $R_{avg, 1}$ is just the first reconstruction $R_1$. Then, from the second iteration, the target intensity $T_i$ is updated as the target image ($T$) plus the difference between the target image and the average reconstruction so far ($T-R_{avg, i}$). After computing new reconstructions $R_i$, the average reconstruction $R_{avg, i}$ is updated using the weighted average function $R_{avg}[i] \gets (R_{avg}[i-1] \times (i-1) + R)/i$. After 24 iterations, the 24 hologram sub-frames are computed and their average reconstruction ($R_{avg, 24}$) had an NMSE of \num{9.1161e-08} and a SSIM of 0.1992, which are both better than the OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} who achieved an NMSE of \num{9.8632e-08} and an SSIM of 0.1321. The programme running time of the AD-OSPR algorithm is nearly the same as the OSPR algorithm, both being around 0.7 second. Therefore the improvement is quite effective, achieving a 7.6\% reduction in NMSE and 50.8\% improvement in SSIM without adding much computation. The disadvantage is however, that it cannot be parallelised, unlike the OSPR algorithm. As it needs to have the average reconstruction intensity result from the previous iteration for use in the next iteration.
+In \cref{fig:adospr_mandrill_2}, each row of images correspond to one iteration that is indexed in the `i' column, where only iterations 1, 2, 3, 24 are shown here, while iterations 4-23 are omitted to save space. At each iteration, the binary-phase hologram $H_i$ is computed from its target $T_i$, and the corresponding reconstruction is shown in $R_i$. For the first iteration, the target image of the same one as in \cref{fig:ospr_mandrill_2} is used, and the first average reconstruction $R_{avg, 1}$ is just the first reconstruction $R_1$. Then, from the second iteration, the target intensity $T_i$ is updated as the target image ($T$) plus the difference between the target image and the average reconstruction so far ($T-R_{avg, i}$). After computing new reconstructions $R_i$, the average reconstruction $R_{avg, i}$ is updated using the weighted average function $R_{avg}[i] \gets (R_{avg}[i-1] \times (i-1) + R)/i$. After 24 iterations, the 24 hologram sub-frames are computed and their average reconstruction ($R_{avg, 24}$) had an NMSE of \num{9.1161e-08} and a SSIM of 0.1992, which are both better than the OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} who achieved an NMSE of \num{9.8632e-08} and an SSIM of 0.1321.
 
+The programme running time of the AD-OSPR algorithm is nearly the same as the OSPR algorithm, both being around 0.7 second. Therefore the AD-OSPR algorithm is quite an effective improvement on the original OSPR algorithm, achieving a 7.6\% reduction in NMSE and 50.8\% improvement in SSIM without adding much computation. The disadvantage is however, that it cannot be parallelised, unlike the OSPR algorithm. As it needs to have the average reconstruction intensity result from the previous iteration for use in the next iteration.
+
+
+\newpage
 \subsection{3D CGH}
-\cref{sec:Naive algorithm} - \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} described several algorithms to generate a phase hologram for a single slice target field. Then the problem arises as how to generate a hologram for 3D target, and hence making full use of the major benefit of holography, which is true 3D reconstruction. There are several ways to achieve this.
+\cref{sec:Naive algorithm} - \cref{sec:Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm} described several algorithms to generate a phase hologram for a single target image. However, the major benefit of holography is that it can produce true 3D light field, much more than just a single slice 2D image. Then the problem arises as how to generate a hologram for 3D targets to make full use of the major benefit of holography. The simplest method is to slice the 3D target into a set of 2D layers, like computed tomography (CT) scanning, and then generate a hologram so that its Fresnel propagation (in \cref{eq:fresnel-diffraction}) at each depth ($z$) matches the according layer. This subsection therefore reviews how the current methods in \cref{sec:Naive algorithm} - \cref{sec:Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm} can be adapted to multi-depth hologram generation.
 
-\subsubsection{Multi-Layer Slicing}
-The simplest method is to slice the 3D target into a set of layers, and then generate a set of phase holograms for each slice at its according distance ($z$) using Fresnel propagation model. Then the set of phase holograms are added up to form the final phase hologram, based on the principle of superposition.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{ABCD/ABCD_target.eps}
+	\caption{Multi-slice target consisted of 4 different characters at different distances}
+	\label{fig:ABCD_target}
+\end{figure}
+
+For fair tests on algorithms, an example 3D target field consisted of 4 slices has been created using alphabets, as shown in \cref{fig:ABCD_target}. $T_1$ to $T_4$ have the same resolution of $512px \times 512px$, and the distances $z_1$ to $z_4$ are set to $1, 2, 3, 4 cm$ respectively.
+
+
+\subsubsection{Naive phase addition}
+To adapt the naive method in \cref{sec:Naive algorithm} to compute multi-depth hologram, firstly, a set of holograms are generated corresponding to each layer of the target field respectively, using the inverse of the Fresnel propagation function in \cref{eq:fresnel-diffraction}. Then, based on the principle of superposition, the set of holograms are added up to form the final hologram, whose phase is directly extracted to be the phase-only hologram while the amplitude component is discarded.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{ABCD/Naive_ABCD.pdf}
+	\caption{Naive phase addition method's result on the 4-slice target}
+	\label{fig:Naive_ABCD}
+\end{figure}
+
+The simulation results shown in \cref{fig:Naive_ABCD} demonstrates the effectiveness of the naive phase addition method. The reconstructions at each depth are legible, despite the presence of some noise. However, after applying a binary-phase quantisation on the hologram, the reconstruction quality deteriorates significantly, as shown in \cref{fig:Naive_ABCD_binary}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{ABCD/Naive_ABCD_binary.pdf}
+	\caption{Naive phase addition method's result on the 4-slice target after binary quantisation}
+	\label{fig:Naive_ABCD_binary}
+\end{figure}
+
+To improve the reconstruction quality, the time-multiplexed OSPR algorithm (in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm}) is adapted to produce multi-frame holograms for 3D targets.
+
+
+\subsubsection{OSPR algorithm adaptation}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{ABCD/OSPR_ABCD.pdf}
+	\caption{OSPR algorithm's result on the 4-slice target}
+	\label{fig:OSPR_ABCD}
+\end{figure}
+
+The OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} was adapted to generate multi-depth targets by doing the Naive phase addition method $S$ times, where $S$ is the total number of sub-frames. The results of the example run with $S=24$ is shown in \cref{fig:OSPR_ABCD}. The average reconstructions has much less noise than the single frame one in \cref{fig:Naive_ABCD_binary}. However, the contrast is rather low. Therefore, one of the major objective of this thesis is to search for time-multiplexed binary-phase holograms with better reconstruction quality than the existing methods.
+
+\subsubsection{GS algorithm adaptation}
+The GS algorithm in \cref{sec:Gerchberg-Saxton (GS) Algorithm} can also be adapted to generate phase-only holograms for multi-depth 3D targets. Instead of propagating to a fixed target image at each iteration, it is modified to propagate to a different distance at each iteration, and the target amplitude constraint of the according distance is applied (i.e. line $E \gets \sqrt{T} \times e^{j\angle E}$ in \cref{alg:Gerchberg-Saxton (GS) Algorithm} becomes $E \gets \sqrt{T_{i\%n}} \times e^{j\angle E}$, where $i$ is the iteration number and $n$ is the total number of slices). Such method is named sequential slicing, where the algorithm sweeps through the slices one by one sequentially during its iterations.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{intermediate_plane.png}
-  \caption{Schematic diagram of the intermediate plane method \cite{Chen2021}}
-  \label{fig:intermediate_plane}
+  \includegraphics[width=1.0\textwidth]{ABCD/GS_SS_ABCD.pdf}
+  \caption{GS with sequential slicing algorithm's result on the 4-slice target}
+  \label{fig:GS_SS_ABCD}
 \end{figure}
 
-There is also an alternative solution, that is to propagate each slice of the 3D target into an intermediate plane, and then run the phase retrieval algorithms on the complex target field ($T$) with a loss function ($\mathcal{L} $), where needed, that accounts for both amplitude and phase components. The schematic of this method is shown in \cref{fig:intermediate_plane} \cite{Chen2021}.
+The GS with sequential slicing (SS) algorithm was run on the target field in \cref{fig:ABCD_target} for 100 iterations, and the result is shown in \cref{fig:GS_SS_ABCD}. The interesting phenomena is that, as the 100 iterations terminated at the $4^{th}$ layer, the $4^{th}$ reconstruction ($R_4$) has the best quality among all slices, and the reconstruction quality deteriorates as the slice index reduces.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{ABCD/Each_slice_GS.png}
+  \caption{GS with SS algorithm's NMSE v.s. iteration number plot}
+  \label{fig:Each_slice_GS}
+\end{figure}
 
-\subsubsection{Point Cloud Method}
-Point cloud method, as its name infers, divides a 3D target into a collection of points, each emitting a spherical wave, and then summed under the principle of superposition. The point cloud method is extremely computationally heavy and is very slow.
+As a further investigation, the NMSE of each slice is plotted against iteration number in \cref{fig:Each_slice_GS}. It shows that the iterations did not converge. The NMSE curves are oscillating severely. When the NMSE of one slice decreases, the NMSE of all other slices increase. Applying the amplitude constraint at a single depth worsen all other slices. There is a solution in the literature, called dynamic compensatory GS (DCGS) \cite{Zhou2019}.
 
+The DCGS algorithm `softens' the target field amplitude constraint. Instead of forcing the amplitude of the reconstructed field to the target amplitude directly, it allows a fraction $\alpha$ of the original amplitude to retain (i.e. $E \gets \sqrt{T_{i\%n}} \times e^{j\angle E}$ becomes $E \gets [\alpha \times \vert E \vert + (1-\alpha) \times \sqrt{T_{i\%n}}] \times e^{j\angle E}$), where $\alpha$ is adjusted dynamically at each iteration. The DCGS algorithm was implemented and run on the 4-slice target in \cref{fig:ABCD_target}. The result is shown in \cref{fig:DCGS_ABCD}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.0\textwidth]{ABCD/DCGS_ABCD.pdf}
+  \caption{DCGS algorithm's result on the 4-slice target}
+  \label{fig:DCGS_ABCD}
+\end{figure}
+
+\cref{fig:DCGS_ABCD} shows the effectiveness of the DCGS algorithm, where all slices have good qualities instead of the huge inter-slice quality imbalance observed in \cref{fig:GS_SS_ABCD}. The NMSE of each slice is plotted against the iteration number in \cref{fig:Each_slice_DCGS}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{ABCD/Each_slice_DCGS.png}
+  \caption{DCGS algorithm's NMSE v.s. iteration number plot}
+  \label{fig:Each_slice_DCGS}
+\end{figure}
+
+\cref{fig:Each_slice_DCGS} shows a much better convergence than \cref{fig:Each_slice_GS}. Although the bounce-backs still present (i.e. when the NMSE of one slice decreases, those of other slices increase), the overall trend of NMSE is decreasing as the iterations continue.
 
 
 \newpage

@@ -12,16 +12,16 @@ In a computer-generated holographic projection system, the image is reconstructe
 
 
 \section{Introduction}
-In a computer-generated holographic projection system, images are generated via the controlled diffraction of coherent light, which is modulated by a spatial light modulator (SLM). Contemporary SLM's can only modulate either phase or amplitude, hence algorithms are needed to compute amplitude-only or phase-only holograms. Among those, phase-only holograms are generally preferred due to inherently higher energy efficiency as there is no intentional blockage of light during modulation. The previous research had demonstrated a real-time computer-generated holography (CGH) method called one-step phase retrieval (OSPR) \cite{Cable2004}, which was fast enough for real-time holography, but the reconstruction quality still has potential for improvement. Hence, a computationally inexpensive method is needed to improve the reconstruction quality whilst maintaining the real-time property of the OSPR algorithm.
+\cref{sec:Literature Review} reviewed the real-time CGH method called OSPR (in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm}), which was fast enough for real-time holography, but the reconstruction quality has still got potential for improvement. Hence, a computationally inexpensive method is needed to improve the reconstruction quality whilst maintaining the real-time property of the OSPR algorithm.
 
-There are several factors contributing to the non-linearities between the reconstruction of hologram and the target image, including the calculation and quantization of the hologram, the modulation of the light and the imperfections in the optical setup. This article proposes the digital pre-distorted one-step phase retrieval (DPD-OSPR) algorithm. The digital pre-distortion (DPD) is carried out on the holographic projection system using holograms computed by the OSPR algorithm by measuring the non-linearity experimentally and applying the according pre-distortion curve on target images. DPD can be done via a one-to-one correction curve or a look-up table (LUT) which allows the relationship between the input and output to be adjusted without any heavy computation.
+There are several factors contributing to the non-linearities between the reconstruction of hologram and the target image, including the calculation and quantization of the hologram, the modulation of the light and the imperfections in the optical setup. This chapter proposes the digital pre-distorted one-step phase retrieval (DPD-OSPR) algorithm. The digital pre-distortion (DPD) is carried out on the holographic projection system by measuring the non-linearity experimentally and applying the according pre-distortion curve on target images. DPD can be done via a one-to-one correction curve or a look-up table (LUT) which allows the relationship between the input and output to be adjusted without any heavy computation.
 
-The intuition of the proposed DPD-OPSR algorithm for CGH comes from the gamma correction method for conventional displays, such as cathode-ray tube (CRT) monitor \cite{Xu2009}, plasma display panel television (PDP-TV) \cite{Sung2009} and thin-film-transistor liquid-crystal display (TFT LCD) \cite{Lee2005,Prraga2014}. Gamma correction for conventional displays were originally developed to mimic the perceptual response of human vision \cite{Poynton2012}. The work presented here is a logical continuation of this approach applied to holographic displays.
+The intuition of the proposed DPD-OSPR algorithm for CGH comes from the gamma correction method for conventional displays, such as cathode-ray tube (CRT) monitor \cite{Xu2009}, plasma display panel television (PDP-TV) \cite{Sung2009} and thin-film-transistor liquid-crystal display (TFT LCD) \cite{Lee2005,Prraga2014}. Gamma correction for conventional displays were originally developed to mimic the perceptual response of human vision \cite{Poynton2012}. The work presented here is a logical continuation of this approach applied to holographic displays.
 
 
 
-\section{Method}
-The proposed DPD-OSPR method builds on the OSPR algorithm \cite{Cable2004}, described in \cref{alg:One-Step Phase Retrieval (OSPR) algorithm}, where the propagation function $\mathcal{P}$ is set to Fraunhofer diffraction (in \cref{eq:fraunhofer-diffraction}) and the number of sub-frames $S$ is set to 24 throughout this chapter.
+% \section{Method}
+% The proposed DPD-OSPR method builds on the OSPR algorithm \cite{Cable2004}, described in \cref{alg:One-Step Phase Retrieval (OSPR) algorithm}, where the propagation function $\mathcal{P}$ is set to Fraunhofer diffraction (in \cref{eq:fraunhofer-diffraction}) and the number of sub-frames $S$ is set to 24 throughout this chapter.
 
 \section{Experimental setup}
 
@@ -32,7 +32,7 @@ The proposed DPD-OSPR method builds on the OSPR algorithm \cite{Cable2004}, desc
     \label{fig:projection_setup}
 \end{figure}
 
-The holographic projector used in this experiment is a Fourier projection system developed by Freeman \cite{Freeman2009}, as shown in \cref{fig:projection_setup}. The design is consisted of a diode-pumped solid-state (DPSS) 532 nm 50mW laser source, focussed down by an aspheric singlet (A), the focus of which becomes the diffraction limited point source (B) for the projector. The beam then passes through a polarizing beam splitter cube (C) to a collimating lens (D), which illuminates the SLM (E). The SLM is a binary phase SXGA-R2 ForthDD ferroelectric Liquid crystal on silicon (LCOS) micro-display with a refresh rate of 1440Hz, a pixel pitch of \SI{13.6}{\micro\metre} and a resolution of $1280\times1024$. An aperture at point (F) spatially filters out the other orders, leaving only one first order, which is then magnified up by a finite conjugate lens group (G) to produce an image, of the required size, on the screen (H). \cite{Freeman2009}
+The holographic projector used in this experiment is a Fourier projection system developed by Freeman \cite{Freeman2009}, as shown in \cref{fig:projection_setup}. The design is consisted of a diode-pumped solid-state (DPSS) 532 nm 50mW laser source, focussed down by an aspheric singlet (A), the focus of which becomes the diffraction limited point source (B) for the projector. The beam then passes through a polarizing beam splitter cube (C) to a collimating lens (D), which illuminates the SLM (E). The SLM is a binary phase SXGA-R2 ForthDD ferroelectric Liquid crystal on silicon (LCOS) micro-display with a refresh rate of 1440Hz, a pixel pitch of \SI{13.6}{\micro\metre} and a resolution of $1280px \times 1024px$. An aperture at point (F) spatially filters out the other orders, leaving only one first order, which is then magnified up by a finite conjugate lens group (G) to produce an image, of the required size, on the screen (H). \cite{Freeman2009}
 
 \begin{figure}[H]
     \centering
@@ -41,7 +41,7 @@ The holographic projector used in this experiment is a Fourier projection system
     \label{fig:holographic_projector}
 \end{figure}
 
-The mechanical components are listed in \cref{fig:holographic_projector} with parts number. The holograms displayed on the SLM are generated using the OSPR algorithm \cite{Cable2004}, and as the SLM is a binary-phase modulator, each hologram sub-frame needs to be binary quantized. Then each group of the 24 binary-phase hologram sub-frames are encoded as the 8-bit red, green, blue (RGB) channels of a 24-bit image to interface with the SLM driver electronics. The SLM displays each bit plane sequentially, with ones and zeros mapping to opposing phase modulations at each pixel. The reconstructions were captured using a Canon 550D camera with an EFS 18-55 mm lens. To ensure fair comparison, the camera was set to the same manual setting when comparing each pair of replay fields before and after DPD. It takes $24/1440=1/60$s to display all 24 sub-frames on a 1440Hz SLM, so the camera shutter speed was set to $1/30$s to capture all frames twice. The images captured are raw format in RGB colour, which are subsequently converted to grey-scale (using the rgb2gray function in Matlab\cite{MATLAB}) when calculating normalized mean squared error (NMSE) against the target images, using equation $NMSE = \frac{\frac{1}{n} * \sum (x - \hat{x})^2}{\sum (x)^2}$, where $x$ is the target, $\hat{x}$ is the measured output and $n$ is the dimension of $x$ and $\hat{x}$.
+The mechanical components are listed in \cref{fig:holographic_projector} with parts number. The holograms displayed on the SLM are generated using the OSPR algorithm \cite{Cable2004}, and as the SLM is a binary-phase modulator, each hologram sub-frame needs to be binary quantized. Then each group of the 24 binary-phase hologram sub-frames are encoded as the 8-bit red, green, blue (RGB) channels of a 24-bit image to interface with the SLM driver electronics. The SLM displays each bit plane sequentially, with ones and zeros mapping to opposing phase modulations at each pixel. The reconstructions were captured using a Canon 550D camera with an EFS 18-55 mm lens. To ensure fair comparison, the camera was set to the same manual setting when comparing each pair of replay fields before and after DPD. It takes $24/1440=1/60$s to display all 24 sub-frames on a 1440Hz SLM, so the camera shutter speed was set to $1/30$s to capture all frames twice. The images captured are raw format in RGB colour, which are subsequently converted to grey-scale (using the rgb2gray function in Matlab\cite{MATLAB}) when calculating NMSE against the target images, using the equation $NMSE = \frac{\frac{1}{n} * \sum (x - \hat{x})^2}{\sum (x)^2}$, where $x$ is the target, $\hat{x}$ is the measured output and $n$ is the dimension of $x$ and $\hat{x}$.
 
 
 
@@ -83,7 +83,7 @@ Subsequently, the DPD curve (red line in \cref{fig:Determining_the_DPD_curve}(d)
     \end{center}
 \end{table}
 
-Hence, as demonstrated in \cref{tab:non-linearity result}, DPD achieved a 95.45\% reduction in MSE, which was a significant improvement in non-linearity, therefore the DPD curve measured is validated.
+Hence, as demonstrated in \cref{tab:non-linearity result}, DPD achieved a 95.45\% reduction in NMSE, which was a significant improvement in non-linearity, therefore the DPD curve measured is validated.
 
 
 
@@ -132,7 +132,7 @@ In \cref{fig:Projection output of the two sample images before and after DPD}(b)
             \multicolumn{1}{|c|}{Sample image 1} & \multicolumn{1}{c|}{NMSE}    & \multicolumn{1}{c|}{Percentage} \\ \hline
             \multicolumn{1}{|c|}{Before DPD}     & \multicolumn{1}{c|}{0.06139} & \multicolumn{1}{c|}{100\%}      \\ \hline
             \multicolumn{1}{|c|}{After DPD}      & \multicolumn{1}{c|}{0.04920} & \multicolumn{1}{c|}{80.15\%}    \\ \hline\hline
-            \multicolumn{1}{|c|}{Sample image 2} & \multicolumn{1}{c|}{MSE}     & \multicolumn{1}{c|}{Percentage} \\ \hline
+            \multicolumn{1}{|c|}{Sample image 2} & \multicolumn{1}{c|}{NMSE}     & \multicolumn{1}{c|}{Percentage} \\ \hline
             \multicolumn{1}{|c|}{Before DPD}     & \multicolumn{1}{c|}{0.04309} & \multicolumn{1}{c|}{100\%}      \\ \hline
             \multicolumn{1}{|c|}{After DPD}      & \multicolumn{1}{c|}{0.03635} & \multicolumn{1}{c|}{84.36\%}    \\ \hline
         \end{tabular}
@@ -148,8 +148,8 @@ Lastly, as the DPD is a one-to-one mapping, the computation time is negligible. 
 
 
 
-\section{Conclusion}
-The non-linearity between target image and reconstructed image was measured for the overall holographic projection system by projecting a linear grey-scale ramp. Then DPD was applied to the grey-scale ramp and successfully reduced the MSE by 95.45\%. To examine its effectiveness on real world images, the DPD method was applied on two sample images, it was observed that more details were shown in the replay field after DPD, and the MSE's of the two example images were reduced by 19.86\% and 15.64\%. As the DPD is a one-to-one mapping, the extra computation required is negligible. Hence, we have demonstrated the effectiveness of the proposed DPD-OSPR method to improve reconstruction quality on the existing OSPR algorithm while still keeping its ability for real-time holography.
+\section{Summary}
+The non-linearity between target image and reconstructed image was measured for the overall holographic projection system by projecting a linear grey-scale ramp. Then the DPD curve was applied to the grey-scale ramp and successfully reduced the NMSE by 95.45\%. To examine its effectiveness on real world images, the DPD method was applied on two sample images, it was observed that more details were shown in the replay field after DPD, and the NMSE's of the two example images were reduced by 19.86\% and 15.64\%. As the DPD is a one-to-one mapping, the extra computation required is negligible. Hence, we have demonstrated the effectiveness of the proposed DPD-OSPR method to improve reconstruction quality on the existing OSPR algorithm while still keeping its ability for real-time holography.
 
 % In order to improve image quality of holographic projection, the idea of the gamma correction method arose to improve the contrast of the replay field. Every display has an inherent property known as the gamma value $\gamma$, which essentially describes the transfer function between input pixel value and output pixel energy\cite{Gonzalez2002}. Gamma correction is normally done via a look-up table or correction curve which allows the relationship between the input and output to be adjusted. In a computer-generated holographic projection system, the image is generated via diffraction of light from spatial light modulators. In this process, several factors contribute to non-linearities between the replay field and the target image. This section evaluates the gamma response of the overall system experimentally, and then applies a gamma correction method, with the aim of increasing the image quality of a holographic projection system. Both a notable increase in replay field quality alongside a significant reduction in mean squared error were observed, demonstrating the effectiveness of gamma correction in holographic projection.
 
@@ -241,7 +241,7 @@ The non-linearity between target image and reconstructed image was measured for 
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
-% Hence, as demonstrated in \cref{tab:Gamma response result}, gamma correction achieved a 95.58\% reduction in MSE, which was a significant improvement, proving the effectiveness of gamma correction method on the grey-scale ramp.
+% Hence, as demonstrated in \cref{tab:Gamma response result}, gamma correction achieved a 95.58\% reduction in NMSE, which was a significant improvement, proving the effectiveness of gamma correction method on the grey-scale ramp.
 
 
 

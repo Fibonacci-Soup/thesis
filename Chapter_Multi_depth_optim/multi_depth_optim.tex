@@ -10,6 +10,13 @@
 
 This chapter implements the limited-memory Broyden-Fletcher-Goldfarb-Shanno (L-BFGS) optimization method introduced in \cref{sec:L-BFGS} to generate phase-only computer-generated hologram (CGH) for both 2D and 3D targets. For 3D targets, instead of computing the full 3D reconstruction of the hologram at every iteration, a novel method called sequential slicing (SS) is proposed for partial evaluation of the hologram during optimization.
 
+\section{Introduction}
+The most common multi-depth CGH optimization methods either evaluate their loss against the entire multi-depth 3D target, which is time-consuming, or evaluate the hologram for each plane and then sum the holograms, which introduces quality degradation.
+
+A search in the literature has found some recent work that compute CGH using numerical optimization methods \cite{Zhang2017, Liu2020, Choi2021, Chen2021}, but speed and quality are still the major challenges.
+
+proposes the sequential slicing (SS) technique for the optimization of CGH for multi-depth 3D target, which evaluates the loss for a single slice at each iteration, aiming for quicker hologram generation with proper overall quality and low quality imbalance across the multiple depths enabled by the second-order nature of the L-BFGS optimization algorithm.
+
 
 \section{Method}
 

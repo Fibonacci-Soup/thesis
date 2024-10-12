@@ -2,7 +2,7 @@
 %*******************************************************************************
 %****************************** Literature Review Chapter **********************
 %*******************************************************************************
-\chapter{Literature Review} \label{sec:Literature Review}
+\chapter{Literature Review} \label{chapter:Literature Review}
 
 \graphicspath{{Chapter_LR/Figs/}}
 This chapter lays down the fundamental theories of optoelectronics and search algorithms, which are essential to the research outlined in the later chapters of this thesis.
@@ -621,7 +621,7 @@ The Gerchberg-Saxton (GS) algorithm \cite{Gerchberg1972} is a revolutionary algo
   \end{algorithmic}
 \end{algorithm}
 
-The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was implemented in MATLAB and was first run on the mandrill target image in \cref{fig:mandrill.png} the output results are shown in \cref{fig:GS algorithm output}. It can be seen from \cref{fig:GS_recon_i_30} that, the reconstruction after 30 iterations of GS algorithm reached a very good result, having an NMSE of \num{2.6612e-08} and an SSIM of 0.7940, which are both much better than the single-iteration Naive method's result in \cref{fig:Naive_rand_recon}.
+The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was implemented in MATLAB and was first run on the mandrill target image in \cref{fig:mandrill.png}, and the output results are shown in \cref{fig:GS algorithm output on the mandrill target}. It can be seen from \cref{fig:GS_recon_i_30} that, the reconstruction after 30 iterations of GS algorithm reached a very good result, having an NMSE of \num{2.6612e-08} and an SSIM of 0.7940, which are both much better than the single-iteration Naive method's result in \cref{fig:Naive_rand_recon}.
 
 \begin{figure}[H]
   \centering

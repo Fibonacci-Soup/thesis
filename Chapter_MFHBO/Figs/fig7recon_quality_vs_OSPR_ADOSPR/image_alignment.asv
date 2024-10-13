@@ -1,0 +1,10 @@
+fixed = imresize(rgb2gray(imread("mandrill.tiff")), 6);
+moving = rgb2gray(imread("MFHO_m.JPG"));
+
+% imshowpair(fixed,moving,"Scaling","joint");
+optimizer = registration.optimizer.RegularStepGradientDescent;
+metric = registration.metric.MeanSquares;
+
+movingRegistered = imregister(moving,fixed,'rigid',optimizer,metric);
+
+imshowpair(fixed, movingRegistered,'Scaling','joint');

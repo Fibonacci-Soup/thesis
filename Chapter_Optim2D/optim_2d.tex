@@ -128,6 +128,7 @@ From this expression we can derive a recursive procedure (\cref{alg:L-BFGS}) to 
 Apart from being inexpensive, L-BFGS has the advantage that the multiplication by the initial matrix $\mathcal{H}_k^0$ is isolated from the rest of the computations, allowing this matrix to be chosen freely and to vary between iterations. A method for choosing $\mathcal{H}_k^0$ that has proved effective in practice is to use the same as BFGS as stated in \cref{eq:BFGS_initiate_H_0}. \cite{Nocedal2006}
 
 
+
 \section{Implementation of Optimisation Methods on CGH}
 
 To implement the optimisation methods listed in \cref{sec:Numerical Optimisation Methods} on CGH, firstly the optimisation framework needs to be adapted. The objective is to find the phase hologram (H) that has the optimal reconstruction (R) matching the target image (T), which can be formulated as minimising the difference between R and T by varying H, leading to the mathematical expression:
@@ -135,6 +136,10 @@ To implement the optimisation methods listed in \cref{sec:Numerical Optimisation
 	\underset{\textbf{H}}{\arg \min}\ Loss(\textbf{T}, \textbf{R})
 \end{equation}
 where $Loss$ denotes a loss function quantifying the difference between T and R, and $\arg$ returns the argument (H) of the optimisation. There are
+
+\begin{equation}
+  MSE(\textbf{T}, \textbf{R}) = \frac{1}{X\times Y} \sum_{x=1}^{X} \sum_{y=1}^{Y} (\textbf{T}_{x,y}-\textbf{R}_{x,y})^2
+\end{equation}
 
 The phase-only constraint of CGH can be easily applied by fixing a constant amplitude of the hologram, while keeping its phase varying and being the argument of optimization ($\textbf{x}$).
 
@@ -144,10 +149,6 @@ The phase-only constraint of CGH can be easily applied by fixing a constant ampl
 	\caption{Flowchart of the optimisation process}
 	\label{fig:optim_flowchart_2D}
 \end{figure}
-
-\begin{equation}
-  MSE(\textbf{T}, \textbf{R}) = \frac{1}{X\times Y} \sum_{x=1}^{X} \sum_{y=1}^{Y} (\textbf{T}_{x,y}-\textbf{R}_{x,y})^2
-\end{equation}
 
 \begin{figure}[H]
 	\centering

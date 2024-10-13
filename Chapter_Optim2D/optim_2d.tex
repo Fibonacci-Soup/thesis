@@ -46,7 +46,7 @@ Gradient descent (GD) is a first-order optimisation method, it finds a local min
 \end{equation}
 The steepest descent method is very intuitive: among all possible directions to move away from $\textbf{x}_{k}$, the steepest gradient direction is the one which $f$ decreases most rapidly. The advantage of this method is that it requires few computation and memory resource, because it only requires a computation of the first derivative, and it does not require any accumulation of historical gradients. However, it is a greedy method that only considers the current iteration without any global consideration, so it can be extremely slow on complicated problems. \cite{Nocedal2006}
 
-To work around the disadvantage, a few variants have emerged, such as AdaGrad \cite{Duchi2011}, RMSProp \cite{Tieleman2012} and Adam \cite{Kingma2015} which combines the advantages of AdaGrad and RMSProp. The Adam method is an iconic variant of the gradient descent, often referred to as `gradient descent with momentum', as the name Adam is derived from `adaptive moment estimation'. Adam algorithm is based on adaptive estimates of lower-order moments \cite{Kingma2015}. It computes individual adaptive learning rates for different parameters from estimates of first and second moments of the gradients \cite{Kingma2015}.
+To work around the disadvantage, a few variants have emerged, such as AdaGrad \cite{Duchi2011}, RMSProp \cite{Tieleman2012} and Adam \cite{Kingma2015} which combines the advantages of AdaGrad and RMSProp. The Adam method is an iconic variant of GD, often referred to as `gradient descent with momentum', as the name Adam is derived from `adaptive moment estimation'. Adam algorithm is based on adaptive estimates of lower-order moments \cite{Kingma2015}. It computes individual adaptive learning rates for different parameters from estimates of first and second moments of the gradients \cite{Kingma2015}.
 
 
 \subsection{Newton's Method}
@@ -145,6 +145,21 @@ The phase-only constraint of CGH can be easily applied by fixing a constant ampl
 	\label{fig:optim_flowchart_2D}
 \end{figure}
 
+\begin{equation}
+  MSE(\textbf{T}, \textbf{R}) = \frac{1}{X\times Y} \sum_{x=1}^{X} \sum_{y=1}^{Y} (\textbf{T}_{x,y}-\textbf{R}_{x,y})^2
+\end{equation}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{LBFGS_iters.pdf}
+	\caption{Reconstructions at the first 20 iterations of the L-BFGS optimisation}
+	\label{fig:LBFGS_iters}
+\end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{GD_ADAM_LBFGS.pdf}
+	\caption{Convergence plot for comparison between the GD, Adam and L-BFGS optimisations}
+	\label{fig:GD_ADAM_LBFGS}
+\end{figure}
 

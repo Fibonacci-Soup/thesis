@@ -23,12 +23,9 @@
 
 \section{Methods}
 \subsection{Computation of Diffraction}
-	To compute the spatial diffraction of light, the Fresnel diffraction formula is used, as shown in Equation~(\ref{eq:fresnel-diffraction}) \cite{Goodman2017}.
+	To compute the spatial diffraction of light, the Fresnel diffraction formula is used, as shown in Equation~(\ref{eq:fresnel-diffraction}).
 
-	\begin{equation}
-	  E_{Fresnel}(\alpha, \beta, z) = \mathcal{F} \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}
-	  \label{eq:fresnel-diffraction}
-	\end{equation}
+
 	where the hologram aperture is denoted by $A(x, y)$ and the diffracted field is denoted by $E(\alpha, \beta, z)$, with $z$ being the distance from the hologram aperture $A(x, y)$, and $j$ is $\sqrt{-1}$, $k$ is the wave number ($k=\frac{2\pi}{\lambda}$, where $\lambda$ is the wavelength), and $\mathcal{F}$ denotes the Fourier Transform. The amplitude of $E(\alpha, \beta, z)$, which is $|E(\alpha, \beta, z)|$, is referred to as the reconstruction of the hologram throughout this paper.
 
 	When $z\gg \frac{k(x^2+y^2)_{max}}{2}$ (i.e. in the far field), Equation~(\ref{eq:fresnel-diffraction}) can be further approximated to give Equation~(\ref{eq:fraunhofer-diffraction}), which is the Fraunhofer diffraction formula \cite{Goodman2017}.

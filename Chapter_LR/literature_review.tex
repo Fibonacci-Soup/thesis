@@ -172,7 +172,8 @@ where $\mathcal{F}$ denotes the Fourier Transform, implemented on computers usin
 
 Now we have a more simple and solvable expression than \cref{eq:huygens-fresnel-principle-substituded-r-square}. And also, as we are only interested in the scaling of relative points at $P$ with respect to each other, so it is safe to normalise the multiplier term before the Fourier Transform to 1 \cite{Wilkinson2019}. So we can express the diffraction pattern in Fresnel region as:
 \begin{equation}
-  E_{Fresnel\ region}(\alpha, \beta, z) = \mathcal{F} \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\} \label{eq:fresnel-diffraction}
+  E_{Fresnel\ region}(\alpha, \beta, z) = \mathcal{F} \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}
+  \label{eq:fresnel-diffraction}
 \end{equation}
 
 
@@ -185,6 +186,7 @@ Fraunhofer diffraction is a form of diffraction in which the distance between th
 so that the wave fronts can be treated as planar rather than spherical \cite{Daintith2009}, then the $e^{j\frac{k}{2z}(x^2+y^2)}$ term tends to $1$, and \cref{eq:fresnel-diffraction} becomes:
 \begin{equation}
   E_{Fraunhofer\ region}(\alpha, \beta) = \mathcal{F} \left\{A(x,y)\right\}
+  \label{eq:fraunhofer-diffraction}
 \end{equation}
 
 which suggests that the far field pattern is simply the Fourier Transform of the aperture function.

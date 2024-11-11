@@ -16,7 +16,7 @@ A search in the literature has found some recent work that compute CGH for 3D ta
 This chapter proposes the sequential slicing (SS) technique for the L-BFGS optimisation of CGH for multi-depth 3D target, which evaluates the loss for a single slice at each iteration. The proposed technique aims for a quicker hologram generation with proper overall quality and low quality imbalance across the multiple depths, benefiting from the second-order nature of the L-BFGS optimiser.
 
 
-\section{Method}
+\section{Methods}
 
 The optimiser used for CGH in this chapter is the L-BFGS optimiser as introduced in \cref{sec:L-BFGS}, with the GD optimiser in \cref{sec:GD} also implemented as a reference. The phase-only constraint of CGH is applied by fixing a constant amplitude of the hologram, while keeping its phase varying and being the argument of optimisation ($\textbf{x}$ in \cref{eq:minimise_F}).
 

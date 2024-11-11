@@ -832,7 +832,7 @@ To improve the reconstruction quality, the time-multiplexed OSPR algorithm (in \
 
 The OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} was adapted to generate multi-depth targets by doing the Naive phase addition method $S$ times, where $S$ is the total number of sub-frames. The results of the example run with $S=24$ is shown in \cref{fig:OSPR_ABCD}. The average reconstructions has much less noise than the single frame one in \cref{fig:Naive_ABCD_binary}. However, the contrast is rather low. Therefore, one of the major objective of this thesis is to search for time-multiplexed binary-phase holograms with better reconstruction quality than the existing methods.
 
-\subsubsection{GS algorithm adaptation}
+\subsubsection{GS algorithm adaptation} \label{sec:GS algorithm adaptation}
 The GS algorithm in \cref{sec:Gerchberg-Saxton (GS) Algorithm} can also be adapted to generate phase-only holograms for multi-depth 3D targets. Instead of propagating to a fixed target image at each iteration, it is modified to propagate to a different distance at each iteration, and the target amplitude constraint of the according distance is applied (i.e. line $E \gets \sqrt{T} \times e^{j\angle E}$ in \cref{alg:Gerchberg-Saxton (GS) Algorithm} becomes $E \gets \sqrt{T_{i\%n}} \times e^{j\angle E}$, where $i$ is the iteration number and $n$ is the total number of slices). Such method is named sequential slicing, where the algorithm sweeps through the slices one by one sequentially during its iterations.
 
 \begin{figure}[H]

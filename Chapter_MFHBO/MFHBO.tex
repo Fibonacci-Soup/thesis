@@ -37,10 +37,10 @@
 
 	To help explain the optimisation process, a flow chart is drawn in \cref{fig:MFHO_flowchart}. As shown in the flowchart, the target image $\textbf{T}$ is first loaded, with a set of $n$ hologram sub-frames ($\{\textbf{H}_1, \textbf{H}_2, ..., \textbf{H}_n\}$) generated randomly. Then at every iteration, each hologram sub-frame $\textbf{H}_i$ is quantized to the bit-depth constraint of the SLM, and propagated to the reconstruction plane $\textbf{R}_i$, and the average of the amplitudes of all reconstructions $\textbf{R}_{avg}$ is computed and compared against the target image $\textbf{T}$ using a loss function $Loss(\textbf{T}, \textbf{R}_{avg})$, after which the search direction is computed using the L-BFGS optimiser and the hologram sub-frames are updated accordingly. Here the loss function selected is the relative entropy\cite{Kullback1951} given in \cref{eq:RE_holo}.
 
-	\begin{equation}
-		Loss(\textbf{T}, \textbf{R}_{avg}) = -\sum_{x=1}^{X} \sum_{y=1}^{Y} \textbf{T}_{(x,y)}\log\left(\frac{\textbf{R}_{avg(x,y)}}{\textbf{T}_{(x,y)}}\right)
-		\label{eq:RE_holo}
-	\end{equation}
+	% \begin{equation}
+	% 	Loss(\textbf{T}, \textbf{R}_{avg}) = -\sum_{x=1}^{X} \sum_{y=1}^{Y} \textbf{T}_{(x,y)}\log\left(\frac{\textbf{R}_{avg(x,y)}}{\textbf{T}_{(x,y)}}\right)
+	% 	\label{eq:RE_holo}
+	% \end{equation}
 
 	Since fast SLM's available in the lab are binary-phase devices, the quantization step in the flowchart in \cref{fig:MFHO_flowchart} is carried out with bit-depth limit of 1, hence producing binary-phase holograms. However, the optimisation algorithm does not converge with a straight binary quantization as integers are discrete, therefore a Sigmoid function \cite{Bacaer2011} is used for a smoother and differentiable quantization, as defined in \cref{eq:sigmoid}. The output of the Sigmoid function is then scaled by $\pi$ so that the binary phase levels are $0$ and $\pi$.
 

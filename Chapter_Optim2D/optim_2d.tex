@@ -133,12 +133,12 @@ Apart from being inexpensive, L-BFGS has the advantage that the multiplication b
 
 \section{Optimisation of Phase Hologram for a Target Image} \label{sec:Optimisation of Phase Hologram for a Target Image}
 
-To implement the optimisation methods listed in \cref{sec:Numerical Optimisation Methods} on CGH, firstly the optimisation framework needs to be adapted. The objective of CGH is to find the phase hologram (H) that has the optimal reconstruction (R) matching the target image (T), which can be formulated as minimising the difference between R and T by varying H, leading to the mathematical expression below:
+To implement the optimisation methods listed in \cref{sec:Numerical Optimisation Methods} on CGH, firstly the optimisation framework needs to be adapted. The objective of CGH is to find the phase hologram ($\textbf{H}$) that has the optimal reconstruction ($\textbf{R}$) matching the target image ($\textbf{T}$), which can be formulated as minimising the difference between $\textbf{R}$ and $\textbf{T}$ by varying $\textbf{H}$, leading to the mathematical expression below:
 \begin{equation}
 	\underset{\textbf{H}}{\arg \min}\ Loss(\textbf{T}, \textbf{R})
 \end{equation}
 
-where `$Loss$' denotes an error function quantifying the difference between T and R, and `$\arg$' returns the argument (H) instead of the error value. For the $Loss$ function, the classic error function mean-squared error (MSE) \cite{MSE_REF} is selected, with its definition as shown below:
+where `$Loss$' denotes an error function quantifying the difference between $\textbf{T}$ and $\textbf{R}$, and `$\arg$' returns the argument ($\textbf{H}$) instead of the error value. For the $Loss$ function, the classic error function mean-squared error (MSE) \cite{MSE_REF} is selected, with its definition as shown below:
 \begin{equation}
   MSE(\textbf{T}, \textbf{R}) = \frac{1}{X\times Y} \sum_{x=1}^{X} \sum_{y=1}^{Y} (\textbf{T}_{x,y}-\textbf{R}_{x,y})^2
   \label{eq:MSE}
@@ -151,7 +151,7 @@ where `$Loss$' denotes an error function quantifying the difference between T an
 	\label{fig:optim_flowchart_2D}
 \end{figure}
 
-The optimisation process for generating a phase hologram to reconstruct a target image is depicted in \cref{fig:optim_flowchart_2D}. The process begins by loading the target image (T) and initializing a random phase hologram (H). Using this initial phase hologram, a reconstruction (R) of the target image is computed via either the Fraunhofer or Fresnel propagation equation introduced in \cref{sec:Diffraction} based on the distance needed. The difference between the target image (T) and the reconstruction (R) is quantified by computing the loss, such as the MSE in \cref{eq:MSE}. An optimiser (such as the GD, Adam or L-BFGS algorithms mentioned in \cref{sec:Numerical Optimisation Methods}) then updates the phase hologram based on the computed loss. This iterative process of reconstruction, loss calculation, and hologram update continues until a termination condition is met, usually a fixed total number of iterations, or when optimisation has reached convergence. The final optimised phase hologram (H) is then outputted.
+The optimisation process for generating a phase hologram to reconstruct a target image is depicted in \cref{fig:optim_flowchart_2D}. The process begins by loading the target image ($\textbf{T}$) and initializing a random phase hologram ($\textbf{H}$). Using this initial phase hologram, a reconstruction ($\textbf{R}$) of the target image is computed via either the Fraunhofer or Fresnel propagation equation introduced in \cref{sec:Diffraction} based on the distance needed. The difference between the target image ($\textbf{T}$) and the reconstruction ($\textbf{R}$) is quantified by computing the loss, such as the MSE in \cref{eq:MSE}. An optimiser (such as the GD, Adam or L-BFGS algorithms mentioned in \cref{sec:Numerical Optimisation Methods}) then updates the phase hologram based on the computed loss. This iterative process of reconstruction, loss calculation, and hologram update continues until a termination condition is met, usually a fixed total number of iterations, or when optimisation has reached convergence. The final optimised phase hologram ($\textbf{H}$) is then outputted.
 
 \begin{figure}[H]
 	\centering
@@ -160,7 +160,7 @@ The optimisation process for generating a phase hologram to reconstruct a target
 	\label{fig:LBFGS_iters}
 \end{figure}
 
-The optimisation flowchart in \cref{fig:optim_flowchart_2D} is run on the example target image in \cref{fig:mandrill.png} for a total of 50 iterations. The reconstruction (R) at each iteration is listed in \cref{fig:LBFGS_iters}, with iterations 16 to 45 omitted to save space. The list of reconstructions demonstrate visually how the optimisation converges to the resulting reconstruction (R$_{50}$) which has a very good quality. It shows that the proposed method using the L-BFGS algorithm to generate phase hologram is effective.
+The optimisation flowchart in \cref{fig:optim_flowchart_2D} is run on the example target image in \cref{fig:mandrill.png} for a total of 50 iterations. The reconstruction ($\textbf{R}$) at each iteration is listed in \cref{fig:LBFGS_iters}, with iterations 16 to 45 omitted to save space. The list of reconstructions demonstrate visually how the optimisation converges to the resulting reconstruction ($\textbf{R}_{50}$) which has a very good quality. It shows that the proposed method using the L-BFGS algorithm to generate phase hologram is effective.
 
 \begin{figure}[H]
 	\centering
@@ -185,7 +185,7 @@ This section proposes a novel method of optimising the phase of the target image
 	\label{fig:TIPO_flowchart}
 \end{figure}
 
-The flowchart in \cref{fig:TIPO_flowchart} outlines the TIPO algorithm process for generating a phase-only hologram ($H$) to reconstruct a target image ($T$). The procedure starts with loading the target image and initializing the phase ($\Phi$). The target field ($E$) is then computed from the target image and the target image phase ($E = T \cdot e^{j\Phi}$). Next, the hologram aperture ($A$) is computed by applying the inverse propagation ($\mathcal{P}^{-1}$) to the target field, where $\mathcal{P}$ is chosen from the Fraunhofer and Fresnel diffraction equations in \cref{sec:Diffraction}. The phase-only hologram ($H$) is then derived from the angle of the complex hologram aperture ($H = \angle A$). Subsequently, a reconstruction ($R$) is computed using the forward propagation ($R = P \cdot e^{jH}$). The loss, such as the Mean Squared Error (MSE), is calculated between the target image ($T$) and the reconstruction ($R$). An optimiser (e.g. SGD or L-BFGS) then updates the phase ($\Phi$) based on the computed loss. This iterative process of computing the target field, hologram plane, phase hologram, reconstruction, and loss calculation continues, followed by phase updates, until a termination condition is met, which is usually set for a fixed number of iterations. Upon convergence, the final optimised phase hologram ($H$) is produced.
+The flowchart in \cref{fig:TIPO_flowchart} outlines the TIPO algorithm process for generating a phase-only hologram ($\textbf{H}$) to reconstruct a target image ($\textbf{T}$). The procedure starts with loading the target image and initializing the phase ($\Phi$). The complex target field ($\textbf{E}$) is then computed from the target image and the target image phase ($\textbf{E} = \textbf{T} \cdot e^{j\Phi}$). Next, the hologram aperture ($\textbf{A}$) is computed by applying the inverse propagation ($\mathcal{P}^{-1}$) to the target field, where $\mathcal{P}$ is chosen from the Fraunhofer and Fresnel diffraction equations in \cref{sec:Diffraction}. The phase-only hologram ($\textbf{H}$) is then derived from the angle of the complex hologram aperture ($\textbf{H} = \angle \textbf{A}$). Subsequently, a reconstruction ($\textbf{R}$) is computed using the forward propagation ($\textbf{R} = |\mathcal{P}(e^{jH})|$). The loss, such as the Mean Squared Error (MSE), is calculated between the target image ($\textbf{T}$) and the reconstruction ($\textbf{R}$). An optimiser (e.g. SGD or L-BFGS) then updates the phase ($\Phi$) based on the computed loss. This iterative process of computing the target field, hologram plane, phase hologram, reconstruction, and loss calculation continues, followed by phase updates, until a termination condition is met, which is usually set for a fixed number of iterations. Upon convergence, the final optimised phase hologram ($\textbf{H}$) is produced.
 
 \begin{figure}[H]
 	\centering
@@ -194,7 +194,7 @@ The flowchart in \cref{fig:TIPO_flowchart} outlines the TIPO algorithm process f
 	\label{fig:TIPO_iters}
 \end{figure}
 
-The results for an example run of the TIPO algorithm on the mandrill target (in \cref{fig:mandrill.png}) with the total number of iterations set to 100 are shown in \cref{fig:TIPO_iters} (only iterations number 1, 30, 50 and 100 are shown for space saving). As the first hologram is computed by the inverse propagation ($\mathcal{P}^{-1}$) of the target image with an random phase, the reconstruction ($R_1$) is already showing the target image. Then as the iterations continue, the reconstruction quality gets better, proving the effectiveness of the proposed TIPO algorithm.
+The results for an example run of the TIPO algorithm on the mandrill target (in \cref{fig:mandrill.png}) with the total number of iterations set to 100 are shown in \cref{fig:TIPO_iters} (only iterations number 1, 30, 50 and 100 are shown for space saving). As the first hologram is computed by the inverse propagation ($\mathcal{P}^{-1}$) of the target image with an random phase, the reconstruction ($\textbf{R}_1$) is already showing the target image. Then as the iterations continue, the reconstruction quality gets better, proving the effectiveness of the proposed TIPO algorithm.
 
 \begin{figure}[H]
 	\centering

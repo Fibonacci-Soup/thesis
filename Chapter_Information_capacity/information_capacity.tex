@@ -90,78 +90,92 @@ Despite many years of development in computer-generated holography, perfect phas
 
 \section{Results}
 \subsection{Targets at far field (Fraunhofer region)} \label{sec:Fraunhofer_results}
-	The target images used in this chapter are sourced from the DIV2K dataset \cite{Agustsson2017}, among which, all of the 800 images in the `DIV2K\_train\_HR' folder are selected. The quantised GS algorithm in \cref{fig:GS_quantised_flowchart} was run on each of the 800 target images set at far field (using the Fraunhofer diffraction formula in \cref{eq:fraunhofer-diffraction}), for hologram bit depth set to integers ranging from 1 to 8, with the total number of iterations ($N$) set to 100.
+	In this subsection, the target images are set at far field, so the Fraunhofer diffraction formula in \cref{eq:fraunhofer-diffraction} is used.
 
 	\begin{figure} [H]
 	   \begin{center}
 	   \includegraphics[width = 1.0\textwidth]{holo_bit_depth_recon_Fraunhofer.png}
 	   \end{center}
-	   \caption{\label{fig:holo_bit_depth_recon_Fraunhofer} Hologram generated at certain bit depths and their according reconstructions at far field}
+	   \caption{\label{fig:holo_bit_depth_recon_Fraunhofer} Holograms generated at bit depths level from 1 to 8 and their according reconstructions at far field}
 	\end{figure}
 
-	An example of quantised phase hologram generation for the sample image in \cref{fig:delentropy}~(a) is shown in \cref{fig:holo_bit_depth_recon_Fraunhofer}, which demonstrates qualitatively how the reconstruction quality improves with the increase in the bit depth of the hologram, and also quantitatively, the NMSE between the reconstruction and target image has shown a decreasing trend as the bit depth of hologram increases. The rotational symmetry in the reconstruction of the hologram with bit depth 1 can be explained by the conjugate properties of Fourier Transforms, because the binary phase holograms have pixel values whose complex conjugates are the same as themselves.
+	An example run of the quantised GS algorithm (in \cref{fig:GS_quantised_flowchart}) for the sample image in \cref{fig:delentropy}~(a) is shown in \cref{fig:holo_bit_depth_recon_Fraunhofer}, which demonstrates qualitatively how the reconstruction quality improves with the increase in the bit depth of the hologram, and also quantitatively as the NMSE between the reconstruction and target image has shown a decreasing trend as the bit depth of hologram increases. The rotational symmetry in the reconstruction of the hologram with bit depth 1 is explained by the conjugate properties of Fourier Transforms in \cref{sec:Rotational symmetries in the binary phase modulation}.
 
+	Then the same quantised GD algorithm is run on the 800 images in the `DIV2K\_train\_HR' folder in the DIV2K dataset \cite{Agustsson2017}, for hologram bit depth set to integers ranging from 1 to 8, with the total number of iterations ($N$) set to 100.
 
 	\begin{figure} [H]
 	   \begin{center}
 	   \includegraphics[width = \textwidth]{GS_Fraunhofer_NMSE_VS_Hologram bit depth.pdf}
 	   \end{center}
-	   \caption{\label{fig:GS_Fraunhofer_NMSE_VS_Hologram_bit_depth} NMSE v.s. Hologram bit depth for target images set at far field}
+	   \caption{\label{fig:GS_Fraunhofer_NMSE_VS_Hologram_bit_depth} The average and standard deviation of the far-field reconstruction errors among the 800 target images plotted against the hologram bit depth}
 	\end{figure}
 
-	\cref{fig:GS_Fraunhofer_NMSE_VS_Hologram_bit_depth} plots the NMSE between the reconstruction of the hologram and the target image against the hologram bit depth for every 5 images (as there are a total of 800 images, only every 5 images are shown in the plot to avoid overcrowding, where the full data can be accessed from the published research data \cite{research_data_Sha2024}). It can be observed that, for each target image, the NMSE between the resulting reconstructions and their according target images decreases as the hologram bit depth increases. It infers that holograms with higher bit depth carries more sufficient information in order to better reconstruct the target images.
+	For the 800 target images, the average (AVG) and standard deviation (STD) of the NMSE values between the far-field reconstructions of the holograms and their corresponding target images are plotted against the hologram bit depth in \cref{fig:GS_Fraunhofer_NMSE_VS_Hologram_bit_depth} (the raw data is accessible from the published research dataset \cite{research_data_Sha2024}). It can be concluded that, the NMSE between the resulting reconstructions and their according target images decreases as the hologram bit depth increases, inferring that holograms with higher bit depth carries more sufficient information in order to better reconstruct the target images.
 
 	\begin{figure} [H]
 		\begin{center}
-			\begin{tabular}{c c}
-				\includegraphics[trim={80 50 90 70}, clip, width = 0.8\textwidth]{GS_Fraunhofer_NMSE_VS_Entropy.png} \\
-				(a)\\
-				\includegraphics[trim={80 50 90 70}, clip, width = 0.8\textwidth]{GS_Fraunhofer_NMSE_VS_Delentropy.png} \\
-				(b)
-			\end{tabular}
-			\caption{\label{fig:GS_Fraunhofer_NMSE_VS_Entropy_Delentropy} Scatter plot for target images set at far field. (a) NMSE v.s. Entropy. (b) NMSE v.s. Delentropy.}
+		\includegraphics[trim={50 40 70 70}, clip, width = \textwidth]{GS_Fraunhofer_NMSE_VS_Entropy.pdf}
 		\end{center}
+		\caption{\label{fig:GS_Fraunhofer_NMSE_VS_Entropy} Scatter plot of the far-field reconstruction errors v.s. entropy of target image among the 800 target images, with different colours indicating hologram bit depth constraints}
 	\end{figure}
 
-	Then the entropy of each of the 800 target images are calculated using \cref{eq:shannon-entropy}, and a scatter plot of the NMSE between the reconstruction and target image against the target image entropy is plotted for all 800 target images as shown in \cref{fig:GS_Fraunhofer_NMSE_VS_Entropy_Delentropy}~(a), with the difference in hologram bit depth distinguished by different colours. To avoid the effect of initial random phase on the final result, 5 different randomly generated initial phases are used for each run. However, the result \cite{research_data_Sha2024} had rarely shown any difference between each run, leading to 5 dots overlapping at the same spot in the scatter plot. Unfortunately, no correlation has been found between the NMSE and the target image entropy, inferring that the Shannon entropy cannot be used to quantify the difficulty of CGH for a target image.
+	Then the entropy of each of the 800 target images are calculated using \cref{eq:shannon-entropy}, and a scatter plot of the NMSE between the far-field reconstruction and target image against the target image entropy is plotted for all 800 target images run with each of the 8 hologram bit depth levels, as shown in \cref{fig:GS_Fraunhofer_NMSE_VS_Entropy}. To avoid the effect of the different initial random phases on the final result, 5 different randomly generated initial phases are used for each run; however, the result \cite{research_data_Sha2024} has shown negligible difference between the runs using different random initial phase holograms.
+	Unfortunately, as the linear regressions between NMSE and entropies of target image have coefficients of determination ($R^2$) much less than 0.5, no correlation has been found between the NMSE and the target image entropy. Therefore, the Shannon entropy cannot be used to quantify the difficulty of CGH for a given target image.
 
-	Lastly, the delentropy of each of the 800 target images are calculated following the method in Section \ref{sec:Delentropy}, and a scatter plot of the NMSE between the reconstruction and target image against the target image delentropy is plotted in \cref{fig:GS_Fraunhofer_NMSE_VS_Entropy_Delentropy}~(b) for the 800 target images. And again, no correlation has been found between the NMSE and the target image delentropy either, inferring that the 2D delentropy also fails to quantify the difficulty of CGH for a target image.
+
+	\begin{figure} [H]
+		\begin{center}
+		\includegraphics[trim={50 40 70 70}, clip, width = \textwidth]{GS_Fraunhofer_NMSE_VS_Delentropy.pdf}
+		\end{center}
+		\caption{\label{fig:GS_Fraunhofer_NMSE_VS_Delentropy} Scatter plot of the far-field reconstruction errors v.s. delentropy of target image among the 800 target images, with different colours indicating hologram bit depth constraints}
+	\end{figure}
+
+	The delentropy of each of the 800 target images are then calculated using the method in \cref{sec:Delentropy}, and a scatter plot of the NMSE between the far-field reconstruction and target image against the target image delentropy is plotted in \cref{fig:GS_Fraunhofer_NMSE_VS_Delentropy} for the 800 target images. And again, as all the $R^2$ are much less than 0.5, no correlation is shown between the NMSE and the target image delentropy, inferring that the 2D delentropy also fails to predict the error of CGH for a given target image.
 
 
 \subsection{Targets at near field (Fresnel region)}
-	The target images are now set to near field, where the Fresnel diffraction formula in \cref{eq:fresnel-diffraction} applies; therefore the FFT and IFFT stages in \cref{fig:GS_quantised_flowchart} needs to be modified to include the phase term in \cref{eq:fresnel-diffraction}, and for experimental purpose, the distance ($z$) is set at $10cm$, the hologram's pixel pitch (sampling resolution of $x$ and $y$) has a size of $13.62\mu m$ and the incident light's wavelength ($\lambda$) is $532nm$.
+	The target images are now set to near field, where the Fresnel diffraction formula in \cref{eq:fresnel-diffraction} applies; therefore the FFT and IFFT stages in \cref{fig:GS_quantised_flowchart} are modified to include the phase term in \cref{eq:fresnel-diffraction}, and for experimental purpose, the distance ($z$) is set at $10cm$, the hologram's pixel pitch (sampling resolution of $x$ and $y$) has a size of $13.62\mu m$ and the incident light's wavelength ($\lambda$) is $532nm$.
 	\begin{figure} [H]
 	   \begin{center}
 	   \includegraphics[width = 1.0\textwidth]{holo_bit_depth_recon_Fresnel.png}
 	   \end{center}
-	   \caption{\label{fig:holo_bit_depth_recon_Fresnel} Hologram generated at certain bit depths and their according reconstructions at near field}
+	   \caption{\label{fig:holo_bit_depth_recon_Fresnel} Holograms generated at bit depths level from 1 to 8 and their according reconstructions at near field}
 	\end{figure}
 
-	\cref{fig:holo_bit_depth_recon_Fresnel} shows both qualitatively and quantitatively how the reconstruction quality improves (i.e. NMSE decreases) with the increase in the bit depth of the hologram. Such trend is the same for target images places at near field as those placed at far field in \cref{fig:holo_bit_depth_recon_Fraunhofer}. The rotational symmetry is gone for the binary phase hologram (bit depth = 1) due to the extra phase term in the Fresnel diffraction formula making the product of binary phase hologram and the phase term to be complex-valued whose complex conjugate does not equal to itself; however, the conjugate wouldn't disappear, but to appear at a different distance to where the target image is set at, leading to extra defocused noise onto the reconstruction plane. Nevertheless, the trend infers that holograms with higher bit depth produces better quality in the reconstruction plane.
+	\cref{fig:holo_bit_depth_recon_Fresnel} shows both qualitatively and quantitatively how the reconstruction quality improves (i.e. NMSE decreases) with the increase in the bit depth of the hologram. Such trend is the same for target images placed at near field as those placed at far field in \cref{fig:holo_bit_depth_recon_Fraunhofer}. The rotational symmetry is gone for the binary phase hologram (bit depth = 1) due to the extra phase term in the Fresnel diffraction formula making the product of binary phase hologram and the phase term to be complex-valued whose complex conjugate does not equal to itself; however, the complex conjugate wouldn't disappear, but it will appear at a different distance to where the target image is set at, leading to extra defocused noise onto the reconstruction plane. Nevertheless, the trend of NMSE shows that holograms with higher bit depth produces better quality in the reconstruction plane.
 
 	\begin{figure} [H]
 	   \begin{center}
 	   \includegraphics[width = \textwidth]{GS_Fraunhofer_NMSE_VS_Hologram bit depth.pdf}
 	   \end{center}
-	   \caption{\label{fig:GS_Fresnel0.1_NMSE_VS_Hologram_bit_depth} NMSE v.s. Hologram bit depth for target images set at near field}
+	   \caption{\label{fig:GS_Fresnel0.1_NMSE_VS_Hologram_bit_depth} The average and standard deviation of the near-field reconstruction errors among the 800 target images plotted against the hologram bit depth}
 	\end{figure}
 
-	\cref{fig:GS_Fresnel0.1_NMSE_VS_Hologram_bit_depth} plots the trend of NMSE against increasing hologram bit depth, for every 5 target images to avoid overcrowding the plot, with all raw data accessible at the published research data \cite{research_data_Sha2024} (as the results for Fraunhofer has shown that the result from different initial random phases are the same, each run for Fresnel propagation only starts with one initial random phase as opposed to 5 different random phases for Fraunhofer propagation). In \cref{fig:GS_Fresnel0.1_NMSE_VS_Hologram_bit_depth}, the same trend as the one for far field in \cref{fig:GS_Fraunhofer_NMSE_VS_Hologram_bit_depth} can be observed, where NMSE decreases as hologram bit depth increases, for every single target image.
+	\cref{fig:GS_Fresnel0.1_NMSE_VS_Hologram_bit_depth} plots the average (AVG) and standard deviation (STD) of the NMSE values between the near-field reconstructions of the holograms and their corresponding target images against the hologram bit depth (the raw data is accessible from the published research dataset \cite{research_data_Sha2024}). In \cref{fig:GS_Fresnel0.1_NMSE_VS_Hologram_bit_depth}, the same trend as the one for far field in \cref{fig:GS_Fraunhofer_NMSE_VS_Hologram_bit_depth} can be observed, where NMSE decreases as hologram bit depth increases, for every single target image. Therefore, the previous conclusion of higher hologram bit depth being able to produce better reconstruction quality is still valid.
 
 
 	\begin{figure} [H]
 		\begin{center}
-			\begin{tabular}{c c}
-				\includegraphics[trim={80 50 90 70}, clip, width = 0.8\textwidth]{GS_Fresnel0.1_NMSE_VS_Entropy.png} \\
-				(a)\\
-				\includegraphics[trim={80 50 90 70}, clip, width = 0.8\textwidth]{GS_Fresnel0.1_NMSE_VS_Delentropy.png} \\
-				(b)
-			\end{tabular}
-			\caption{\label{fig:GS_Fresnel0.1_NMSE_VS_Entropy_Delentropy} Scatter plot for target images set at near field. (a) NMSE v.s. Entropy. (b) NMSE v.s. Delentropy.}
+		\includegraphics[trim={50 40 70 70}, clip, width = \textwidth]{GS_Fresnel0.1_NMSE_VS_Entropy.pdf}
 		\end{center}
+		\caption{\label{fig:GS_Fresnel0.1_NMSE_VS_Entropy} Scatter plot of the near-field reconstruction errors v.s. entropy of target image among the 800 target images, with different colours indicating hologram bit depth constraints}
 	\end{figure}
 
-	The scatter plot of NMSE against target image's entropy and delentropy are plotted, in \cref{fig:GS_Fresnel0.1_NMSE_VS_Entropy_Delentropy}~(a)~and~(b) respectively. No correlation has been observed between the NMSE and either the entropy or delentropy of target image. Such `no correlation observed' result is the same as the results for the targets in far field in \cref{sec:Fraunhofer_results}, confirming that neither entropy nor delentropy is suitable for quantifying how difficult a target image is for phase hologram computation.
+	A scatter plot of the NMSE between the near-field reconstruction and target image against the target image entropy is plotted for all 800 target images run with each of the 8 hologram bit depth levels as shown in \cref{fig:GS_Fresnel0.1_NMSE_VS_Entropy}, with the hologram bit depth distinguished by different colours.
+	Unfortunately, as the linear regressions between NMSE and entropies of target image have coefficients of determination ($R^2$) much less than 0.5, no correlation has been found between the NMSE and the target image entropy. Therefore, the Shannon entropy cannot be used to quantify the difficulty of CGH for a given target image.
+
+
+	\begin{figure} [H]
+		\begin{center}
+		\includegraphics[trim={50 40 70 70}, clip, width = \textwidth]{GS_Fresnel0.1_NMSE_VS_Delentropy.pdf}
+		\end{center}
+		\caption{\label{fig:GS_Fresnel0.1_NMSE_VS_Delentropy} Scatter plot of the near-field reconstruction errors v.s. delentropy of target image among the 800 target images, with different colours indicating hologram bit depth constraints}
+	\end{figure}
+
+
+	The scatter plot ofthe NMSE between the near-field reconstruction and target image against the target image delentropy in \cref{fig:GS_Fresnel0.1_NMSE_VS_Delentropy} again shows no correlation between the NMSE and the delentropy of target image. Such `no correlation' result is the same as the results for far field investigated in \cref{sec:Fraunhofer_results}, confirming that neither entropy nor delentropy is suitable for quantifying how difficult a target image is for CGH.
+
+
 
 	\begin{figure} [H]
 		\begin{center}

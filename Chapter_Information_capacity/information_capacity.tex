@@ -94,7 +94,7 @@ Despite many years of development in computer-generated holography, perfect phas
 
 	\begin{figure} [H]
 	   \begin{center}
-	   \includegraphics[width = 1.0\textwidth]{holo_bit_depth_recon_Fraunhofer.png}
+	   \includegraphics[width = 1.0\textwidth]{holo_bit_depth_recon_Fraunhofer.pdf}
 	   \end{center}
 	   \caption{\label{fig:holo_bit_depth_recon_Fraunhofer} Holograms generated at bit depths level from 1 to 8 and their according reconstructions at far field}
 	\end{figure}
@@ -137,7 +137,7 @@ Despite many years of development in computer-generated holography, perfect phas
 	The target images are now set to near field, where the Fresnel diffraction formula in \cref{eq:fresnel-diffraction} applies; therefore the FFT and IFFT stages in \cref{fig:GS_quantised_flowchart} are modified to include the phase term in \cref{eq:fresnel-diffraction}, and for experimental purpose, the distance ($z$) is set at $10cm$, the hologram's pixel pitch (sampling resolution of $x$ and $y$) has a size of $13.62\mu m$ and the incident light's wavelength ($\lambda$) is $532nm$.
 	\begin{figure} [H]
 	   \begin{center}
-	   \includegraphics[width = 1.0\textwidth]{holo_bit_depth_recon_Fresnel.png}
+	   \includegraphics[width = 1.0\textwidth]{holo_bit_depth_recon_Fresnel.pdf}
 	   \end{center}
 	   \caption{\label{fig:holo_bit_depth_recon_Fresnel} Holograms generated at bit depths level from 1 to 8 and their according reconstructions at near field}
 	\end{figure}
@@ -193,7 +193,7 @@ Despite many years of development in computer-generated holography, perfect phas
 
 	The solid lines in \cref{fig:GS_Fresnel0.1_iterations}~(a) show that the entropy of hologram keeps increasing towards a value lower than the bit depth, with their corresponding NMSE between reconstruction and target image (dotted lines) decreasing. Such trend can be explained qualitatively that, as the iteration goes on, the hologram is attempting to contain more information to sustain a better reconstruction, while the entropy cannot exceed or even reach the bit depth level. On the other hand, the random initial phase plotted in \cref{fig:GS_Fresnel0.1_iterations}~(b) has a constant entropy approximately equal to the bit depth, which infers that the iterations are improving the reconstruction quality without reducing the information entropy of the hologram. In both cases, the entropy of the hologram does not decrease at any iteration, and the final NMSE does not have significant reduction when the hologram's bit depth exceeds 5.
 
-	The entropy of final hologram in (a) is lower than that in (b), although the final NMSE are similar. If the computer-generated holograms were to undergo a lossless compression, the hologram in (a) would be better compressed than the hologram in (b) as the entropy denotes the compression limit, assuming that the holograms are treated as 1D arrays when compressing. Therefore if hologram compression is of a concern, then starting with a low entropy initial hologram in the CGH process is recommended. In case if the reconstruction quality is not as high of a priority than making holograms to occupy less storage space, it is also recommended to use quantised GS algorithm with 5 bit depth instead of 6-7 bit depth as the final reconstruction quality will not degrade significantly.
+	The entropy of final hologram in \cref{fig:GS_Fresnel0.1_iterations}~(a) is lower than that in \cref{fig:GS_Fresnel0.1_iterations}~(b), although the final NMSE are similar. If the computer-generated holograms were to undergo a lossless compression, the hologram in \cref{fig:GS_Fresnel0.1_iterations}~(a) would be better compressed than the hologram in \cref{fig:GS_Fresnel0.1_iterations}~(b) as the entropy denotes the compression limit, assuming that the holograms are treated as 1D arrays when compressing. Therefore if hologram compression is of a concern, then starting with a low entropy initial hologram in the CGH process is recommended. In case if the reconstruction quality is not as high of a priority than making holograms to occupy less storage space, it is also recommended to use quantised GS algorithm with 5 bit depth instead of 6-7 bit depth as the final reconstruction quality will not degrade significantly.
 
 
 

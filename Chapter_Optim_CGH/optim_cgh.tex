@@ -5,7 +5,7 @@
 \chapter{L-BFGS Optimisation of Phase-Only Hologram}
 \label{chapter:L-BFGS Optimisation of Phase-Only Hologram}
 
-\graphicspath{{Chapter_Optim2D/Figs/}}
+\graphicspath{{Chapter_Optim_CGH/Figs/}}
 
 \textit{Note: Part of this chapter has been published in Ref. \cite{Sha2022}}\\\\
 
@@ -131,7 +131,7 @@ Apart from being inexpensive, L-BFGS has the advantage that the multiplication b
 
 
 
-\section{Optimisation of Phase Hologram for a Target Image} \label{sec:Optimisation of Phase Hologram for a Target Image}
+\section{Phase-only Hologram Optimisation} \label{sec:Optimisation of Phase Hologram for a Target Image}
 
 To implement the optimisation methods listed in \cref{sec:Numerical Optimisation Methods} on CGH, firstly the optimisation framework needs to be adapted. The objective of CGH is to find the phase hologram ($\textbf{H}$) that has the optimal reconstruction ($\textbf{R}$) matching the target image ($\textbf{T}$), which can be formulated as minimising the difference between $\textbf{R}$ and $\textbf{T}$ by varying $\textbf{H}$, leading to the mathematical expression below:
 \begin{equation}
@@ -175,7 +175,7 @@ The proposed method using L-BFGS algorithm (the yellow line in \cref{fig:GD_ADAM
 
 
 
-\section{Target Image Phase Optimisation}
+\section{Target Image Phase Optimisation (TIPO)}
 This section proposes a novel method of optimising the phase of the target image instead of optimising the phase of the hologram as previously introduced in \cref{sec:Optimisation of Phase Hologram for a Target Image}, under the same `phase only' constraint of the hologram. The objective is to find an optimal phase profile to be attached to the target image, so that its inverse propagation to the hologram plane produces a hologram whose phase has a reconstruction that best matches the target image. As it optimises the phase of the target image instead of the traditional way optimising the phase of the hologram, this method is named as Target Image Phase Optimisation (TIPO). A flowchart is drawn in \cref{fig:TIPO_flowchart} to clarify the detailed operation of the proposed TIPO algorithm.
 
 \begin{figure}[H]

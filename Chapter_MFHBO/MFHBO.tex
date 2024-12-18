@@ -2,12 +2,12 @@
 %*******************************************************************************
 %****************************** MFHBO Chapter **********************************
 %*******************************************************************************
-\chapter{Time-Multiplexed Multi-Frame Holograms Batched Optimisation for High-Refresh-Rate Binary Phase Modulators}
+\chapter{Multi-Frame Binary-Phase Holograms Batched Optimisation}
 \label{chapter:Multi Frame Holograms Batched Optimisation}
 
 \graphicspath{{Chapter_MFHBO/Figs/}}
 
-\textit{Note: This chapter has been published in Ref. \cite{Sha2024MFHBO}}\\\\
+\textit{Note: The work in this chapter has been published in Ref. \cite{Sha2024MFHBO}}\\\\
 
 This chapter builds up on the idea of time-averaging multiple hologram frames, and proposes a technique called Multi-Frame Holograms Batched Optimisation (MFHBO), which uses the L-BFGS optimisation algorithm to simultaneously generate a batch of phase-only holograms which result in an average reconstructed image of improved fidelity and fast algorithmic convergence, both in the Fraunhofer and the Fresnel regions.
 
@@ -101,7 +101,7 @@ This chapter builds up on the idea of time-averaging multiple hologram frames, a
 
 \subsection{Optical Experiment results}
 
-	The holographic projection system used in this experiment is the same as the one used in \cref{chapter:Digital Pre-Distorted One-Step Phase Retrieval (DPD-OSPR) Algorithm}, with the optical setup shown in \cref{fig:holographic_projector}. Since the SLM has a refresh rate of 1440Hz and modern computer monitors have refresh rate of at least 60Hz, the maximum number of frames was chosen to be $1440/60=24$, so that each set of 24 frames will take a total of $1/60$ seconds to display, therefore giving an equivalent refresh rate of 60Hz. Then the integer factors of 24 were chosen so that the equivalent refresh rate becomes integer multiples of 60Hz. The number of frames starts from 1 to help illustrate how the increase in number of frames positively affect the reconstruction quality.
+	The holographic projection system used in this experiment is the same as the one described in \cref{sec:experimental setup}, with the optical setup shown in \cref{fig:holographic_projector}. Since the SLM has a refresh rate of 1440Hz and modern computer monitors have refresh rate of at least 60Hz, the maximum number of frames was chosen to be $1440/60=24$, so that each set of 24 frames will take a total of $1/60$ seconds to display, therefore giving an equivalent refresh rate of 60Hz. Then the integer factors of 24 were chosen so that the equivalent refresh rate becomes integer multiples of 60Hz. The number of frames starts from 1 to help illustrate how the increase in number of frames positively affect the reconstruction quality.
 
 	\begin{figure}[H]
 		\centering

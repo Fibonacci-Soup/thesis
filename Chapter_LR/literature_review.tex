@@ -368,7 +368,7 @@ The improved Phase Unwrapping method was implemented in MATLAB and produced the 
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Naive_rand_holo.png}
-    \caption{Phase Hologram ($H$)}
+    \caption{Multi-level Phase Hologram ($H$)}
     \label{fig:Naive_rand_holo}
   \end{subfigure}
   \hfill
@@ -489,7 +489,7 @@ Although the DBS algorithm is specifically suited for generating binary phase ho
   \label{fig:DBS algorithm running on the rotationally symmetrical mandrill target}
 \end{figure}
 
-DBS algorithm can sometimes find very accurate hologram if the run is lucky; however, it is extremely slow, because it takes numerous iterations (as shown in \cref{fig:DBS_mandrill_2_convergence}, even $10^5$ iterations has not reached a good convergence) and each iteration requires a Fourier Transform which is computationally expensive, the example run on the target image of resolution $1024 px\times 1024 px$ in \cref{fig:mandrill_2_DBS} took more than one hour to run the $10^5$ iterations, which is still nowhere near convergence. The binary-phase hologram produced is shown in \cref{fig:DBS_mandrill_2_Holo} and its corresponding reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} is of very poor quality.
+DBS algorithm can sometimes find very accurate holograms if the run is lucky; however, it is extremely slow, because it takes numerous iterations (as shown in \cref{fig:DBS_mandrill_2_convergence}, even $10^5$ iterations has not reached a good convergence). The example run on the target image of resolution $1024 px\times 1024 px$ in \cref{fig:mandrill_2_DBS} took more than one hour to finish the $10^5$ iterations, which is still far from convergence. The binary-phase hologram produced is shown in \cref{fig:DBS_mandrill_2_Holo}, and its corresponding reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an NMSE of \num{8.0717e-07} which is 78\% larger than the NMSE of the Phase Unwrapping method being \num{4.5452e-07}. The reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an SSIM of only 0.0076, indicating very poor structural similarity against the target image, and is much worse than the Phase Unwrapping method with SSIM being 0.0603 in \cref{sec:Naive algorithm}.
 
 \begin{figure}[H]
   \centering
@@ -526,11 +526,11 @@ DBS algorithm can sometimes find very accurate hologram if the run is lucky; how
 
 As the DBS algorithm only flips one pixel per iteration, it naturally takes significantly longer to generate holograms with higher resolution. To test the programme on a smaller image for much quicker convergence, another target image has been designed as shown in \cref{fig:test_128}, which is also rotationally symmetrical as it is used for the binary-phase hologram generation. After $10^6$ iterations, which took 10 minutes, the hologram generated is shown in \cref{fig:DBS_test_128_Holo} and its resulting reconstruction is shown in \cref{fig:DBS_test_128_recon_intensity}, which has an NMSE of \num{9.6881e-06} and an SSIM of 0.2871. The NMSE v.s. iteration plot in \cref{fig:DBS_test_128_convergence} shows that it reaches a good convergence at around \num{2e5} iterations, corresponding to around 2 minutes. And the curve of NMSE is monotonically decreasing with iteration number, as only holograms with better results are accepted during the iterations.
 
-In summary, the DBS algorithm is a slow but working algorithm for binary phase hologram generation. The programme running time scales up significantly when the target image's resolution gets higher. And also, as it only cares about local optimality at each iteration, it is a greedy algorithm that only follow the steepest descent route, which could easily get trapped in a local minimum where flipping any bit is not getting better reconstruction. Another consequence of the random nature is that the generated hologram will be different at each run, so the quality of the resulting reconstruction ($R$) will depend on how `lucky' each run is. The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} in the next session aims to resolve this issue.
+In summary, the DBS algorithm is a slow but working algorithm for binary phase hologram generation. The programme running time scales up significantly when the target image's resolution gets higher. And also, as it only cares about local optimality at each iteration, it is a greedy algorithm that only follows the steepest descent route, which could easily get trapped in a local minimum where flipping any bit is not getting better reconstruction. Another consequence of the random nature is that the generated hologram will be different at each run, so the quality of the resulting reconstruction ($R$) will depend on how `lucky' each run is. The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} in the next session aims to resolve this issue.
 
 
 \subsection{Simulated Annealing (SA) Algorithm}\label{sec:Simulated Annealing (SA) Algorithm}
-Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DBS algorithm. It adopts a probabilistic approach to avoid the steepest gradient descent. Its name derives from the fact that it approximates the recrystallisation process during metal annealing and is particularly well-suited to avoiding the trap of local minima \cite{Yang2009}. To implement this idea, we then need a function ($\mathcal{Z}$) to calculate the probability of the hologram ($H$), and a threshold $p_t$ to decide whether the probability is high enough for the according hologram to be accepted. In this thesis, the probability is selected to be a random function and the threshold is chosen to be 0.9. The pseudocode for this algorithm is listed in \cref{alg:Simulated Annealing (SA) algorithm}.
+The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DBS algorithm. It adopts a probabilistic approach to avoid the steepest gradient descent. Its name derives from the fact that it approximates the recrystallisation process during metal annealing and is particularly well-suited to avoiding the trap of local minima \cite{Yang2009}. To implement this idea, we then need a function ($\mathcal{Z}$) to calculate the probability of the hologram ($H$), and a threshold $p_t$ to decide whether the probability is high enough for the according hologram to be accepted. In this thesis, the probability is selected to be a random function and the threshold is chosen to be 0.9. The pseudocode for this algorithm is listed in \cref{alg:Simulated Annealing (SA) algorithm}.
 \begin{algorithm}[H]
   \caption{Simulated Annealing (SA) algorithm}\label{alg:Simulated Annealing (SA) algorithm}
   \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$, Number of iterations $N$, Probability function $\mathcal{Z}$, Probability threshold $p_t$ \\
@@ -635,7 +635,9 @@ An implementation of SA algorithm with $p_t = 0.9$ was carried out on the low re
   \label{fig:SA algorithm running on the rotationally symmetrical mandrill target}
 \end{figure}
 
-Then the SA algorithm was run for the mandrill target in \cref{fig:mandrill_2_SA}. The convergence plot in \cref{fig:SA_mandrill_2_convergence} shows that it did not converge within $10^5$ iterations, which took around one hour. The binary phase hologram generated is shown in \cref{fig:SA_mandrill_2_Holo} and its corresponding reconstruction intensity is shown in \cref{fig:SA_mandrill_2_recon_intensity}, which is of very poor quality. Both the DBS and the SA algorithms rely on flipping only a single pixel per iteration, which is very inefficient. A better algorithm should change the value of multiple pixels at every iteration for better efficiency.
+Then the SA algorithm was run for the mandrill target in \cref{fig:mandrill_2_SA}. The convergence plot in \cref{fig:SA_mandrill_2_convergence} shows that it did not converge within $10^5$ iterations, which took around one hour. The binary phase hologram generated is shown in \cref{fig:SA_mandrill_2_Holo} and its corresponding reconstruction intensity is shown in \cref{fig:SA_mandrill_2_recon_intensity}, which has an NMSE of \num{8.2054e-07} and an SSIM of 0.0073, which are slightly worse than the DBS algorithm results in \cref{fig:DBS_mandrill_2_recon_intensity} with an NMSE of \num{8.0717e-07} and an SSIM of 0.0076.
+
+Both the DBS and the SA algorithms rely on flipping only a single pixel per iteration, which is very inefficient. A better algorithm should change the values of most pixels at every iteration for better efficiency, and to converge within much fewer iterations for lower computational time. The Gerchberg-Saxton (GS) algorithm \cite{Gerchberg1972} is a classical example, which will be further explained in \cref{sec:Gerchberg-Saxton (GS) Algorithm}.
 
 
 \subsection{Gerchberg-Saxton (GS) Algorithm}\label{sec:Gerchberg-Saxton (GS) Algorithm}
@@ -663,8 +665,6 @@ The Gerchberg-Saxton (GS) algorithm \cite{Gerchberg1972} is a revolutionary algo
   \end{algorithmic}
 \end{algorithm}
 
-The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was implemented in MATLAB and was first run on the mandrill target image in \cref{fig:mandrill.png}, and the output results are shown in \cref{fig:GS algorithm output on the mandrill target}. It can be seen from \cref{fig:GS_recon_i_30} that, the reconstruction after 30 iterations of GS algorithm reached a very good result, having an NMSE of \num{2.6612e-08} and an SSIM of 0.7940, which are both much better than the single-iteration Phase Unwrapping method's result in \cref{fig:Naive_rand_recon}.
-
 \begin{figure}[H]
   \centering
   \begin{subfigure}[t]{0.3\textwidth}
@@ -676,7 +676,7 @@ The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was imp
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{GS_holo_i_30.png}
-    \caption{Hologram}
+    \caption{Multi-level Phase Hologram}
     \label{fig:GS_holo_i_30}
   \end{subfigure}
   \hfill
@@ -696,9 +696,7 @@ The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was imp
   \caption{GS algorithm output on the mandrill target}
   \label{fig:GS algorithm output on the mandrill target}
 \end{figure}
-
-
-The NMSE v.s. iteration plot in \cref{fig:GS_NMSE_plot} shows that the GS algorithm converged quickly, providing very good result in tens of iterations, which is much fewer than the DBS and SA algorithms. Although the GS algorithm is more computationally expensive at each iteration, as it needs to compute both a forward and an backward propagation, leading to two Fourier transforms every iteration, the GS algorithm is still much faster and provides much better reconstruction quality than the DBS and SA algorithms.
+The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was implemented in MATLAB and was first run on the mandrill target image in \cref{fig:mandrill.png}, and the output results are shown in \cref{fig:GS algorithm output on the mandrill target}. \cref{fig:GS_holo_i_30} is the multi-level hologram generated after 30 iterations, and its reconstruction is shown in \cref{fig:GS_recon_i_30}. The reconstruction in \cref{fig:GS_recon_i_30} has an NMSE of \num{2.6612e-08} and an SSIM of 0.7940, which are both much better than the single-iteration Phase Unwrapping method's result in \cref{fig:Naive_rand_recon} (with an NMSE of \num{1.0228e-06} and an SSIM of 0.1603). The NMSE v.s. iteration plot in \cref{fig:GS_NMSE_plot} shows that the GS algorithm converged quickly, providing very good result in tens of iterations, which is much fewer than the DBS and SA algorithms. Although the GS algorithm is more computationally expensive at each iteration, as it needs to compute both a forward and an backward propagation, leading to two Fourier transforms every iteration, the GS algorithm is still much faster and provides much better reconstruction quality than the DBS and SA algorithms.
 
 \begin{figure}[H]
   \centering
@@ -733,11 +731,11 @@ The NMSE v.s. iteration plot in \cref{fig:GS_NMSE_plot} shows that the GS algori
   \label{fig:GS algorithm running on the rotationally symmetrical mandrill target}
 \end{figure}
 
-Then the GS algorithm was adapted to generate binary-phase holograms, for use on the binary-phase SLM in this thesis. The change was simply implemented by adding a quantisation function ($\mathcal{Q}$) when applying the phase-only constraint at the hologram plane (i.e. the line `$A \gets e^{j\angle A}$' in \cref{alg:Gerchberg-Saxton (GS) Algorithm} is changed to `$A \gets e^{j\mathcal{Q}[\angle A]}$'). The results are shown in \cref{fig:GS algorithm running on the rotationally symmetrical mandrill target}. \cref{fig:GS_mandrill_2_convergence} shows good convergence within 20 iterations. The resulting binary-phase hologram is shown in \cref{fig:GS_Holo_mandrill_2} and its corresponding reconstruction in \cref{fig:GS_Recon_mandrill_2} has an NMSE of 1.6968e-07 and an SSIM of 0.0619, which are both better than the Phase Unwrapping method's result in \cref{fig:Output of the improved Naive method with binary-phase quantisation}. In summary, the GS algorithm is quick and robust. On my laptop computer of model ASUS ROG Zephyrus M16, which has a CPU of model i7-11800H and a GPU of model RTX3060, the 30 iterations took 1.5 seconds to complete. It reached convergence in tens of iterations. However, as it is still iterative, generating holograms in real-time is still a challenge, and the reconstruction still suffers from noise.
+Then the GS algorithm was adapted to generate binary-phase holograms, for use on the binary-phase SLM in this thesis. The change was simply implemented by adding a quantisation function ($\mathcal{Q}$) when applying the phase-only constraint at the hologram plane (i.e. the line `$A \gets e^{j\angle A}$' in \cref{alg:Gerchberg-Saxton (GS) Algorithm} is changed to `$A \gets e^{j\mathcal{Q}[\angle A]}$'). The results are shown in \cref{fig:GS algorithm running on the rotationally symmetrical mandrill target}. \cref{fig:GS_mandrill_2_convergence} shows good convergence within 20 iterations. The resulting binary-phase hologram is shown in \cref{fig:GS_Holo_mandrill_2} and its corresponding reconstruction in \cref{fig:GS_Recon_mandrill_2} has an NMSE of 1.6968e-07 and an SSIM of 0.0619, which are both better than the Phase Unwrapping method's result in \cref{fig:Output of the improved Naive method with binary-phase quantisation} (with an NMSE of \num{4.5452e-07} and an SSIM of 0.0603). In summary, the GS algorithm is quick and robust. On my laptop computer of model ASUS ROG Zephyrus M16, which has a CPU of model i7-11800H and a GPU of model RTX3060, the 30 iterations took 1.5 seconds to complete. It reached convergence in tens of iterations. However, as it is still iterative, generating holograms in real-time is still a challenge, and the reconstruction still suffers from noise.
 
 
 \subsection{One-Step Phase Retrieval (OSPR) Algorithm}\label{sec:One Step Phase Retrieval (OSPR) Algorithm}
-OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. It is a solution to high-quality hologram reconstruction that relies on time multiplexing of holograms, exploiting the response time of eye in order to reduce noise in the replay field \cite{Cable2006}. The random noises are averaged by the eye, while the target image stays, so that the average noise can be reduced. The perceived noise is lessened by the temporal average detected by the eye, rather than computational optimisation of the hologram \cite{Cable2006}. The pseudocode for OSPR is shown in \cref{alg:One-Step Phase Retrieval (OSPR) algorithm} below.
+The OSPR algorithm was first demonstrated by Cable and Buckley \cite{Cable2004}. It is a solution to high-quality hologram reconstruction that relies on time multiplexing of holograms, exploiting the response time of eye in order to reduce noise in the replay field \cite{Cable2006}. The random noise is averaged by the eye, while the target image stays, so that the average noise can be reduced. The perceived noise is lessened by the temporal average detected by the eye, rather than computational optimisation of the hologram \cite{Cable2006}. The pseudocode for OSPR is shown in \cref{alg:One-Step Phase Retrieval (OSPR) algorithm} below.
 
 \begin{algorithm}[H]
   \caption{One-Step Phase Retrieval (OSPR) algorithm}\label{alg:One-Step Phase Retrieval (OSPR) algorithm}
@@ -746,7 +744,7 @@ OSPR algorithm was first demonstrated by Buckley \cite{Buckley2006}. It is a sol
   \begin{algorithmic}
     \State // Compute a list of hologram sub-frames
     \For {$i$ = $1$ to $S$}
-    \State $E \gets \sqrt{T} \times $ RandomPhase()
+    \State $E \gets \sqrt{T} \cdot $ RandomPhase()
     \State $A \gets \mathcal{P}^{-1}[E]$
     \State $H[i] \gets \mathcal{Q}[\angle A]$
     \EndFor\\
@@ -773,7 +771,7 @@ When generating the list of holograms, it repetitively computes the inverse prop
 
 In \cref{fig:ospr_mandrill_2}, a total of 24 binary-phase hologram sub-frames ($H_1, H_2, \ldots, H_{24}$) were generated for the target image $T$. For easier data transfer and to fit with the common display signal formats, the 24 binary-phase hologram sub-frames are encoded into a single file with 8 bit depth and RGB (red-green-blue) channels, so that each of the $(8\times 3 = )24$ bit-planes corresponds to a single binary-phase hologram sub-frame. For a quantitative analysis, the reconstruction intensities of the hologram sub-frames are computed in $R_1, R_2, \ldots, R_{24}$ respectively, whose average is $R_{avg}$ in \cref{fig:ospr_mandrill_2}. The average reconstruction intensity $R_{avg}$ has an NMSE of \num{9.8632e-08} and an SSIM of 0.1321, which are both significantly better than the GS algorithm (NMSE=\num{1.6968e-7}, SSIM=0.0619) and the Phase Unwrapping method (NMSE=\num{4.5452e-7}, SSIM=0.0603).
 
-The major advantage of the OSPR algorithm is that it is superfast. It is non-iterative and requires only one Fourier Transform per frame, taking less than a second to generate a 24-frame hologram set. Its non-iterative nature also allows it to be parallelised to further improve computation speed, which is crucial for the Light Blue Optics who made the real-time holographic laser projector commercially available in 2010 \cite{Buckley2008}, although the product was later discontinued for financial reasons. The downside of this algorithm is that the sub-frames are independent from each other, and the final reconstruction output is still subject to some noise, as they are only more randomly distributed instead of being reduced. There is a variant of slight improvement on the OSPR algorithm, called Adaptive OSPR (AD-OSPR), to be introduced in \cref{sec:Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm}.
+The major advantage of the OSPR algorithm is that it is fast. It is non-iterative and requires only one Fourier Transform per frame, taking less than a second to generate a 24-frame hologram set. Its non-iterative nature also allows it to be parallelised to further improve computation speed, which is crucial for Light Blue Optics who made a real-time holographic laser projector commercially available in 2010 \cite{Buckley2008}, although the product was later discontinued for financial reasons. The downside of this algorithm is that the sub-frames are independent from each other, and the final reconstruction output is still subject to some noise, as they are only more randomly distributed instead of being reduced. There is a variant of improvement on the OSPR algorithm, called Adaptive OSPR (AD-OSPR), to be introduced in \cref{sec:Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm}.
 
 
 
@@ -788,20 +786,27 @@ The AD-OSPR algorithm \cite{Kaczorowski2016} is a variant of the OSPR algorithm.
   \begin{algorithmic}
     \State // Compute a list of hologram sub-frames
     \State $T[1] \gets T$
-    \State $R_{avg}[0] \gets 0$
+    \State $R_{total} \gets 0$
     \For {$i$ = $1$ to $S$}
-    \State $E \gets \sqrt{T[s]} \times$ RandomPhase()
+    \State $E \gets \sqrt{T[i]} \cdot$ RandomPhase()
     \State $A \gets \mathcal{P}^{-1}[E]$
-    \State $H[i] \gets \mathcal{Q}[\angle A]$\\
-
-    \State // Compute average reconstruction
+    \State $H[i] \gets \mathcal{Q}[\angle A]$
+    \State // Compute the reconstruction intensity
     \State $R \gets \vert \mathcal{P}[e^{jH[i]}] \vert ^2$
-    \State $R_{avg}[i] \gets (R_{avg}[i-1] \times (i-1) + R)/i$\\
+    \State // Carry out energy conservation to match the total energy of the target image
+    \State $R \gets R \cdot \sqrt{\frac{sum(T^2)}{sum(R^2)}} $ // squares and sums are taken element wise
+    \State // Compute the total reconstruction intensity so far
+    \State $R_{total} \gets R_{total} + R$
+    \State // Compute the new target for the next iteration
+    \For {$[x, y]$ = $[1, 1]$ to size($T$)} // loop among all the pixels
+    \If {($i+1)\cdot T[x,y]$ > $R_{total}[x,y]$}
+    \State $T[i+1][x,y] \gets (i+1)\cdot T[x,y] - R_{total}[x,y]$
+    \Else
+    \State $T[i+1][x,y] \gets 0$
+    \EndIf
+    \EndFor
 
-    \State // Update the target for the next iteration
-    \State $T[i+1] \gets T + T - R_{avg}[i]$
-    \EndFor\\
-
+    \EndFor
     \State // Then display the sub-frames on the phase modulator sequentially
     \State $i\gets 1$
     \While {True}
@@ -814,7 +819,7 @@ The AD-OSPR algorithm \cite{Kaczorowski2016} is a variant of the OSPR algorithm.
   \end{algorithmic}
 \end{algorithm}
 
-In the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}, the target intensity for the first iteration ($T[1]$) is initialised as the input target image $T$, and the average reconstruction intensity for the holograms generated up to each iteration ($R_{avg}[i]$) is initialised as 0. Then the $\textbf{for}$ loop starts from the same routine as the OSPR algorithm, multiplying a random phase to the square root of target intensity, taking a inverse propagation, and applying the binary phase quantisation. Then, the average reconstruction is computed by propagating the quantised hologram of each iteration and take the weighted average between the current reconstruction intensity and the historical average reconstruction value. The average reconstruction is then used to update the target intensity for the next iteration, by subtracting the average from the target and adding the difference to the input target image. To provide a visual illustration, an example run of the AD-OSPR algorithm was carried out on the mandrill target as shown in \cref{fig:adospr_mandrill_2}.
+In the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}, the target intensity for the first iteration ($T[1]$) is initialised as the input target image $T$, and the total reconstruction intensity for the holograms generated up to each iteration ($R_{total}$) is initialised as 0. Then the $\textbf{for}$ loop starts from the same routine as the OSPR algorithm, multiplying a random phase to the square root of target intensity, taking a inverse propagation, and applying the binary phase quantisation. Then, the total reconstruction is computed by forward propagating the quantised hologram, conserving the energy to match the target image, and adding to the total reconstruction of the last iteration. The total reconstruction is then used to compute the target intensity for the next iteration, by subtracting the total reconstruction from $(i+1)$ times the target image, with an $\textbf{if-else}$ statement to avoid negative intensity values. To provide a visual illustration, an example run of the AD-OSPR algorithm was carried out on the mandrill target as shown in \cref{fig:adospr_mandrill_2}.
 
 \begin{figure}[H]
 	\centering
@@ -823,9 +828,11 @@ In the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algor
 	\label{fig:adospr_mandrill_2}
 \end{figure}
 
-In \cref{fig:adospr_mandrill_2}, each row of images correspond to one iteration that is indexed in the `i' column, where only iterations 1, 2, 3, 24 are shown here, while iterations 4-23 are omitted to save space. At each iteration, the binary-phase hologram $H_i$ is computed from its target $T_i$, and the corresponding reconstruction is shown in $R_i$. For the first iteration, the target image of the same one as in \cref{fig:ospr_mandrill_2} is used, and the first average reconstruction $R_{avg, 1}$ is just the first reconstruction $R_1$. Then, from the second iteration, the target intensity $T_i$ is updated as the target image ($T$) plus the difference between the target image and the average reconstruction so far ($T-R_{avg, i}$). After computing new reconstructions $R_i$, the average reconstruction $R_{avg, i}$ is updated using the weighted average function $R_{avg}[i] \gets (R_{avg}[i-1] \times (i-1) + R)/i$. After 24 iterations, the 24 hologram sub-frames are computed and their average reconstruction ($R_{avg, 24}$) had an NMSE of \num{9.1161e-08} and a SSIM of 0.1992, which are both better than the OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} who achieved an NMSE of \num{9.8632e-08} and an SSIM of 0.1321.
+In \cref{fig:adospr_mandrill_2}, each row of images correspond to one iteration that is indexed in the `i' column, where only iterations 1, 2, 3, 24 are shown here, while iterations 4-23 are omitted to save space. At each iteration, the binary-phase hologram $H_i$ is computed from its target $T_i$, and the corresponding reconstruction is shown in $R_i$. Instead of showing the $R_{total, i}$, the $R_{avg, i}=\frac{R_{total, i}}{i}$ is shown here as $R_{total, i}$ has increasing dynamic range at each iteration.
 
-The programme running time of the AD-OSPR algorithm is nearly the same as the OSPR algorithm, both being around 0.7 second. Therefore the AD-OSPR algorithm is quite an effective improvement on the original OSPR algorithm, achieving a 7.6\% reduction in NMSE and 50.8\% improvement in SSIM without adding much computation. The disadvantage is however, that it cannot be parallelised, unlike the OSPR algorithm. As it needs to have the average reconstruction intensity result from the previous iteration for use in the next iteration.
+For the first iteration, the target image of the same one as in \cref{fig:ospr_mandrill_2} is used, and the first average reconstruction $R_{avg, 1}$ is just the first reconstruction $R_1$. Then, from the second iteration onwards, the target intensity $T_i$ is updated following the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}. After 24 iterations, the 24 hologram sub-frames are computed and their average reconstruction ($R_{avg, 24}$) had an NMSE of \num{9.1161e-08} and a SSIM of 0.1992, which are both better than the OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} who achieved an NMSE of \num{9.8632e-08} and an SSIM of 0.1321.
+
+The programme running time of the AD-OSPR algorithm is nearly the same as the OSPR algorithm, both being around 0.7 second. Therefore the AD-OSPR algorithm is quite an effective improvement on the original OSPR algorithm, achieving a 7.6\% reduction in NMSE and 50.8\% improvement in SSIM without adding much computation. The disadvantage is however, that it cannot be parallelised, unlike the OSPR algorithm, as it needs to have the total reconstruction intensity result from the previous iteration for use in the next iteration.
 
 
 \newpage

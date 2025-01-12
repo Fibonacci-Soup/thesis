@@ -30,7 +30,7 @@ This understanding was further reinforced by James Clerk Maxwell in the mid-19th
 \end{align}
 where $\mathbb{D}$ is the electric flux density, $\mathbb{E}$ is the electric field intensity, $\mathbb{B}$ is the magnetic flux density, $\mathbb{H}$ is the magnetic field intensity, $\rho$ is the volume charge density, and $\mathbb{J}$ is the current density \cite{Daintith2009}.
 
-And the relation between $\mathbb{D}$ and $\mathbb{E}$ and between $\mathbb{B}$ and $\mathbb{H}$ for linear materials are:
+The relation between $\mathbb{D}$ and $\mathbb{E}$ and between $\mathbb{B}$ and $\mathbb{H}$ for linear materials are:
 \begin{align}
   \mathbb{B} & = \mu \mathbb{H}      \\
   \mathbb{D} & = \epsilon \mathbb{E}
@@ -39,9 +39,9 @@ where $\mu$ is the magnetic permeability and $\epsilon$ is the dielectric permit
 
 Maxwell's equations unified electricity and magnetism into a single theory of electromagnetism, predicting that light is an electromagnetic wave that propagates through space \cite{Maxwell1865}.
 
-Despite the success of the wave theory, it could not explain all light-related phenomena. The early 20th century brought a pivotal development with Albert Einstein's explanation of the photoelectric effect. In 1905, Einstein proposed that light also behaves as particles, or `quanta' (later called photons), which could eject electrons from a metal surface when light is shone upon it \cite{Einstein1905}. This particle nature of light was critical in explaining observations that wave theory alone could not address and earned Einstein the Nobel Prize in Physics in 1921.
+Despite its success, the wave theory could not explain all light-related phenomena. The early 20th century brought a pivotal development with Albert Einstein's explanation of the photoelectric effect. In 1905, Einstein proposed that light also behaves as particles, or `quanta' (later called photons), which could eject electrons from a metal surface when light is shone upon it \cite{Einstein1905}. This particle nature of light was critical in explaining observations that wave theory alone could not address and earned Einstein the Nobel Prize in Physics in 1921.
 
-These discoveries collectively revealed that light exhibits both wave and particle properties, depending on the experimental context. This wave-particle duality became a cornerstone of quantum mechanics, fundamentally altering human's understanding of the nature of light. Although to date, it is still not yet known what light exactly is, it is now known how light behaves.
+These discoveries collectively revealed that light exhibits both wave and particle properties, depending on the experimental context. This wave-particle duality became a cornerstone of quantum mechanics, fundamentally altering human's understanding of the nature of light. Although the exact nature of light remains unknown, its behaviour is now well understood.
 
 \subsection{Wave Equation}
 To mathematically describe the propagation of light in free space (i.e. in absence of free charge), the Maxwell equations in \cref{eq:maxwell1} - \cref{eq:maxwell4} can be simplified as:
@@ -81,7 +81,7 @@ Holography is a technology that can fully reconstruct the wavefront of 3D object
 
 \subsection{Light Source} \label{sec:Light Source}
 
-The mechanism of holographic projection is to control the propagation of light in a way that, after diffraction, reconstructs a wavefront that matches the target field. We usually prefer to start from a coherent light source rather than a random one which will be a lot more difficult or even impossible to analyse and predict the interference pattern.
+The mechanism of holographic projection is to control the propagation of light in a way that, after diffraction, it reconstructs a wavefront that matches the target field. We usually prefer to start from a coherent light source rather than a random one, as it will be a lot more difficult or sometimes impossible to analyse and predict the interference pattern of a random light source.
 
 \begin{figure}[H]
 	\centering
@@ -116,7 +116,7 @@ This section delves into how light interacts with apertures, leading to diffract
   \caption{Diffraction geometry}\label{fig:diffraction_coordinate_definition}
 \end{figure}
 
-To model how light diffracts through a 2D aperture, we first set up a coordinate system as shown in \cref{fig:diffraction_coordinate_definition}, where the aperture is denoted by $A(x, y)$ and the diffracted field is denoted by $E(\alpha, \beta, z)$. $R$ defines the distance between point $P$ and the origin of the aperture ($(x,y)=(0,0)$), $r$ defines the distance between point $P$ and a point on the aperture, and $\theta$ defines the angle $r$ from the $z$-axis. Then by trigonometry we can have the following identities:
+To model how light diffracts through a 2D aperture, we first set up a coordinate system as shown in \cref{fig:diffraction_coordinate_definition}, where the aperture is denoted by $A(x, y)$ with $x, y$ denoting the coordinates in the hologram plane, and the diffracted field is denoted by $E(\alpha, \beta, z)$ with $\alpha, \beta$ denoting the coordinates in the reconstruction plane and $z$ denoting the distance from the hologram aperture $A(x, y)$. The $R$ in \cref{fig:diffraction_coordinate_definition} defines the distance between point $P$ and the origin of the aperture ($(x,y)=(0,0)$), $r$ defines the distance between point $P$ and a point on the aperture, and $\theta$ defines the angle $r$ from the $z$-axis. Then by trigonometry we can have the following identities:
 \begin{align}
   cos(\theta) & = \frac{z}{r}                      \label{eq:trignometry-theta} \\
   R^2         & = \alpha ^2 + \beta ^2 + z^2       \label{eq:trignometry-R} \\
@@ -140,7 +140,7 @@ Applying the identities in \cref{eq:trignometry-theta} - \cref{eq:trignometry-r}
                       & = \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jk\sqrt{(\alpha-x)^2 + (\beta-y)^2 + z^2}}}{(\alpha-x)^2 + (\beta-y)^2 + z^2} dxdy \label{eq:huygens-fresnel-principle-substituded-r-square}
 \end{align}
 
-Unfortunately, \cref{eq:huygens-fresnel-principle-substituded-r-square} cannot be solved analytically except for few specific aperture functions $A(x,y)$, so we have to make some approximations in order to solve for arbitrary $A(x,y)$, the common methods are \textit{Fresnel} and \textit{Fraunhofer} approximations for regions depicted in \cref{fig:fresnel_fraunhofer_approximations}.
+Unfortunately, \cref{eq:huygens-fresnel-principle-substituded-r-square} cannot be solved analytically except for few specific aperture functions $A(x,y)$, so we have to make some approximations in order to solve for arbitrary $A(x,y)$. The common methods are \textit{Fresnel} and \textit{Fraunhofer} approximations for regions depicted in \cref{fig:fresnel_fraunhofer_approximations}.
 
 \begin{figure}[H]
   \centering
@@ -170,7 +170,7 @@ For the $r^2$ in the denominator of \cref{eq:huygens-fresnel-principle-substitud
 \end{align}
 where $\mathcal{F}$ denotes the Fourier Transform, implemented on computers using the Fast Fourier Transform (FFT) function. Such method of including Fourier Transform (FT) in the study of optics is also named `Fourier Optics'.
 
-Now we have a more simple and solvable expression than \cref{eq:huygens-fresnel-principle-substituded-r-square}. And also, as we are only interested in the scaling of relative points at $P$ with respect to each other, so it is safe to normalise the multiplier term before the Fourier Transform to 1 \cite{Wilkinson2019}. So we can express the diffraction pattern in Fresnel region as:
+Now we have a more simple and solvable expression than \cref{eq:huygens-fresnel-principle-substituded-r-square}. And also, as we are only interested in the scaling of relative points at $P$ with respect to each other, it is safe to normalise the multiplier term before the Fourier Transform to 1 \cite{Wilkinson2019}. So we can express the diffraction pattern in Fresnel region as:
 \begin{equation}
   E_{Fresnel\ region}(\alpha, \beta, z) = \mathcal{F} \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}
   \label{eq:fresnel-diffraction}
@@ -178,11 +178,10 @@ Now we have a more simple and solvable expression than \cref{eq:huygens-fresnel-
 
 
 \subsubsection{Fraunhofer Approximation}
-Fraunhofer diffraction is a form of diffraction in which the distance between the light source and the receiving screen are in effect at infinite, so that the wave fronts can be treated as planar rather than spherical \cite{Daintith2009}. Fraunhofer approximation is very stringent, it assumes that the distance between the light source and the receiving screen are in effect at infinite:
+Fraunhofer approximation is very stringent, it assumes that the distance between the light source and the receiving screen are in effect at infinite, with $z$ satisfying the condition of
 \begin{equation}
   z\gg \frac{k(x^2+y^2)_{max}}{2}
 \end{equation}
-
 so that the wave fronts can be treated as planar rather than spherical \cite{Daintith2009}, then the $e^{j\frac{k}{2z}(x^2+y^2)}$ term tends to $1$, and \cref{eq:fresnel-diffraction} becomes:
 \begin{equation}
   E_{Fraunhofer\ region}(\alpha, \beta) = \mathcal{F} \left\{A(x,y)\right\}
@@ -201,7 +200,7 @@ SLMs are critical components in computer-generated holography (CGH). An SLM is a
   \caption{A single FLC backplane SLM pixel structure \cite{Wilkinson1994}} \label{fig:SLM_pixel_structure}
 \end{figure}
 
-The typical structure of a Ferroelectric Liquid Crystal (FLC) SLM pixel is shown in \cref{fig:SLM_pixel_structure}. The horizontal dimension of a single pixel, which is called the pixel pitch, is on scale of a few \SI{}{\micro\metre}. LCs are anisotropic materials, which have different refraction index in different axis. And the modulation is achieved by controlling the tilt of the angle of the LCs. For the FLCs, the tilt angle is controlled by the electric field across them. Therefore the FLCs are sandwiched between the Indium Tin Oxide (ITO) conductor and the aluminium (Al) mirror, aside which is a Very Large Scale Integration (VLSI) circuitry to control the voltage and the electric field across the FLCs, hence modulates the phase of the incident light. Aligning millions of pixels in a grid produces an SLM which can spatially modulate the wavefront of the incident light.
+The typical structure of a Ferroelectric Liquid Crystal (FLC) SLM pixel is shown in \cref{fig:SLM_pixel_structure}. The horizontal dimension of a single pixel, which is called the pixel pitch, is on scale of a few \SI{}{\micro\metre}. LCs are anisotropic materials, which have different refraction index in different axis. And modulation is achieved by controlling the tilt of the angle of the LCs. For the FLCs, the tilt angle is controlled by the electric field across them. Therefore, the FLCs are sandwiched between the Indium Tin Oxide (ITO) conductor and the aluminium (Al) mirror, aside which is a Very Large Scale Integration (VLSI) circuitry to control the voltage and the electric field across the FLCs, hence the phase of the incident light is modulated. Aligning millions of pixels in a grid produces an SLM which can spatially modulate the wavefront of the incident light.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{SLMPhoto.jpg}
@@ -218,13 +217,13 @@ A photo of an FLC SLM is shown in \cref{fig:SLMPhoto}. The SLM used in this rese
 Currently available SLMs have one of the four modulation schemes, as illustrated in \cref{fig:modulation_loci} \cite{Cable2006}, which are:
 
 \begin{itemize}
-  \item \textbf{Multi-level Amplitude} modulators can modulate each pixel from zero transmission (0) to full transmission (1), either continuously or in discrete steps. (e.g. nematic liquid crystal display \cite{Schadt1971}, found for example in laptops and many conventional video projectors)
-  \item \textbf{Binary Amplitude} modulators can switch each pixel to zero transmission (0) or full transmission (1), but nothing in between. (e.g. deformable mirror device \cite{Pape1983}, ferroelectric liquid crystal display \cite{Johnson1993}, both used in high-end video projectors)
-  \item \textbf{Multi-level Phase} modulators can modulate the phase shift imparted by each pixel from 0 to 2$\pi$ radians, either continuously or in discrete steps. (e.g. Nematic liquid crystal devices \cite{Lee2004})
-  \item \textbf{Binary Phase} modulators can switch each pixel for a phase shift of either 0 or $\pi$ radians. (e.g. Ferroelectric liquid crystal displays \cite{Broomfield1992})
+  \item \textbf{Multi-level Amplitude} modulators can modulate each pixel from zero transmission (0) to full transmission (1), either continuously or in discrete steps (e.g. nematic liquid crystal display \cite{Schadt1971}, found for example in laptops and many conventional video projectors).
+  \item \textbf{Binary Amplitude} modulators can switch each pixel to zero transmission (0) or full transmission (1), but nothing in between (e.g. deformable mirror device \cite{Pape1983}, ferroelectric liquid crystal display \cite{Johnson1993}, both used in high-end video projectors).
+  \item \textbf{Multi-level Phase} modulators can modulate the phase shift imparted by each pixel from 0 to 2$\pi$ radians, either continuously or in discrete steps (e.g. Nematic liquid crystal devices \cite{Lee2004}).
+  \item \textbf{Binary Phase} modulators can switch each pixel for a phase shift of either 0 or $\pi$ radians (e.g. Ferroelectric liquid crystal displays \cite{Broomfield1992}).
 \end{itemize}
 
-Among the four modulation schemes, phase modulations are of higher interest for the purpose of holography, because amplitude modulators, either multi-level or binary, block light at the SLM, causing waste of energy, leading to poorer energy efficiency. And also, amplitude modulation always has a zero-order (forming a central bright spot), because the average amplitude is always between 0 and 1; on the contrary, phase modulation can suppress the zero-order by designing the hologram to have zero average.
+Among the four modulation schemes, phase modulations are of higher interest for the purpose of holography, because amplitude modulators, either multi-level or binary, block light at the SLM, causing waste of energy and leading to poorer energy efficiency. Moreover, amplitude modulation always has a zero-order (forming a central bright spot), because the average amplitude is always between 0 and 1; on the contrary, phase modulation can suppress the zero-order by designing the hologram to have zero average.
 
 As there is no fully complex modulator available yet, we need algorithms to generate phase-only holograms, and such process is called phase retrieval. There are currently many algorithms for such purpose, which will be discussed in \cref{sec:cgh}.
 
@@ -238,7 +237,7 @@ because the Fourier transform of $A^*(x,y)$ is the same as the Fourier transform
 \begin{equation} \label{eq:AAstar}
   E(-\alpha, -\beta)=\mathcal{F}[A^*(x,y)]=\mathcal{F}[A(x,y)]=E(\alpha, \beta)
 \end{equation}
-So, at the Fraunhofer region, there is no distinction between the desired image and its $180^\circ$ rotation in the replay field, causing a symmetrical conjugate image rotated $180^\circ$ from the target image.
+So, at the Fraunhofer region, there is no distinction between the desired image and its $180^\circ$ rotation in the replay field, resulting in a symmetrical conjugate image rotated $180^\circ$ from the target image.
 
 \begin{figure}[H]
   \centering
@@ -260,15 +259,15 @@ So, at the Fraunhofer region, there is no distinction between the desired image 
   \label{fig:Rotational symmetry Binary SLM}
 \end{figure}
 
-To demonstrate such phenomena, the example target image shown in \cref{fig:10_step_target} generated the binary-phase hologram using the algorithm called one-step phase-retrieval (OSPR), which will be explained in detail in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm}, and the projection output is shown in \cref{fig:binary_phase_SLM_symmetry}. The simplest workaround for this issue is to use only half of the reconstruction field, like the target image in \cref{fig:10_step_target}. However, the side effect of this is that half of the energy will be wasted, leading to higher power consumption and heat dissipation.
+To demonstrate this phenomenon, the example target image shown in \cref{fig:10_step_target} was used to generate the binary-phase hologram using the algorithm known as one-step phase-retrieval (OSPR), which will be explained in detail in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm}, and the projection output is shown in \cref{fig:binary_phase_SLM_symmetry}. The simplest workaround for this issue is to use only half of the reconstruction field, like the target image in \cref{fig:10_step_target}. However, the side effect of this is that half of the energy will be wasted, leading to higher power consumption and heat dissipation.
 
 
 
 \newpage
 \section{Computer-Generated Holography (CGH)}\label{sec:cgh}
-Different from the traditional analogue optical holography and digital holography which both need a physically existing object to record the hologram, the CGH is a method to use computer algorithms to generate holograms without the need for the physical target object. Ideally, holograms can be simply computed using the inverse Fourier Transform, using the inverse functions of \cref{eq:fresnel-diffraction} and \cref{eq:fraunhofer-diffraction} derived in \cref{sec:Diffraction}. The inverse Fourier Transforms on most targets will end up with results in complex numbers; however, as mentioned in \cref{sec:SLM}, currently available SLMs cannot achieve fully complex modulation yet. Therefore, computer algorithms are needed to compute either phase-only or amplitude-only holograms, among which the former is preferred, as explained in \cref{sec:SLM}.
+Different from traditional analogue optical holography and digital holography, which both need a physically existing object to record the hologram, the CGH is a method to use computer algorithms to generate holograms without the need for a physical target object. Ideally, holograms can be computed using the inverse Fourier Transform, using the inverse functions of \cref{eq:fresnel-diffraction} and \cref{eq:fraunhofer-diffraction} derived in \cref{sec:Diffraction}. The inverse Fourier Transforms on most targets will end up with results in complex numbers; however, as mentioned in \cref{sec:SLM}, currently available SLMs cannot achieve fully complex modulation yet. Therefore, computer algorithms are needed to compute either phase-only or amplitude-only holograms, among which the former is preferred, as explained in \cref{sec:SLM}.
 
-This section reviews the existing methods in the literature for calculating phase-only holograms. The phase hologram is labelled as $H$, so that it differs from the previous notation of $A$ for complex-valued hologram apertures. And the propagation function is unified as $\mathcal{P}$, which can be either the Fraunhofer propagation equation in \cref{eq:fresnel-diffraction} or the Fresnel propagation equation in \cref{eq:fraunhofer-diffraction} depending on the distance of the target field. Lastly, $R$ denotes the reconstruction intensity of the hologram (i.e. $R = \vert \mathcal{P}[e^{jH}] \vert ^2 $).
+This section reviews the existing methods in the literature for calculating phase-only holograms. The phase hologram is labelled as $H$, so that it differs from the previous notation of $A$ for complex-valued hologram apertures. And the propagation function is unified as $\mathcal{P}$, which can be either the Fraunhofer propagation equation in \cref{eq:fresnel-diffraction} or the Fresnel propagation equation in \cref{eq:fraunhofer-diffraction} depending on the distance from the hologram plane to the target field plane. Lastly, $R$ denotes the reconstruction intensity of the hologram (i.e. $R = \vert \mathcal{P}[e^{jH}] \vert ^2 $).
 
 \begin{figure}[H]
   \centering
@@ -278,19 +277,19 @@ This section reviews the existing methods in the literature for calculating phas
 
 A sample image of a mandrill (shown in \cref{fig:mandrill.png}) is chosen from the University of Southern California Signal and Image Processing Institute (USC-SIPI) Image Database \cite{MANDRILL_REF} to test and compare the classical phase retrieval algorithms in the literature. As the square of the amplitude, which is the intensity of light, is the only visible component with the human eye \cite{Huang2024}, the diffracted electric field amplitude ($\vert E \vert$) will be targeted to match the square root of $T$.
 
-To quantitatively analyse the reconstruction quality, two metrics are used in this sections, which are the normalised mean squared error (NMSE) \cite{MSE_REF} and the structural similarity index (SSIM) \cite{Wang2004_SSIM}.
+To quantitatively analyse the reconstruction quality, two metrics are used in this section, which are the normalised mean squared error (NMSE) \cite{MSE_REF} and the structural similarity index (SSIM) \cite{Wang2004_SSIM}.
 
 The NMSE is calculated using \cref{eq:NMSE}:
 \begin{equation}
   NMSE(x,y) = \frac{\frac{1}{n} * \sum (x - y)^2}{\sum (x)^2}
   \label{eq:NMSE}
 \end{equation}
-where $x$ is the target, $y$ is the measured output and $n$ is the number of pixels in $x$ and $y$. As the NMSE quantifies the total error between the measured output and the target, lower NMSE value indicates better quality. Different from the NMSE which calculates the absolute errors, the SSIM is a perception-based metric that considers the structural similarity as perceived, defined in \cref{eq:SSIM}:
+where $x$ is the target, $y$ is the measured output and $n$ is the number of pixels in $x$ and $y$. As the NMSE quantifies the total error between the measured output and the target, a lower NMSE value indicates better quality. Different from the NMSE which calculates absolute errors, the SSIM is a perception-based metric that considers the structural similarity as perceived, as defined in \cref{eq:SSIM}:
 \begin{equation}
   SSIM(x,y) = \frac{(2\mu_x\mu_y + C_1) + (2 \sigma _{xy} + C_2)}{(\mu_x^2 + \mu_y^2+C_1) (\sigma_x^2 + \sigma_y^2+C_2)}
   \label{eq:SSIM}
 \end{equation}
-where $\mu_x$ and $\mu_y$ are the mean values of the pixels in $x$ and $y$ respectively, $\sigma_x^2$ and $\sigma_y^2$ are the variance, $\sigma _{xy}$ is the covariance of $x$ and $y$, $C_1 = (k_1 L)^2$ and $C_2 = (k_2 L)^2$, where $L$ is the dynamic range of the pixel values and $k_1 = 0.01$ and $k_2 = 0.03$ by default \cite{Wang2004_SSIM}. Higher SSIM indicates better reconstruction quality.
+where $\mu_x$ and $\mu_y$ are the mean values of the pixels in $x$ and $y$ respectively, $\sigma_x^2$ and $\sigma_y^2$ are the variances, $\sigma _{xy}$ is the covariance of $x$ and $y$, $C_1 = (k_1 L)^2$ and $C_2 = (k_2 L)^2$, where $L$ is the dynamic range of the pixel values and $k_1 = 0.01$ and $k_2 = 0.03$ by default \cite{Wang2004_SSIM}. A higher SSIM value indicates better reconstruction quality.
 
 
 \subsection{Phase Unwrapping Method}\label{sec:Naive algorithm}
@@ -306,7 +305,7 @@ The simplest method to get a phase-only hologram $H$ is by directly extracting t
     \State $R \gets \vert \mathcal{P}[e^{jH}] \vert ^2 $
   \end{algorithmic}
 \end{algorithm}
-where $j = \sqrt{-1} $, the $\angle$ sign means phase unwrapping (i.e. taking arguments of the complex numbers element-wise in the matrix), and $e^{jH}$ converts the angles back to complex numbers. All exponentials, modulus and square-root operators are carried out in an element-wise manner, so that the dimensions of $T$, $A$, $H$, $R$ and $E$ are all the same.
+where $j = \sqrt{-1} $, the $\angle$ sign means phase unwrapping (i.e. taking arguments of the complex numbers element-wise in the matrix), and $e^{jH}$ converts the angles back to complex numbers. All exponentials, modulus and square-root operators were carried out in an element-wise manner, so that the dimensions of $T$, $A$, $H$, $R$ and $E$ are all the same.
 
 The Phase Unwrapping method (described in \cref{alg:Naive algorithm}) was then implemented in MATLAB and run on the sample target image shown in \cref{fig:mandrill.png}, with the distance set to infinity (i.e. in the Fraunhofer region using the propagation formula \cref{eq:fraunhofer-diffraction}). The results are shown in \cref{fig:Naive algorithm output} below:
 
@@ -336,9 +335,9 @@ The Phase Unwrapping method (described in \cref{alg:Naive algorithm}) was then i
   \label{fig:Naive algorithm output}
 \end{figure}
 
-After taking the inverse Fourier Transform, the amplitude and the phase of $A$ are shown in \cref{fig:Naive_discarded_amplitude} and \cref{fig:Naive_output_holo} respectively. The next step then discards the amplitude component (\cref{fig:Naive_discarded_amplitude}) and uses the phase component (in \cref{fig:Naive_output_holo}) as the phase hologram $H$. Then the phase hologram went through a forward propagation and the resulting reconstruction intensity is shown in \cref{fig:Naive algorithm output}.
+After taking the inverse Fourier Transform, the amplitude and the phase of $A$ are shown in \cref{fig:Naive_discarded_amplitude} and \cref{fig:Naive_output_holo} respectively. The next step then discarded the amplitude component (\cref{fig:Naive_discarded_amplitude}) and used the phase component (in \cref{fig:Naive_output_holo}) as the phase hologram $H$. Then the phase hologram went through a forward propagation and the resulting reconstruction intensity is shown in \cref{fig:Naive algorithm output}.
 
-The reconstruction intensity is very far from the desired target image in \cref{fig:mandrill.png}. It shows that, discarding amplitude has introduced a significant loss of information. From a signal processing point of view, the peak around the centre in \cref{fig:Naive_discarded_amplitude} corresponds to low spatial frequency signals, and discarding them causes the reconstruction in \cref{fig:Naive_output_recon} to lose low frequency components and effectively becomes an edge detector. Another explanation of the poor reconstruction quality is that, this method is assuming a uniform phase profile for the target image, which is physically difficult to achieve. A simple improvement can be made by adding a random phase to the target, as shown in the pseudocode below:
+The reconstruction intensity shown in \cref{fig:Naive_output_recon} is very different from the desired target image in \cref{fig:mandrill.png}. This shows that, discarding the amplitude has introduced a significant loss of information. From a signal processing point of view, the peak around the centre in \cref{fig:Naive_discarded_amplitude} corresponds to low spatial frequency signals, and discarding them causes the reconstruction in \cref{fig:Naive_output_recon} to lose low frequency components and effectively becomes an edge detector. Another explanation for the poor reconstruction quality is that the Phase Unwrapping method assumes a uniform phase profile for the target image, which is physically difficult to achieve. A simple improvement can be made by adding a random phase to the target, as shown in the pseudocode below:
 
 \begin{algorithm}[H]
   \caption{Improved Phase Unwrapping method with random phase added to the target field}\label{alg:Naive algorithm with random phase}
@@ -352,7 +351,7 @@ The reconstruction intensity is very far from the desired target image in \cref{
   \end{algorithmic}
 \end{algorithm}
 
-The improved Phase Unwrapping method was implemented in MATLAB and produced the results in \cref{fig:Output of the improved Naive method} below:
+The improved Phase Unwrapping method was implemented in MATLAB and produced the results shown in \cref{fig:Output of the improved Naive method} below:
 
 \begin{figure}[H]
   \centering
@@ -380,9 +379,9 @@ The improved Phase Unwrapping method was implemented in MATLAB and produced the 
   \label{fig:Output of the improved Naive method}
 \end{figure}
 
-As shown in \cref{fig:Naive_rand_recon}, the reconstruction quality has been greatly improved, although still quite noisy. The amplitude of the hologram being discarded (shown in \cref{fig:Naive_rand_discarded_amplitude}) is a lot more uniformly distributed than the one in \cref{fig:Naive_discarded_amplitude}, so that the loss of information evenly spread across all spatial frequencies, leading to the much better reconstruction quality. However, the reconstruction quality is still quite noisy. The reconstruction in \cref{fig:Naive_rand_recon} has an NMSE of \num{1.0228e-06} and an SSIM of 0.1603.
+As shown in \cref{fig:Naive_rand_recon}, the reconstruction quality has been greatly improved, although it is still quite noisy. The discarded amplitude of the hologram (shown in \cref{fig:Naive_rand_discarded_amplitude}) is a lot more uniformly distributed than the one in \cref{fig:Naive_discarded_amplitude}, so that the loss of information is more evenly spread across all spatial frequencies, leading to the much better reconstruction quality. However, the reconstruction quality is still quite noisy. The reconstruction in \cref{fig:Naive_rand_recon} has an NMSE of \num{1.0228e-06} and an SSIM of 0.1603.
 
-Moreover, additional error will be introduced during the quantisation step, which is necessary for the phase hologram to be displayed on SLMs with limited bit depth. As the SLM used in this thesis is a binary phase SLM, which has a rotational symmetry property as explained in \cref{sec:Rotational symmetries in the binary phase modulation}, a target image is specifically designed as shown in \cref{fig:mandrill_2} which is rotationally symmetrical.
+Moreover, additional error will be introduced during the quantisation step, which is necessary for the phase hologram to be displayed on SLMs with limited bit depth. As the SLM used in this thesis is a binary phase SLM, which has a rotational symmetry property as explained in \cref{sec:Rotational symmetries in the binary phase modulation}, a rotationally symmetrical target image is specifically designed, as shown in \cref{fig:mandrill_2}.
 
 \begin{figure}[H]
   \centering
@@ -410,7 +409,7 @@ Moreover, additional error will be introduced during the quantisation step, whic
   \label{fig:Output of the improved Naive method with binary-phase quantisation}
 \end{figure}
 
-The binary phase hologram in \cref{fig:Naive_binary_Holo} is generated by adding an additional binary quantisation step ($\mathcal{Q}$) on the phase hologram computed using \cref{alg:Naive algorithm with random phase}, which is simply rounding all phases to 0 and $\pi$ radians, using \cref{eq:quantisation}
+The binary phase hologram in \cref{fig:Naive_binary_Holo} is generated by adding an additional binary quantisation step ($\mathcal{Q}$) on the phase hologram computed using \cref{alg:Naive algorithm with random phase}, which is achieved by rounding all phases to 0 and $\pi$ radians, using \cref{eq:quantisation}:
 \begin{align}
   \theta_{binary\ quantised}   & \                       \left\{
   \begin{array}{ll}
@@ -420,11 +419,11 @@ The binary phase hologram in \cref{fig:Naive_binary_Holo} is generated by adding
   \right.
   \label{eq:quantisation}
 \end{align}
-where $\theta$ is the input phase value in range $[-\pi, \pi]$ and $\theta_{binary\ quantised}$ is the output quantised binary phase value. The reconstruction of the binary-phase hologram is shown in \cref{fig:Naive_binary_Recon}, which has an NMSE of \num{4.5452e-07} and an SSIM of 0.0603. To improve the reconstruction quality, better algorithms are needed. The following sections explores predecessors efforts in quality improvement.
+where $\theta$ is the input phase value in range $[-\pi, \pi]$ and $\theta_{binary\ quantised}$ is the output quantised binary phase value. The reconstruction of the binary-phase hologram is shown in \cref{fig:Naive_binary_Recon}, which has an NMSE of \num{4.5452e-07} and an SSIM of 0.0603. To improve the reconstruction quality, better algorithms are needed. The following sections explore predecessors efforts in quality improvement.
 
 \newpage
 \subsection{Direct Binary Search (DBS) Algorithm}\label{sec:Direct Binary Search (DBS) Algorithm}
-Direct Binary Search (DBS) algorithm \cite{Seldowitz1987} is an algorithm that generates the hologram by randomly flipping each pixel in the SLM between binary states (0 and $\pi$), one by one for many times in order to minimise the difference between its reconstruction intensity $R$ and the target image $T$. The detailed algorithm is described in \cref{alg:DBS algorithm} below:
+Direct Binary Search (DBS) algorithm \cite{Seldowitz1987} is an algorithm that generates the hologram by randomly flipping each pixel in the SLM between binary states (0 and $\pi$) one by one for many times in order to minimise the difference between the hologram's reconstruction intensity $R$ and the target image $T$. The detailed algorithm is described in \cref{alg:DBS algorithm} below:
 \begin{algorithm}[H]
   \caption{Direct Binary Search (DBS) algorithm}\label{alg:DBS algorithm}
   \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$ (e.g. mean-squared error), Number of iterations $N$ \\
@@ -452,7 +451,7 @@ Direct Binary Search (DBS) algorithm \cite{Seldowitz1987} is an algorithm that g
   \end{algorithmic}
 \end{algorithm}
 
-Although the DBS algorithm is specifically suited for generating binary phase holograms, it can also be adapted for generating multi-level phase holograms, by representing each level as binary numbers, at the cost of more computation.
+Although the DBS algorithm is specifically suited for generating binary phase holograms, it can also be adapted for generating multi-level phase holograms, by representing each level as binary numbers at the cost of more computation.
 
 \begin{figure}[H]
   \centering
@@ -487,7 +486,7 @@ Although the DBS algorithm is specifically suited for generating binary phase ho
   \label{fig:DBS algorithm running on the rotationally symmetrical mandrill target}
 \end{figure}
 
-DBS algorithm can sometimes find very accurate holograms if the run is lucky; however, it is extremely slow, because it takes numerous iterations (as shown in \cref{fig:DBS_mandrill_2_convergence}, even $10^5$ iterations has not reached a good convergence). The example run on the target image of resolution $1024 px\times 1024 px$ in \cref{fig:mandrill_2_DBS} took more than one hour to finish the $10^5$ iterations, which is still far from convergence. The binary-phase hologram produced is shown in \cref{fig:DBS_mandrill_2_Holo}, and its corresponding reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an NMSE of \num{8.0717e-07} which is 78\% larger than the NMSE of the Phase Unwrapping method being \num{4.5452e-07}. The reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an SSIM of only 0.0076, indicating very poor structural similarity against the target image, and is much worse than the Phase Unwrapping method with SSIM being 0.0603 in \cref{sec:Naive algorithm}.
+DBS algorithm can sometimes find very accurate holograms if the run is lucky; however, it is extremely slow due to the large number of iteration required (as shown in \cref{fig:DBS_mandrill_2_convergence}, even $10^5$ iterations have not reached a good convergence). The example run on the target image with resolution $1024 px\times 1024 px$ in \cref{fig:mandrill_2_DBS} took more than one hour to finish the $10^5$ iterations, which is still far from reaching a good convergence. The binary-phase hologram produced is shown in \cref{fig:DBS_mandrill_2_Holo}, and its corresponding reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an NMSE of \num{8.0717e-07}, which is 78\% larger than the NMSE of the Phase Unwrapping method (\num{4.5452e-07}). The reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an SSIM of only 0.0076, indicating a very low structural similarity to the target image, and is much worse than the Phase Unwrapping method, which has an SSIM of 0.0603, as discussed in \cref{sec:Naive algorithm}.
 
 \begin{figure}[H]
   \centering
@@ -522,13 +521,13 @@ DBS algorithm can sometimes find very accurate holograms if the run is lucky; ho
   \label{fig:DBS algorithm running on the low resolution target}
 \end{figure}
 
-As the DBS algorithm only flips one pixel per iteration, it naturally takes significantly longer to generate holograms with higher resolution. To test the programme on a smaller image for much quicker convergence, another target image has been designed as shown in \cref{fig:test_128}, which is also rotationally symmetrical as it is used for the binary-phase hologram generation. After $10^6$ iterations, which took 10 minutes, the hologram generated is shown in \cref{fig:DBS_test_128_Holo} and its resulting reconstruction is shown in \cref{fig:DBS_test_128_recon_intensity}, which has an NMSE of \num{9.6881e-06} and an SSIM of 0.2871. The NMSE v.s. iteration plot in \cref{fig:DBS_test_128_convergence} shows that it reaches a good convergence at around \num{2e5} iterations, corresponding to around 2 minutes. And the curve of NMSE is monotonically decreasing with iteration number, as only holograms with better results are accepted during the iterations.
+As the DBS algorithm only flips one pixel per iteration, it naturally takes significantly longer to generate holograms with higher resolution. To test the programme on a smaller image for much quicker convergence, another target image has been designed, as shown in \cref{fig:test_128}, which is also rotationally symmetrical as it is used for the binary-phase hologram generation. After $10^6$ iterations, which took 10 minutes, the hologram generated is shown in \cref{fig:DBS_test_128_Holo} and its resulting reconstruction is shown in \cref{fig:DBS_test_128_recon_intensity}, which has an NMSE of \num{9.6881e-06} and an SSIM of 0.2871. The NMSE v.s. iteration plot in \cref{fig:DBS_test_128_convergence} shows that it reaches a good convergence at around \num{2e5} iterations, which needs around 2 minutes. Moreover, the curve of NMSE is monotonically decreasing with iteration number, as only holograms with better results are accepted during the iterations.
 
-In summary, the DBS algorithm is a slow but working algorithm for binary phase hologram generation. The programme running time scales up significantly when the target image's resolution gets higher. And also, as it only cares about local optimality at each iteration, it is a greedy algorithm that only follows the steepest descent route, which could easily get trapped in a local minimum where flipping any bit is not getting better reconstruction. Another consequence of the random nature is that the generated hologram will be different at each run, so the quality of the resulting reconstruction ($R$) will depend on how `lucky' each run is. The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} in the next session aims to resolve this issue.
+In summary, the DBS algorithm is a slow but working algorithm for binary phase hologram generation. The programme running time scales up significantly when the target image's resolution gets higher. Furthermore, as the DBS algorithm only cares about local optimality at each iteration, it is a greedy algorithm that only follows the steepest descent route, which can easily get trapped in a local minimum where flipping any bit will not result in better reconstructions. Another consequence of the random nature is that the generated hologram will be different at each run, so the quality of the resulting reconstruction ($R$) will depend on how `lucky' each run is. The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} in the next session aims to resolve this issue.
 
 
 \subsection{Simulated Annealing (SA) Algorithm}\label{sec:Simulated Annealing (SA) Algorithm}
-The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DBS algorithm. It adopts a probabilistic approach to avoid the steepest gradient descent. Its name derives from the fact that it approximates the recrystallisation process during metal annealing and is particularly well-suited to avoiding the trap of local minima \cite{Yang2009}. To implement this idea, we then need a function ($\mathcal{Z}$) to calculate the probability of the hologram ($H$), and a threshold $p_t$ to decide whether the probability is high enough for the according hologram to be accepted. In this thesis, the probability is selected to be a random function and the threshold is chosen to be 0.9. The pseudocode for this algorithm is listed in \cref{alg:Simulated Annealing (SA) algorithm}.
+The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DBS algorithm. It adopts a probabilistic approach to avoid the steepest gradient descent. Its name derives from the fact that it approximates the recrystallisation process during metal annealing and is particularly well-suited to avoiding the trap of local minima \cite{Yang2009}. To implement this idea, we need a function ($\mathcal{Z}$) to calculate the probability of the hologram ($H$), and a threshold $p_t$ to decide whether the probability is high enough for the according hologram to be accepted. In this thesis, the probability is selected to be a random function and the threshold is chosen to be 0.9. The pseudocode for this algorithm is listed in \cref{alg:Simulated Annealing (SA) algorithm}.
 \begin{algorithm}[H]
   \caption{Simulated Annealing (SA) algorithm}\label{alg:Simulated Annealing (SA) algorithm}
   \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$, Number of iterations $N$, Probability function $\mathcal{Z}$, Probability threshold $p_t$ \\

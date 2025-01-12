@@ -40,7 +40,7 @@ The strategy used to determine $\textbf{p}_k$ distinguishes one algorithm from a
 
 
 \subsection{Gradient Descent}\label{sec:GD}
-Gradient descent (GD) is a first-order optimisation method, it finds a local minimum by following the negative of the gradient (i.e. the steepest descent direction). The $\textbf{B}_k$ (in \cref{eq:general-descent-direction}) for gradient descent simply takes the value of $\textbf{I}$, which is the identity matrix. And the search direction becomes:
+Gradient descent (GD) is a first-order optimisation method, it finds a local minimum by following the negative of the gradient (i.e. the steepest descent direction). The $\textbf{B}_k$ (in \cref{eq:general-descent-direction}) for gradient descent simply takes the value of $\textbf{I}$, which is the identity matrix. Then the search direction becomes:
 \begin{equation}
   \textbf{p}_k = -\nabla f_k
 \end{equation}
@@ -187,7 +187,7 @@ The flowchart in \cref{fig:TIPO_flowchart} outlines the TIPO algorithm process f
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{TIPO_iters.pdf}
-	\caption{TIPO iterations on the mandrill target}
+	\caption{TIPO iterations on the mandrill target ($i$ is the iteration number, $\Phi_i$, $H_i$, $R_i$ are the phase of the target field, the phase hologram, and the reconstruction amplitude at iteration $i$)}
 	\label{fig:TIPO_iters}
 \end{figure}
 
@@ -200,7 +200,7 @@ The results for an example run of the TIPO algorithm on the mandrill target (in 
 	\label{fig:TIPO_convergence}
 \end{figure}
 
-To quantitatively analyse the results, the convergence of the TIPO algorithm is plotted in \cref{fig:TIPO_convergence}, where the NMSE between the reconstruction and the target image are plotted against the number of iterations. Both SGD and L-BFGS optimisers are run for the TIPO algorithm (corresponding to the green and red line in \cref{fig:TIPO_convergence} accordingly), and are compared against the regular phase hologram optimisation algorithm in \cref{sec:Optimisation of Phase Hologram for a Target Image} (corresponding to the dotted blue line and the dotted orange line in \cref{fig:TIPO_convergence} respectively). The TIPO algorithms using both SGD and L-BFGS optimisers start with a lower NMSE of the reconstruction as their holograms in the first iteration are extracted from the inverse propagation of the target image, instead of pure random holograms as done in the regular phase hologram optimisation. However, the regular phase hologram optimisation using L-BFGS optimiser quickly surpassed the TIPO algorithm within 10 iterations, and reached the lowest reconstruction error. For the SGD optimiser, the TIPO method (green line) has an significant improvement than the regular phase hologram optimisation method (dotted blue line). The two TIPO methods (in solid lines) lie between the two regular phase hologram optimisation methods (in dotted lines), proving that although not being the best, the TIPO method is still an effective method for phase hologram generation.
+To quantitatively analyse the results, the convergence of the TIPO algorithm is plotted in \cref{fig:TIPO_convergence}, where the NMSE between the reconstruction and the target image are plotted against the number of iterations. Both SGD and L-BFGS optimisers are run for the TIPO algorithm (corresponding to the green and red line in \cref{fig:TIPO_convergence} accordingly), and are compared against the regular phase hologram optimisation algorithm in \cref{sec:Optimisation of Phase Hologram for a Target Image} (corresponding to the dotted blue line and the dotted orange line in \cref{fig:TIPO_convergence} respectively). The TIPO algorithms using both SGD and L-BFGS optimisers start with a lower NMSE of the reconstruction as their holograms in the first iteration are extracted from the inverse propagation of the target image, instead of pure random holograms as done in the regular phase hologram optimisation. However, the regular phase hologram optimisation using L-BFGS optimiser quickly surpassed the TIPO algorithm within 10 iterations, and reached the lowest reconstruction error. For the SGD optimiser, the TIPO method (green line) shows a significant improvement over the regular phase hologram optimisation method (dotted blue line). The two TIPO methods (in solid lines) lie between the two regular phase hologram optimisation method (in dotted lines), showing that the conventional L-BFGS phase hologram optimisation method has the fastest convergence, while the two TIPO methods are better than the SGD phase hologram optimisation method, proving the proposed TIPO method to be an effective method for phase hologram generation.
 
 
 

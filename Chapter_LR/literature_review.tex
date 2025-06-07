@@ -14,8 +14,8 @@ The problem of how light propagates has been troubling scientists for centuries.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{Double-slit.eps}
-	\caption{An illustration of the Young's Double-slit experiment \cite{Kalliauer2017}}
+	\includegraphics[width=0.7\textwidth]{Youngs-double-slit.jpg}
+	\caption{An illustration of the Young's double-slit experiment \cite{Beal2000}}
 	\label{fig:Double-slit.eps}
 \end{figure}
 
@@ -44,33 +44,14 @@ Despite its success, the wave theory could not explain all light-related phenome
 These discoveries collectively revealed that light exhibits both wave and particle properties, depending on the experimental context. This wave-particle duality became a cornerstone of quantum mechanics, fundamentally altering human's understanding of the nature of light. Although the exact nature of light remains unknown, its behaviour is now well understood.
 
 \subsection{Wave Equation}
-To mathematically describe the propagation of light in free space (i.e. in absence of free charge), the Maxwell equations in \cref{eq:maxwell1} - \cref{eq:maxwell4} can be simplified as:
-\begin{align}
-  \nabla \times \mathbb{E}         & = -\mu \frac{\partial \mathbb{H}}{\partial t}     \label{eq:simplified_maxwell1} \\
-  \nabla \times \mathbb{H}         & = \epsilon \frac{\partial \mathbb{E}}{\partial t} \label{eq:simplified_maxwell2} \\
-  \nabla \cdot \epsilon \mathbb{E} & = 0                                               \label{eq:simplified_maxwell3} \\
-  \nabla \cdot \mu \mathbb{H}      & = 0 \label{eq:simplified_maxwell4}
-\end{align}
-
-Taking the curl on both the left and right hand sides of \cref{eq:simplified_maxwell1}, and using the vector identity of $\nabla \times (\nabla \times \textbf{u}) = \nabla(\nabla \cdot \textbf{u}) - \nabla^2 \textbf{u}$, we get:
-\begin{align}
-  \nabla \times (\nabla \times \mathbb{E})               & = -\nabla \times (\mu \frac{\partial \mathbb{H}}{\partial t}) \label{eq:wave_equation_derivation1} \\
-  \nabla (\nabla \cdot \mathbb{E}) - \nabla^2 \mathbb{E} & = -\frac{\partial}{\partial t} \nabla \times (\mu \mathbb{H}) \label{eq:wave_equation_derivation2}
-\end{align}
-
-Then, by substituting \cref{eq:simplified_maxwell2} and \cref{eq:simplified_maxwell3} in, \cref{eq:wave_equation_derivation2} becomes:
-\begin{equation}
-  -\nabla^2 \mathbb{E} = -\frac{\partial}{\partial t} (\mu \epsilon \frac{\partial \mathbb{E}}{\partial t}) \label{eq:wave_equation_derivation3}
-\end{equation}
-
-Hence, we have a generic form of wave equation, relating the space and time domain relation of electromagnetic waves propagating in free space:
+To mathematically describe the propagation of light in free space (i.e. in absence of free charge), the Maxwell equations in \cref{eq:maxwell1} - \cref{eq:maxwell4} can be combined to derive the wave equation, relating the space and time domain relation of electromagnetic waves propagating in free space:
 \begin{equation}
   \nabla^2 \mathbb{E} = \mu \epsilon \frac{\partial^2 \mathbb{E}}{\partial t^2} \label{eq:wave_equation}
 \end{equation}
 
 A valid solution to \cref{eq:wave_equation} is:
 \begin{equation}
-  \mathbb{E} = \mathbb{E}_0 e^{j(\omega t - k r)} \label{eq:wave_equation_solution}
+  \mathbb{E} = \mathbb{E}_0 \mathrm{e}^{j(\omega t - k r)} \label{eq:wave_equation_solution}
 \end{equation}
 where $\omega$ is the angular velocity of the wave, $t$ is time, $r$ is the propagation distance and $k$ is called the wave number ($k=\frac{2\pi}{\lambda}$, where $\lambda$ is the wavelength). From \cref{eq:wave_equation_solution} we can see that the propagation of light in free space is essentially a phase shift. This suggests that, if we have a coherent light source and a device to manipulate light (called SLM, further explained in \cref{sec:SLM}), we can produce an interference pattern reconstructing the target field we desire, and such method is called holographic projection.
 
@@ -85,8 +66,8 @@ The mechanism of holographic projection is to control the propagation of light i
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{coherent-vs-incoherent.eps}
-	\caption{Coherent v.s. incoherent light}
+	\includegraphics[width=1.0\textwidth]{coherent-vs-incoherent.png}
+	\caption{Illustration of coherence (a) a point source emitting different wavelengths (temporal coherence) and (b) an extended light source consisting of two identical single wavelength light sources separated spatially (spatial coherence) \cite{Deng2017}}
 	\label{fig:coherent-vs-incoherent.eps}
 \end{figure}
 
@@ -108,7 +89,7 @@ The most common coherent visible light source is Laser, which stands for \textit
 
 \subsection{Diffraction} \label{sec:Diffraction}
 
-This section delves into how light interacts with apertures, leading to diffractions. Understanding diffraction is essential for holography, as it explains how light can be manipulated to reconstruct three-dimensional light fields. The principles of diffraction and interference underpin the essential process of holographic projection, making it possible to accurately recreate complex wavefronts and achieve true 3D visualization.
+Diffraction is the deviation of waves from straight-line propagation without any change in their energy due to an obstacle or through an aperture \cite{Hecht2017}. The principles of diffraction and interference underpin the essential process of holographic projection, making it possible to accurately recreate complex wavefronts and achieve true 3D visualization. This section delves into how light interacts with apertures, leading to diffractions. Understanding diffraction is essential for holography, as it explains how light can be manipulated to reconstruct three-dimensional light fields. 
 
 \begin{figure}[H]
   \centering
@@ -116,9 +97,9 @@ This section delves into how light interacts with apertures, leading to diffract
   \caption{Diffraction geometry}\label{fig:diffraction_coordinate_definition}
 \end{figure}
 
-To model how light diffracts through a 2D aperture, we first set up a coordinate system as shown in \cref{fig:diffraction_coordinate_definition}, where the aperture is denoted by $A(x, y)$ with $x, y$ denoting the coordinates in the hologram plane, and the diffracted field is denoted by $E(\alpha, \beta, z)$ with $\alpha, \beta$ denoting the coordinates in the reconstruction plane and $z$ denoting the distance from the hologram aperture $A(x, y)$. The $R$ in \cref{fig:diffraction_coordinate_definition} defines the distance between point $P$ and the origin of the aperture ($(x,y)=(0,0)$), $r$ defines the distance between point $P$ and a point on the aperture, and $\theta$ defines the angle $r$ from the $z$-axis. Then by trigonometry we can have the following identities:
+To model how light diffracts through a 2D aperture, we first set up a coordinate system as shown in \cref{fig:diffraction_coordinate_definition}, where the aperture is denoted by $\textbf{A}(x, y)$ with $x, y$ denoting the coordinates in the hologram plane, and the diffracted field is denoted by $\textbf{E}(\alpha, \beta, z)$ with $\alpha, \beta$ denoting the coordinates in the reconstruction plane and $z$ denoting the distance from the hologram aperture $\textbf{A}(x, y)$. The $R$ in \cref{fig:diffraction_coordinate_definition} defines the distance between point $P$ and the origin of the aperture ($(x,y)=(0,0)$), $r$ defines the distance between point $P$ and a point on the aperture, and $\theta$ defines the angle $r$ from the $z$-axis. Then by trigonometry we can have the following identities:
 \begin{align}
-  cos(\theta) & = \frac{z}{r}                      \label{eq:trignometry-theta} \\
+  \cos(\theta) & = \frac{z}{r}                      \label{eq:trignometry-theta} \\
   R^2         & = \alpha ^2 + \beta ^2 + z^2       \label{eq:trignometry-R} \\
   r^2         & = (\alpha-x)^2 + (\beta-y)^2 + z^2 \label{eq:trignometry-r}
 \end{align}
@@ -131,16 +112,16 @@ To model how light diffracts through a 2D aperture, we first set up a coordinate
 
 The Huygens-Fresnel principle states that every point on a wavefront is itself the source of outgoing secondary spherical wavelets, which can be expressed mathematically as follows when $r\gg \lambda$ \cite{Goodman2017}:
 \begin{equation}
-  E(\alpha, \beta, z) = \frac{1}{j\lambda} \iint A(x,y)\frac{e^{jkr}}{r} cos(\theta) dxdy \label{eq:huygens-fresnel-principle}
+  \textbf{E}(\alpha, \beta, z) = \frac{1}{j\lambda} \iint \textbf{A}(x,y)\frac{\mathrm{e}^{jkr}}{r} \cos(\theta) dxdy \label{eq:huygens-fresnel-principle}
 \end{equation}
 
 Applying the identities in \cref{eq:trignometry-theta} - \cref{eq:trignometry-r},  \cref{eq:huygens-fresnel-principle} becomes:
 \begin{align}
-  E(\alpha, \beta, z) & = \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jkr}}{r^2} dxdy                    \label{eq:huygens-fresnel-principle-substituded-cos}                                                      \\
-                      & = \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jk\sqrt{(\alpha-x)^2 + (\beta-y)^2 + z^2}}}{(\alpha-x)^2 + (\beta-y)^2 + z^2} dxdy \label{eq:huygens-fresnel-principle-substituded-r-square}
+  \textbf{E}(\alpha, \beta, z) & = \frac{z}{j\lambda} \iint \textbf{A}(x,y)\frac{\mathrm{e}^{jkr}}{r^2} dxdy                    \label{eq:huygens-fresnel-principle-substituded-cos}                                                      \\
+                      & = \frac{z}{j\lambda} \iint \textbf{A}(x,y)\frac{\mathrm{e}^{jk\sqrt{(\alpha-x)^2 + (\beta-y)^2 + z^2}}}{(\alpha-x)^2 + (\beta-y)^2 + z^2} dxdy \label{eq:huygens-fresnel-principle-substituded-r-square}
 \end{align}
 
-Unfortunately, \cref{eq:huygens-fresnel-principle-substituded-r-square} cannot be solved analytically except for few specific aperture functions $A(x,y)$, so we have to make some approximations in order to solve for arbitrary $A(x,y)$. The common methods are \textit{Fresnel} and \textit{Fraunhofer} approximations for regions depicted in \cref{fig:fresnel_fraunhofer_approximations}.
+Unfortunately, \cref{eq:huygens-fresnel-principle-substituded-r-square} cannot be solved analytically except for few specific aperture functions $\textbf{A}(x,y)$, so we have to make some approximations in order to solve for arbitrary $\textbf{A}(x,y)$. The common methods are \textit{Fresnel} and \textit{Fraunhofer} approximations for regions depicted in \cref{fig:fresnel_fraunhofer_approximations}.
 
 \begin{figure}[H]
   \centering
@@ -164,15 +145,15 @@ Retaining only the first two terms of the expansion gives:
 
 For the $r^2$ in the denominator of \cref{eq:huygens-fresnel-principle-substituded-cos}, the error introduced by dropping all terms but $z$ is generally acceptably small (i.e. $r^2\approx z^2$), and for the $r$ appearing in the exponent in the numerator of \cref{eq:huygens-fresnel-principle-substituded-cos}, errors are much more critical \cite{Goodman2017}. So, by substituting \cref{eq:r-approximation} for the $r$ in the numerator of \cref{eq:huygens-fresnel-principle-substituded-cos} and substituting $z$ for the $r$ in the denominator, we have:
 \begin{align}
-  E(\alpha, \beta, z) & \approx \frac{z}{j\lambda} \iint A(x,y)\frac{e^{jkz \left[ 1 + \frac{1}{2} \left( \frac{\alpha-x}{z} \right)^2 + \frac{1}{2} \left(\frac{\beta-y}{z}\right)^2 \right]}}{z^2} dxdy \\
-                      & = \frac{e^{jkz}}{j\lambda z} e^{j\frac{k}{2z}(\alpha^2+\beta^2)} \iint \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}e^{-j\frac{2\pi}{\lambda z}(\alpha x+\beta y)}dxdy    \\
-                      & = \frac{e^{jkz}}{j\lambda z} e^{j\frac{k}{2z}(\alpha^2+\beta^2)} \mathcal{F} \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}
+  \textbf{E}(\alpha, \beta, z) & \approx \frac{z}{j\lambda} \iint \textbf{A}(x,y)\frac{\mathrm{e}^{jkz \left[ 1 + \frac{1}{2} \left( \frac{\alpha-x}{z} \right)^2 + \frac{1}{2} \left(\frac{\beta-y}{z}\right)^2 \right]}}{z^2} dxdy \\
+                      & = \frac{\mathrm{e}^{jkz}}{j\lambda z} \mathrm{e}^{j\frac{k}{2z}(\alpha^2+\beta^2)} \iint \left\{\textbf{A}(x,y)\mathrm{e}^{j\frac{k}{2z}(x^2+y^2)}\right\}\mathrm{e}^{-j\frac{2\pi}{\lambda z}(\alpha x+\beta y)}dxdy    \\
+                      & = \frac{\mathrm{e}^{jkz}}{j\lambda z} \mathrm{e}^{j\frac{k}{2z}(\alpha^2+\beta^2)} \mathcal{F} \left\{\textbf{A}(x,y)\mathrm{e}^{j\frac{k}{2z}(x^2+y^2)}\right\}
 \end{align}
 where $\mathcal{F}$ denotes the Fourier Transform, implemented on computers using the Fast Fourier Transform (FFT) function. Such method of including Fourier Transform (FT) in the study of optics is also named `Fourier Optics'.
 
 Now we have a more simple and solvable expression than \cref{eq:huygens-fresnel-principle-substituded-r-square}. And also, as we are only interested in the scaling of relative points at $P$ with respect to each other, it is safe to normalise the multiplier term before the Fourier Transform to 1 \cite{Wilkinson2019}. So we can express the diffraction pattern in Fresnel region as:
 \begin{equation}
-  E_{Fresnel\ region}(\alpha, \beta, z) = \mathcal{F} \left\{A(x,y)e^{j\frac{k}{2z}(x^2+y^2)}\right\}
+  \textbf{E}_{Fresnel\ region}(\alpha, \beta, z) = \mathcal{F} \left\{\textbf{A}(x,y)\mathrm{e}^{j\frac{k}{2z}(x^2+y^2)}\right\}
   \label{eq:fresnel-diffraction}
 \end{equation}
 
@@ -182,9 +163,9 @@ Fraunhofer approximation is very stringent, it assumes that the distance between
 \begin{equation}
   z\gg \frac{k(x^2+y^2)_{max}}{2}
 \end{equation}
-so that the wave fronts can be treated as planar rather than spherical \cite{Daintith2009}, then the $e^{j\frac{k}{2z}(x^2+y^2)}$ term tends to $1$, and \cref{eq:fresnel-diffraction} becomes:
+so that the wave fronts can be treated as planar rather than spherical \cite{Daintith2009}, then the $\mathrm{e}^{j\frac{k}{2z}(x^2+y^2)}$ term tends to $1$, and \cref{eq:fresnel-diffraction} becomes:
 \begin{equation}
-  E_{Fraunhofer\ region}(\alpha, \beta) = \mathcal{F} \left\{A(x,y)\right\}
+  \textbf{E}_{Fraunhofer\ region}(\alpha, \beta) = \mathcal{F} \left\{\textbf{A}(x,y)\right\}
   \label{eq:fraunhofer-diffraction}
 \end{equation}
 
@@ -229,13 +210,13 @@ As there is no fully complex modulator available yet, we need algorithms to gene
 
 \subsubsection{Rotational symmetries in the binary phase modulation} \label{sec:Rotational symmetries in the binary phase modulation}
 
-The spatial light modulator (SLM) used in this thesis is a binary phase modulator. As the binary phase modulation is purely real (i.e. it's only switching between $0^\circ$ and $180^\circ$, corresponding to 1 and -1 values of $A^*(x,y)$), the complex conjugate $A^*(x,y)$ is the same as $A(x,y)$:
+The spatial light modulator (SLM) used in this thesis is a binary phase modulator. As the binary phase modulation is purely real (i.e. it's only switching between $0^\circ$ and $180^\circ$, corresponding to 1 and -1 values of $\textbf{A}^*(x,y)$), the complex conjugate $\textbf{A}^*(x,y)$ is the same as $\textbf{A}(x,y)$:
 \begin{equation} \label{eq:AequalsAstar}
-  A^*(x,y) = A(x,y)
+  \textbf{A}^*(x,y) = \textbf{A}(x,y)
 \end{equation}
-because the Fourier transform of $A^*(x,y)$ is the same as the Fourier transform of $A(x,y)$
+because the Fourier transform of $\textbf{A}^*(x,y)$ is the same as the Fourier transform of $\textbf{A}(x,y)$
 \begin{equation} \label{eq:AAstar}
-  E(-\alpha, -\beta)=\mathcal{F}[A^*(x,y)]=\mathcal{F}[A(x,y)]=E(\alpha, \beta)
+  \textbf{E}(-\alpha, -\beta)=\mathcal{F}[\textbf{A}^*(x,y)]=\mathcal{F}[\textbf{A}(x,y)]=\textbf{E}(\alpha, \beta)
 \end{equation}
 So, at the Fraunhofer region, there is no distinction between the desired image and its $180^\circ$ rotation in the replay field, resulting in a symmetrical conjugate image rotated $180^\circ$ from the target image.
 
@@ -267,15 +248,15 @@ To demonstrate this phenomenon, the example target image shown in \cref{fig:10_s
 \section{Computer-Generated Holography (CGH)}\label{sec:cgh}
 Different from traditional analogue optical holography and digital holography, which both need a physically existing object to record the hologram, the CGH is a method to use computer algorithms to generate holograms without the need for a physical target object. Ideally, holograms can be computed using the inverse Fourier Transform, using the inverse functions of \cref{eq:fresnel-diffraction} and \cref{eq:fraunhofer-diffraction} derived in \cref{sec:Diffraction}. The inverse Fourier Transforms on most targets will end up with results in complex numbers; however, as mentioned in \cref{sec:SLM}, currently available SLMs cannot achieve fully complex modulation yet. Therefore, computer algorithms are needed to compute either phase-only or amplitude-only holograms, among which the former is preferred, as explained in \cref{sec:SLM}.
 
-This section reviews the existing methods in the literature for calculating phase-only holograms. The phase hologram is labelled as $H$, so that it differs from the previous notation of $A$ for complex-valued hologram apertures. And the propagation function is unified as $\mathcal{P}$, which can be either the Fraunhofer propagation equation in \cref{eq:fresnel-diffraction} or the Fresnel propagation equation in \cref{eq:fraunhofer-diffraction} depending on the distance from the hologram plane to the target field plane. Lastly, $R$ denotes the reconstruction intensity of the hologram (i.e. $R = \vert \mathcal{P}[e^{jH}] \vert ^2 $).
+This section reviews the existing methods in the literature for calculating phase-only holograms $\textbf{H}$, which are the angles of the complex-valued hologram apertures $\textbf{A}$ (i.e. $\textbf{H} = \angle \textbf{A}$). And the propagation function is unified as $\mathcal{P}$, which can be either the Fraunhofer propagation equation in \cref{eq:fresnel-diffraction} or the Fresnel propagation equation in \cref{eq:fraunhofer-diffraction} depending on the distance from the hologram plane to the target field plane. Lastly, $\textbf{R}$ denotes the reconstruction intensity of the hologram (i.e. $\textbf{R} = \vert \mathcal{P}[\mathrm{e}^{j\textbf{H}}] \vert ^2 $).
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.3\textwidth]{mandrill.png}
-  \caption{Sample target image of a mandrill ($T$) \cite{MANDRILL_REF}}\label{fig:mandrill.png}
+  \caption{Sample target image of a mandrill \cite{MANDRILL_REF}}\label{fig:mandrill.png}
 \end{figure}
 
-A sample image of a mandrill (shown in \cref{fig:mandrill.png}) is chosen from the University of Southern California Signal and Image Processing Institute (USC-SIPI) Image Database \cite{MANDRILL_REF} to test and compare the classical phase retrieval algorithms in the literature. As the square of the amplitude, which is the intensity of light, is the only visible component with the human eye \cite{Huang2024}, the diffracted electric field amplitude ($\vert E \vert$) will be targeted to match the square root of $T$.
+A sample image of a mandrill (shown in \cref{fig:mandrill.png}) is chosen from the University of Southern California Signal and Image Processing Institute (USC-SIPI) Image Database \cite{MANDRILL_REF} to test and compare the classical phase retrieval algorithms in the literature. As the square of the amplitude, which is the intensity of light, is the only visible component with the human eye \cite{Huang2024}, the diffracted electric field amplitude ($\vert \textbf{E} \vert$) will be set to match the square root of the target image ($\textbf{T}$).
 
 To quantitatively analyse the reconstruction quality, two metrics are used in this section, which are the normalised mean squared error (NMSE) \cite{MSE_REF} and the structural similarity index (SSIM) \cite{Wang2004_SSIM}.
 
@@ -292,90 +273,100 @@ where $x$ is the target, $y$ is the measured output and $n$ is the number of pix
 where $\mu_x$ and $\mu_y$ are the mean values of the pixels in $x$ and $y$ respectively, $\sigma_x^2$ and $\sigma_y^2$ are the variances, $\sigma _{xy}$ is the covariance of $x$ and $y$, $C_1 = (k_1 L)^2$ and $C_2 = (k_2 L)^2$, where $L$ is the dynamic range of the pixel values and $k_1 = 0.01$ and $k_2 = 0.03$ by default \cite{Wang2004_SSIM}. A higher SSIM value indicates better reconstruction quality.
 
 
-\subsection{Phase Unwrapping Method}\label{sec:Naive algorithm}
-The simplest method to get a phase-only hologram $H$ is by directly extracting the phase of the reverse propagation from the target field, discarding the amplitude component (e.g. for Fraunhofer propagation, $H$ will simply be the phase of the inverse Fourier transform $\mathcal{F} ^{-1}$ of the target field). This method is named as the Phase Unwrapping method in this thesis as it directly unwraps the phases from the complex values. The pseudocode of the Phase Unwrapping method is shown in \cref{alg:Naive algorithm} below:
+\subsection{Direct Phase-Only Hologram Generation}\label{sec:Naive algorithm}
+The simplest method to get a phase-only hologram $\textbf{H}$ is by directly extracting the phase of the reverse propagation from the target field, discarding the amplitude component (e.g. for Fraunhofer propagation, $\textbf{H}$ will simply be the phase of the inverse Fourier transform $\mathcal{F} ^{-1}$ of the target field). The pseudocode of this method is shown in \cref{alg:Naive algorithm} below:
 \begin{algorithm}[H]
-  \caption{Phase Unwrapping method}\label{alg:Naive algorithm}
-  \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
+  \caption{Direct phase-only hologram generation method}\label{alg:Naive algorithm}
+  \textbf{Input:} Target image $\textbf{T}$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
+  \textbf{Output:} Phase hologram $\textbf{H}$ and its reconstruction intensity $\textbf{R}$
   \begin{algorithmic}
-    \State $E \gets \sqrt{T}$
-    \State $A \gets \mathcal{P}^{-1}[E]$
-    \State $H \gets \angle A$
-    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert ^2 $
+    \State $\textbf{E} \gets \sqrt{\textbf{T}}$
+    \State $\textbf{A} \gets \mathcal{P}^{-1}[\textbf{E}]$
+    \State $\textbf{H} \gets \angle \textbf{A}$
+    \State $\textbf{R} \gets \vert \mathcal{P}[\mathrm{e}^{j\textbf{H}}] \vert ^2 $
   \end{algorithmic}
 \end{algorithm}
-where $j = \sqrt{-1} $, the $\angle$ sign means phase unwrapping (i.e. taking arguments of the complex numbers element-wise in the matrix), and $e^{jH}$ converts the angles back to complex numbers. All exponentials, modulus and square-root operators were carried out in an element-wise manner, so that the dimensions of $T$, $A$, $H$, $R$ and $E$ are all the same.
+where $j = \sqrt{-1} $, the $\angle$ sign takes the arguments of the complex numbers element-wise in the matrix, and $\mathrm{e}^{j\textbf{H}}$ converts the angles back to complex numbers. All exponentials, modulus and square-root operators were carried out in an element-wise manner, so that the dimensions of $\textbf{T}$, $\textbf{A}$, $\textbf{H}$, $\textbf{R}$ and $\textbf{E}$ are all the same.
 
-The Phase Unwrapping method (described in \cref{alg:Naive algorithm}) was then implemented in MATLAB and run on the sample target image shown in \cref{fig:mandrill.png}, with the distance set to infinity (i.e. in the Fraunhofer region using the propagation formula \cref{eq:fraunhofer-diffraction}). The results are shown in \cref{fig:Naive algorithm output} below:
+The method described in \cref{alg:Naive algorithm} was then implemented in MATLAB and run on the sample target image shown in \cref{fig:mandrill.png}, with the distance set to infinity (i.e. in the Fraunhofer region using the propagation formula \cref{eq:fraunhofer-diffraction}). The results are shown in \cref{fig:Naive algorithm output} below:
 
 \begin{figure}[H]
   \centering
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Naive_discarded_amplitude.png}
-    \caption{Discarded amplitude ($\vert A\vert$)}
+    \caption{Discarded amplitude ($\vert \textbf{A}\vert$)}
     \label{fig:Naive_discarded_amplitude}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Naive_output_holo.png}
-    \caption{Phase Hologram ($H$)}
+    \caption{Phase Hologram ($\textbf{H}$)}
     \label{fig:Naive_output_holo}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Naive_output_recon.png}
-    \caption{Reconstruction ($R$)}
+    \caption{Reconstruction ($\textbf{R}$)}
     \label{fig:Naive_output_recon}
   \end{subfigure}
-  \caption{Phase Unwrapping method output}
+  \caption{Direct phase-only hologram generation method output}
   \label{fig:Naive algorithm output}
 \end{figure}
 
-After taking the inverse Fourier Transform, the amplitude and the phase of $A$ are shown in \cref{fig:Naive_discarded_amplitude} and \cref{fig:Naive_output_holo} respectively. The next step then discarded the amplitude component (\cref{fig:Naive_discarded_amplitude}) and used the phase component (in \cref{fig:Naive_output_holo}) as the phase hologram $H$. Then the phase hologram went through a forward propagation and the resulting reconstruction intensity is shown in \cref{fig:Naive algorithm output}.
+After taking the inverse Fourier Transform, the amplitude and the phase of $\textbf{A}$ are shown in \cref{fig:Naive_discarded_amplitude} and \cref{fig:Naive_output_holo} respectively. The next step then discarded the amplitude component (\cref{fig:Naive_discarded_amplitude}) and used the phase component (in \cref{fig:Naive_output_holo}) as the phase hologram $\textbf{H}$. Then the phase hologram went through a forward propagation and the resulting reconstruction intensity is shown in \cref{fig:Naive algorithm output}.
 
-The reconstruction intensity shown in \cref{fig:Naive_output_recon} is very different from the desired target image in \cref{fig:mandrill.png}. This shows that, discarding the amplitude has introduced a significant loss of information. From a signal processing point of view, the peak around the centre in \cref{fig:Naive_discarded_amplitude} corresponds to low spatial frequency signals, and discarding them causes the reconstruction in \cref{fig:Naive_output_recon} to lose low frequency components and effectively becomes an edge detector. Another explanation for the poor reconstruction quality is that the Phase Unwrapping method assumes a uniform phase profile for the target image, which is physically difficult to achieve. A simple improvement can be made by adding a random phase to the target, as shown in the pseudocode below:
+The reconstruction intensity shown in \cref{fig:Naive_output_recon} is very different from the desired target image in \cref{fig:mandrill.png}. This shows that, discarding the amplitude has introduced a significant loss of information. From a signal processing point of view, the peak around the centre in \cref{fig:Naive_discarded_amplitude} corresponds to low spatial frequency signals, and discarding them causes the reconstruction in \cref{fig:Naive_output_recon} to lose low frequency components and effectively becomes an edge detector. The reason for this phenomenon is shown in \cref{fig:random_phase_illustration} below. 
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{random_phase_illustration.png}
+    \caption{Illustration of the intuitive reason for the random phase addition \cite{Shimobaba2015}. (a) without random phase (b) with random phase }
+    \label{fig:random_phase_illustration}
+\end{figure}
+ In the case without random phase, shown in \cref{fig:random_phase_illustration}(a), the low frequency object parts cannot spread light widely over the CGH because the spread angle is proportional to $\sin^{-1}(\lambda \nu)$ where $\lambda$ and $\nu$ are the wavelength and the spatial frequency, respectively. Therefore, the object information of parts (2) and (3) can be recorded on the CGH, whereas that of part (1) cannot be recorded. Conversely, as shown in \cref{fig:random_phase_illustration}(b), random phase acts as an equivalent of a physical diffuser so that light from all parts of the object can spread over the CGH owing to high spatial frequency provided by the random phase. \cite{Shimobaba2015}\\
+
+The improvement method of adding a random phase to the target is demonstrated in the pseudocode below:
 
 \begin{algorithm}[H]
-  \caption{Improved Phase Unwrapping method with random phase added to the target field}\label{alg:Naive algorithm with random phase}
-  \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
+  \caption{Improved direct phase-only hologram generation method with random phase added to the target field}\label{alg:Naive algorithm with random phase}
+  \textbf{Input:} Target image $\textbf{T}$, Propagation function $\mathcal{P}$ (e.g. Fresnel or Fraunhofer propagation)\\
+  \textbf{Output:} Phase hologram $\textbf{H}$ and its reconstruction intensity $\textbf{R}$
   \begin{algorithmic}
-    \State $E \gets \sqrt{T} \times RandomPhase()$
-    \State $A \gets \mathcal{P}^{-1}[E]$
-    \State $H \gets \angle A$
-    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert ^2 $
+    \State $\textbf{E} \gets \sqrt{\textbf{T}} \times RandomPhase()$
+    \State $\textbf{A} \gets \mathcal{P}^{-1}[\textbf{E}]$
+    \State $\textbf{H} \gets \angle \textbf{A}$
+    \State $\textbf{R} \gets \vert \mathcal{P}[\mathrm{e}^{j\textbf{H}}] \vert ^2 $
   \end{algorithmic}
 \end{algorithm}
 
-The improved Phase Unwrapping method was implemented in MATLAB and produced the results shown in \cref{fig:Output of the improved Naive method} below:
+The improved direct phase-only hologram generation method was implemented in MATLAB and produced the results shown in \cref{fig:Output of the improved Naive method} below:
 
 \begin{figure}[H]
   \centering
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Naive_rand_discarded_amplitude.png}
-    \caption{Discarded amplitude ($\vert A\vert$)}
+    \caption{Discarded amplitude ($\vert \textbf{A}\vert$)}
     \label{fig:Naive_rand_discarded_amplitude}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Naive_rand_holo.png}
-    \caption{Multi-level Phase Hologram ($H$)}
+    \caption{Multi-level Phase Hologram ($\textbf{H}$)}
     \label{fig:Naive_rand_holo}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.3\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Naive_rand_recon.png}
-    \caption{Reconstruction ($R$)}
+    \caption{Reconstruction ($\textbf{R}$)}
     \label{fig:Naive_rand_recon}
   \end{subfigure}
-  \caption{Output of the improved Phase Unwrapping method}
+  \caption{Output of the improved phase-only hologram generation method}
   \label{fig:Output of the improved Naive method}
 \end{figure}
 
@@ -405,7 +396,7 @@ Moreover, additional error will be introduced during the quantisation step, whic
     \caption{Reconstruction}
     \label{fig:Naive_binary_Recon}
   \end{subfigure}
-  \caption{Output of the improved Phase Unwrapping method with binary-phase quantisation}
+  \caption{Output of the improved phase-only hologram generation method with binary-phase quantisation}
   \label{fig:Output of the improved Naive method with binary-phase quantisation}
 \end{figure}
 
@@ -423,28 +414,28 @@ where $\theta$ is the input phase value in range $[-\pi, \pi]$ and $\theta_{bina
 
 \newpage
 \subsection{Direct Binary Search (DBS) Algorithm}\label{sec:Direct Binary Search (DBS) Algorithm}
-Direct Binary Search (DBS) algorithm \cite{Seldowitz1987} is an algorithm that generates the hologram by randomly flipping each pixel in the SLM between binary states (0 and $\pi$) one by one for many times in order to minimise the difference between the hologram's reconstruction intensity $R$ and the target image $T$. The detailed algorithm is described in \cref{alg:DBS algorithm} below:
+Direct Binary Search (DBS) algorithm \cite{Seldowitz1987} is an algorithm that generates the hologram by randomly flipping each pixel in the SLM between binary states (0 and $\pi$) one by one for many times in order to minimise the difference between the hologram's reconstruction intensity $\textbf{R}$ and the target image $T$. The detailed algorithm is described in \cref{alg:DBS algorithm} below:
 \begin{algorithm}[H]
   \caption{Direct Binary Search (DBS) algorithm}\label{alg:DBS algorithm}
-  \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$ (e.g. mean-squared error), Number of iterations $N$ \\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
+  \textbf{Input:} Target image $\textbf{T}$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$ (e.g. mean-squared error), Number of iterations $N$ \\
+  \textbf{Output:} Phase hologram $\textbf{H}$ and its reconstruction intensity $\textbf{R}$
   \begin{algorithmic}
-    \State{// Start with a random hologram with a size matching $T$}
-    \State $H \gets$ Rand(Size($T$))
-    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert ^2$
-    \State $L \gets \mathcal{L} [R, T]$
+    \State{// Start with a random hologram with a size matching $\textbf{T}$}
+    \State $\textbf{H} \gets$ Rand(Size($\textbf{T}$))
+    \State $\textbf{R} \gets \vert \mathcal{P}[\mathrm{e}^{j\textbf{H}}] \vert ^2$
+    \State $L \gets \mathcal{L} [\textbf{R}, \textbf{T}]$
 
     \For {$n$ = $1$ to $N$}
     \State{// Flip a random pixel in the hologram}
-    \State $H_n \gets$ FlipRandomPixel($H$)\\
+    \State $\textbf{H}_n \gets$ FlipRandomPixel($\textbf{H}$)\\
     \State{// Calculate the loss function for the new hologram}
-    \State $R_n \gets \vert \mathcal{P}[e^{jH_n}] \vert ^2$
-    \State $L_n \gets \mathcal{L} [R_n, T]$\\
+    \State $\textbf{R}_n \gets \vert \mathcal{P}[\mathrm{e}^{j\textbf{H}_n}] \vert ^2$
+    \State $L_n \gets \mathcal{L} [\textbf{R}_n, \textbf{T}]$\\
     \State{// Compare the new loss with the old one}
     \If {$L_n < L$}
     \State{// Accept the new hologram if loss is lower}
-    \State $H \gets H_n$
-    \State $R \gets R_n$
+    \State $\textbf{H} \gets \textbf{H}_n$
+    \State $\textbf{R} \gets \textbf{R}_n$
     \State $L \gets L_n$
     \EndIf
     \EndFor
@@ -486,7 +477,7 @@ Although the DBS algorithm is specifically suited for generating binary phase ho
   \label{fig:DBS algorithm running on the rotationally symmetrical mandrill target}
 \end{figure}
 
-DBS algorithm can sometimes find very accurate holograms if the run is lucky; however, it is extremely slow due to the large number of iteration required (as shown in \cref{fig:DBS_mandrill_2_convergence}, even $10^5$ iterations have not reached a good convergence). The example run on the target image with resolution $1024 px\times 1024 px$ in \cref{fig:mandrill_2_DBS} took more than one hour to finish the $10^5$ iterations, which is still far from reaching a good convergence. The binary-phase hologram produced is shown in \cref{fig:DBS_mandrill_2_Holo}, and its corresponding reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an NMSE of \num{8.0717e-07}, which is 78\% larger than the NMSE of the Phase Unwrapping method (\num{4.5452e-07}). The reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an SSIM of only 0.0076, indicating a very low structural similarity to the target image, and is much worse than the Phase Unwrapping method, which has an SSIM of 0.0603, as discussed in \cref{sec:Naive algorithm}.
+DBS algorithm can sometimes find very accurate holograms if the run is lucky; however, it is extremely slow due to the large number of iteration required (as shown in \cref{fig:DBS_mandrill_2_convergence}, even $10^5$ iterations have not reached a good convergence). The example run on the target image with resolution $1024 px\times 1024 px$ in \cref{fig:mandrill_2_DBS} took more than one hour to finish the $10^5$ iterations, which is still far from reaching a good convergence. The binary-phase hologram produced is shown in \cref{fig:DBS_mandrill_2_Holo}, and its corresponding reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an NMSE of \num{8.0717e-07}, which is 78\% larger than the NMSE of the direct phase-only hologram generation method(\num{4.5452e-07}). The reconstruction in \cref{fig:DBS_mandrill_2_recon_intensity} has an SSIM of only 0.0076, indicating a very low structural similarity to the target image, and is much worse than the direct phase-only hologram generation method, which has an SSIM of 0.0603, as discussed in \cref{sec:Naive algorithm}.
 
 \begin{figure}[H]
   \centering
@@ -523,40 +514,40 @@ DBS algorithm can sometimes find very accurate holograms if the run is lucky; ho
 
 As the DBS algorithm only flips one pixel per iteration, it naturally takes significantly longer to generate holograms with higher resolution. To test the programme on a smaller image for much quicker convergence, another target image has been designed, as shown in \cref{fig:test_128}, which is also rotationally symmetrical as it is used for the binary-phase hologram generation. After $10^6$ iterations, which took 10 minutes, the hologram generated is shown in \cref{fig:DBS_test_128_Holo} and its resulting reconstruction is shown in \cref{fig:DBS_test_128_recon_intensity}, which has an NMSE of \num{9.6881e-06} and an SSIM of 0.2871. The NMSE v.s. iteration plot in \cref{fig:DBS_test_128_convergence} shows that it reaches a good convergence at around \num{2e5} iterations, which needs around 2 minutes. Moreover, the curve of NMSE is monotonically decreasing with iteration number, as only holograms with better results are accepted during the iterations.
 
-In summary, the DBS algorithm is a slow but working algorithm for binary phase hologram generation. The programme running time scales up significantly when the target image's resolution gets higher. Furthermore, as the DBS algorithm only cares about local optimality at each iteration, it is a greedy algorithm that only follows the steepest descent route, which can easily get trapped in a local minimum where flipping any bit will not result in better reconstructions. Another consequence of the random nature is that the generated hologram will be different at each run, so the quality of the resulting reconstruction ($R$) will depend on how `lucky' each run is. The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} in the next session aims to resolve this issue.
+In summary, the DBS algorithm is a slow but working algorithm for binary phase hologram generation. The programme running time scales up significantly when the target image's resolution gets higher. Furthermore, as the DBS algorithm only cares about local optimality at each iteration, it is a greedy algorithm that only follows the steepest descent route, which can easily get trapped in a local minimum where flipping any bit will not result in better reconstructions. Another consequence of the random nature is that the generated hologram will be different at each run, so the quality of the resulting reconstruction ($\textbf{R}$) will depend on how `lucky' each run is. The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} in the next session aims to resolve this issue.
 
 
 \subsection{Simulated Annealing (SA) Algorithm}\label{sec:Simulated Annealing (SA) Algorithm}
-The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DBS algorithm. It adopts a probabilistic approach to avoid the steepest gradient descent. Its name derives from the fact that it approximates the recrystallisation process during metal annealing and is particularly well-suited to avoiding the trap of local minima \cite{Yang2009}. To implement this idea, we need a function ($\mathcal{Z}$) to calculate the probability of the hologram ($H$), and a threshold $p_t$ to decide whether the probability is high enough for the according hologram to be accepted. In this thesis, the probability is selected to be a random function and the threshold is chosen to be 0.9. The pseudocode for this algorithm is listed in \cref{alg:Simulated Annealing (SA) algorithm}.
+The Simulated Annealing (SA) algorithm \cite{Kirkpatrick1983} is a variant of the DBS algorithm. It adopts a probabilistic approach to avoid the steepest gradient descent. Its name derives from the fact that it approximates the recrystallisation process during metal annealing and is particularly well-suited to avoiding the trap of local minima \cite{Yang2009}. To implement this idea, we need a function ($\mathcal{Z}$) to calculate the probability of the hologram ($\textbf{H}$), and a threshold $p_t$ to decide whether the probability is high enough for the according hologram to be accepted. In this thesis, the probability is selected to be a random function and the threshold is chosen to be 0.9. The pseudocode for this algorithm is listed in \cref{alg:Simulated Annealing (SA) algorithm}.
 \begin{algorithm}[H]
   \caption{Simulated Annealing (SA) algorithm}\label{alg:Simulated Annealing (SA) algorithm}
-  \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$, Number of iterations $N$, Probability function $\mathcal{Z}$, Probability threshold $p_t$ \\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
+  \textbf{Input:} Target image $\textbf{T}$, Propagation function $\mathcal{P}$, Loss function $\mathcal{L}$, Number of iterations $N$, Probability function $\mathcal{Z}$, Probability threshold $p_t$ \\
+  \textbf{Output:} Phase hologram $\textbf{H}$ and its reconstruction intensity $R$
   \begin{algorithmic}
-    \State{// Start with a random hologram with a size matching $T$}
-    \State $H \gets$ Rand(Size($T$))
-    \State $R \gets \vert \mathcal{P}[e^{jH}] \vert ^2$
-    \State $L \gets \mathcal{L} [R, T]$
+    \State{// Start with a random hologram with a size matching $\textbf{T}$}
+    \State $\textbf{H} \gets$ Rand(Size($\textbf{T}$))
+    \State $\textbf{R} \gets \vert \mathcal{P}[\mathrm{e}^{j\textbf{H}}] \vert ^2$
+    \State $L \gets \mathcal{L} [\textbf{R}, \textbf{T}]$
 
     \For {$n$ = $1$ to $N$}
     \State{// Flip a random pixel in the hologram}
-    \State $H_n \gets$ FlipRandomPixel($H$)\\
+    \State $\textbf{H}_n \gets$ FlipRandomPixel($\textbf{H}$)\\
     \State{// Calculate the loss function for the new hologram}
-    \State $R_n \gets \vert \mathcal{P}[e^{jH_n}] \vert ^2$
-    \State $L_n \gets \mathcal{L} [R_n, T]$\\
+    \State $\textbf{R}_n \gets \vert \mathcal{P}[\mathrm{e}^{j\textbf{H}_n}] \vert ^2$
+    \State $L_n \gets \mathcal{L} [\textbf{R}_n, \textbf{T}]$\\
     \State{// Compare the new loss with the old one}
     \If {$L_n < L$}
     \State{// Accept the new hologram if loss is lower}
-    \State $H \gets H_n$
-    \State $R \gets R_n$
+    \State $\textbf{H} \gets \textbf{H}_n$
+    \State $\textbf{R} \gets \textbf{R}_n$
     \State $L \gets L_n$
     \Else
     \State{// Calculate the probability of the hologram}
-    \State $p_n \gets \mathcal{Z}[H_n]$
+    \State $p_n \gets \mathcal{Z}[\textbf{H}_n]$
     \If {$p_n > p_t$}
     \State{// Accept the new hologram if the probability exceeds the threshold}
-    \State $H \gets H_n$
-    \State $R \gets R_n$
+    \State $\textbf{H} \gets \textbf{H}_n$
+    \State $\textbf{R} \gets \textbf{R}_n$
     \State $L \gets L_n$
     \EndIf
     \EndIf
@@ -642,23 +633,23 @@ The Gerchberg-Saxton (GS) algorithm \cite{Gerchberg1972} is a revolutionary algo
 
 \begin{algorithm}[H]
   \caption{Gerchberg-Saxton (GS) Algorithm}\label{alg:Gerchberg-Saxton (GS) Algorithm}
-  \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Number of iterations $N$, Initial phase $\varPhi$ (e.g. random, zeros, or other patterns) \\
-  \textbf{Output:} Phase hologram $H$ and its reconstruction intensity $R$
+  \textbf{Input:} Target image $\textbf{T}$, Propagation function $\mathcal{P}$, Number of iterations $N$, Initial phase $\varPhi$ (e.g. random, zeros, or other patterns) \\
+  \textbf{Output:} Phase hologram $\textbf{H}$ and its reconstruction intensity $\textbf{R}$
   \begin{algorithmic}
-    \State{// Initiate $E$ with amplitude $\sqrt{T}$ and initial phase $\varPhi$}
-    \State $E \gets \sqrt{T} \times e^{j\varPhi}$
+    \State{// Initiate $\textbf{E}$ with amplitude $\sqrt{\textbf{T}}$ and initial phase $\varPhi$}
+    \State $\textbf{E} \gets \sqrt{\textbf{T}} \times \mathrm{e}^{j\varPhi}$
     \For {$n$ = $1$ to $N$}
     \State{// Compute the hologram plane}
-    \State $A \gets \mathcal{P}^{-1}[E]$
+    \State $\textbf{A} \gets \mathcal{P}^{-1}[\textbf{E}]$
     \State{// Apply the phase-only constraint at the hologram plane}
-    \State $A \gets e^{j\angle A}$\\
+    \State $\textbf{A} \gets \mathrm{e}^{j\angle A}$\\
     \State{// Compute the propagation for the new hologram}
-    \State $E \gets \mathcal{P}[A]$
+    \State $\textbf{E} \gets \mathcal{P}[\textbf{A}]$
     \State{// Apply the target field amplitude constraint at the reconstruction plane}
-    \State $E \gets \sqrt{T} \times e^{j\angle E}$
+    \State $\textbf{E} \gets \sqrt{\textbf{T}} \times \mathrm{e}^{j\angle \textbf{E}}$
     \EndFor
-    \State $H \gets \angle A$
-    \State $R \gets \vert \mathcal{P}[A] \vert ^2$
+    \State $\textbf{H} \gets \angle \textbf{A}$
+    \State $\textbf{R} \gets \vert \mathcal{P}[\textbf{A}] \vert ^2$
   \end{algorithmic}
 \end{algorithm}
 
@@ -693,7 +684,7 @@ The Gerchberg-Saxton (GS) algorithm \cite{Gerchberg1972} is a revolutionary algo
   \caption{GS algorithm output on the mandrill target}
   \label{fig:GS algorithm output on the mandrill target}
 \end{figure}
-The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was implemented in MATLAB and was first run on the mandrill target image in \cref{fig:mandrill.png}, and the output results are shown in \cref{fig:GS algorithm output on the mandrill target}. \cref{fig:GS_holo_i_30} is the multi-level hologram generated after 30 iterations, and its reconstruction is shown in \cref{fig:GS_recon_i_30}. The reconstruction in \cref{fig:GS_recon_i_30} has an NMSE of \num{2.6612e-08} and an SSIM of 0.7940, which are both much better than the single-iteration Phase Unwrapping method's result in \cref{fig:Naive_rand_recon} (with an NMSE of \num{1.0228e-06} and an SSIM of 0.1603). The NMSE v.s. iteration plot in \cref{fig:GS_NMSE_plot} shows that the GS algorithm converged quickly, providing very good result in tens of iterations, which is much fewer than the DBS and SA algorithms. Although the GS algorithm is more computationally expensive at each iteration, as it needs to compute both a forward and an backward propagation, leading to two Fourier transforms every iteration, the GS algorithm is still much faster and provides much better reconstruction quality than the DBS and SA algorithms.
+The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was implemented in MATLAB and was first run on the mandrill target image in \cref{fig:mandrill.png}, and the output results are shown in \cref{fig:GS algorithm output on the mandrill target}. \cref{fig:GS_holo_i_30} is the multi-level hologram generated after 30 iterations, and its reconstruction is shown in \cref{fig:GS_recon_i_30}. The reconstruction in \cref{fig:GS_recon_i_30} has an NMSE of \num{2.6612e-08} and an SSIM of 0.7940, which are both much better than the single-iteration direct phase-only hologram generation method's result in \cref{fig:Naive_rand_recon} (with an NMSE of \num{1.0228e-06} and an SSIM of 0.1603). The NMSE v.s. iteration plot in \cref{fig:GS_NMSE_plot} shows that the GS algorithm converged quickly, providing very good result in tens of iterations, which is much fewer than the DBS and SA algorithms. Although the GS algorithm is more computationally expensive at each iteration, as it needs to compute both a forward and an backward propagation, leading to two Fourier transforms every iteration, the GS algorithm is still much faster and provides much better reconstruction quality than the DBS and SA algorithms.
 
 \begin{figure}[H]
   \centering
@@ -728,7 +719,7 @@ The GS algorithm described in \cref{alg:Gerchberg-Saxton (GS) Algorithm} was imp
   \label{fig:GS algorithm running on the rotationally symmetrical mandrill target}
 \end{figure}
 
-Then the GS algorithm was adapted to generate binary-phase holograms, for use on the binary-phase SLM in this thesis. The change was simply implemented by adding a quantisation function ($\mathcal{Q}$) when applying the phase-only constraint at the hologram plane (i.e. the line `$A \gets e^{j\angle A}$' in \cref{alg:Gerchberg-Saxton (GS) Algorithm} is changed to `$A \gets e^{j\mathcal{Q}[\angle A]}$'). The results are shown in \cref{fig:GS algorithm running on the rotationally symmetrical mandrill target}. \cref{fig:GS_mandrill_2_convergence} shows good convergence within 20 iterations. The resulting binary-phase hologram is shown in \cref{fig:GS_Holo_mandrill_2} and its corresponding reconstruction in \cref{fig:GS_Recon_mandrill_2} has an NMSE of 1.6968e-07 and an SSIM of 0.0619, which are both better than the Phase Unwrapping method's result in \cref{fig:Output of the improved Naive method with binary-phase quantisation} (with an NMSE of \num{4.5452e-07} and an SSIM of 0.0603). In summary, the GS algorithm is quick and robust. On my laptop computer of model ASUS ROG Zephyrus M16, which has a CPU of model i7-11800H and a GPU of model RTX3060, the 30 iterations took 1.5 seconds to complete. It reached convergence in tens of iterations. However, as it is still iterative, generating holograms in real-time is still a challenge, and the reconstruction still suffers from noise.
+Then the GS algorithm was adapted to generate binary-phase holograms, for use on the binary-phase SLM in this thesis. The change was simply implemented by adding a quantisation function ($\mathcal{Q}$) when applying the phase-only constraint at the hologram plane (i.e. the line `$\textbf{A} \gets \mathrm{e}^{j\angle \textbf{A}}$' in \cref{alg:Gerchberg-Saxton (GS) Algorithm} is changed to `$\textbf{A} \gets \mathrm{e}^{j\mathcal{Q}[\angle \textbf{A}]}$'). The results are shown in \cref{fig:GS algorithm running on the rotationally symmetrical mandrill target}. \cref{fig:GS_mandrill_2_convergence} shows good convergence within 20 iterations. The resulting binary-phase hologram is shown in \cref{fig:GS_Holo_mandrill_2} and its corresponding reconstruction in \cref{fig:GS_Recon_mandrill_2} has an NMSE of 1.6968e-07 and an SSIM of 0.0619, which are both better than the direct phase-only hologram generation method's result in \cref{fig:Output of the improved Naive method with binary-phase quantisation} (with an NMSE of \num{4.5452e-07} and an SSIM of 0.0603). In summary, the GS algorithm is quick and robust. On my laptop computer of model ASUS ROG Zephyrus M16, which has a CPU of model i7-11800H and a GPU of model RTX3060, the 30 iterations took 1.5 seconds to complete. It reached convergence in tens of iterations. However, as it is still iterative, generating holograms in real-time is still a challenge, and the reconstruction still suffers from noise.
 
 
 \subsection{One-Step Phase Retrieval (OSPR) Algorithm}\label{sec:One Step Phase Retrieval (OSPR) Algorithm}
@@ -736,19 +727,19 @@ The OSPR algorithm was first demonstrated by Cable and Buckley \cite{Cable2004}.
 
 \begin{algorithm}[H]
   \caption{One-Step Phase Retrieval (OSPR) algorithm}\label{alg:One-Step Phase Retrieval (OSPR) algorithm}
-  \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Number of sub-frames $S$, Quantisation function $\mathcal{Q}$\\
-  \textbf{Output:} List of phase holograms $H[1\ldots S]$
+  \textbf{Input:} Target image $\textbf{T}$, Propagation function $\mathcal{P}$, Number of sub-frames $S$, Quantisation function $\mathcal{Q}$\\
+  \textbf{Output:} List of phase holograms $\textbf{H}[1\ldots S]$
   \begin{algorithmic}
     \State // Compute a list of hologram sub-frames
     \For {$i$ = $1$ to $S$}
-    \State $E \gets \sqrt{T} \cdot $ RandomPhase()
-    \State $A \gets \mathcal{P}^{-1}[E]$
-    \State $H[i] \gets \mathcal{Q}[\angle A]$
+    \State $\textbf{E} \gets \sqrt{\textbf{T}} \cdot $ RandomPhase()
+    \State $\textbf{A} \gets \mathcal{P}^{-1}[\textbf{E}]$
+    \State $\textbf{H}[i] \gets \mathcal{Q}[\angle \textbf{A}]$
     \EndFor\\
     \State // Then display the sub-frames on the phase modulator sequentially
     \State $i\gets 1$
     \While {True}
-    \State Display($H[i]$)
+    \State Display($\textbf{H}[i]$)
     \State $i\gets i + 1$
     \If {$i > S$}
     \State $i\gets 1$
@@ -757,7 +748,7 @@ The OSPR algorithm was first demonstrated by Cable and Buckley \cite{Cable2004}.
   \end{algorithmic}
 \end{algorithm}
 
-When generating the list of holograms, it repetitively computes the inverse propagation of the target amplitude (which is the square-root of the target intensity $T$) multiplied by different random phases, for a total of $S$ times to generate $S$ hologram sub-frames ($H[1\ldots S]$). The computation of each hologram sub-frame is the same as the Phase Unwrapping method in \cref{alg:Naive algorithm with random phase} discussed in \cref{sec:Naive algorithm}. Then the $S$ hologram sub-frames are displayed sequentially on a SLM having a refresh rate being so fast that the average reconstruction intensity is perceived by the human eyes. As currently available fast SLMs are binary-phase modulators, an example run on the rotationally symmetrical target previously used in \cref{fig:mandrill_2_DBS} was carried out for 24 sub-frames ($S=24$). The results are summarised in \cref{fig:ospr_mandrill_2}.
+When generating the list of holograms, it repetitively computes the inverse propagation of the target amplitude (which is the square-root of the target intensity $\textbf{T}$) multiplied by different random phases, for a total of $S$ times to generate $S$ hologram sub-frames ($\textbf{H}[1\ldots S]$). The computation of each hologram sub-frame is the same as the direct phase-only hologram generation method in \cref{alg:Naive algorithm with random phase} discussed in \cref{sec:Naive algorithm}. Then the $S$ hologram sub-frames are displayed sequentially on a SLM having a refresh rate being so fast that the average reconstruction intensity is perceived by the human eyes. As currently available fast SLMs are binary-phase modulators, an example run on the rotationally symmetrical target previously used in \cref{fig:mandrill_2_DBS} was carried out for 24 sub-frames ($S=24$). The results are summarised in \cref{fig:ospr_mandrill_2}.
 
 \begin{figure}[H]
 	\centering
@@ -766,7 +757,7 @@ When generating the list of holograms, it repetitively computes the inverse prop
 	\label{fig:ospr_mandrill_2}
 \end{figure}
 
-In \cref{fig:ospr_mandrill_2}, a total of 24 binary-phase hologram sub-frames ($H_1, H_2, \ldots, H_{24}$) were generated for the target image $T$. For easier data transfer and to fit with the common display signal formats, the 24 binary-phase hologram sub-frames are encoded into a single file with 8 bit depth and RGB (red-green-blue) channels, so that each of the $(8\times 3 = )24$ bit-planes corresponds to a single binary-phase hologram sub-frame. For a quantitative analysis, the reconstruction intensities of the hologram sub-frames are computed in $R_1, R_2, \ldots, R_{24}$ respectively, whose average is $R_{avg}$ in \cref{fig:ospr_mandrill_2}. The average reconstruction intensity $R_{avg}$ has an NMSE of \num{9.8632e-08} and an SSIM of 0.1321, which are both significantly better than the GS algorithm (NMSE=\num{1.6968e-7}, SSIM=0.0619) and the Phase Unwrapping method (NMSE=\num{4.5452e-7}, SSIM=0.0603).
+In \cref{fig:ospr_mandrill_2}, a total of 24 binary-phase hologram sub-frames ($\textbf{H}_1, \textbf{H}_2, \ldots, \textbf{H}_{24}$) were generated for the target image $\textbf{T}$. For easier data transfer and to fit with the common display signal formats, the 24 binary-phase hologram sub-frames are encoded into a single file with 8 bit depth and RGB (red-green-blue) channels, so that each of the $(8\times 3 = )24$ bit-planes corresponds to a single binary-phase hologram sub-frame. For a quantitative analysis, the reconstruction intensities of the hologram sub-frames are computed in $\textbf{R}_1, \textbf{R}_2, \ldots, \textbf{R}_{24}$ respectively, whose average is $\textbf{R}_{avg}$ in \cref{fig:ospr_mandrill_2}. The average reconstruction intensity $\textbf{R}_{avg}$ has an NMSE of \num{9.8632e-08} and an SSIM of 0.1321, which are both significantly better than the GS algorithm (NMSE=\num{1.6968e-7}, SSIM=0.0619) and the direct phase-only hologram generation method (NMSE=\num{4.5452e-7}, SSIM=0.0603).
 
 The major advantage of the OSPR algorithm is that it is fast. It is non-iterative and requires only one Fourier Transform per frame, taking less than a second to generate a 24-frame hologram set. Its non-iterative nature also allows it to be parallelised to further improve computation speed, which is crucial for Light Blue Optics who made a real-time holographic laser projector commercially available in 2010 \cite{Buckley2008}, although the product was later discontinued for financial reasons. The downside of this algorithm is that the sub-frames are independent from each other, and the final reconstruction output is still subject to some noise, as they are only more randomly distributed instead of being reduced. There is a variant of improvement on the OSPR algorithm, called Adaptive OSPR (AD-OSPR), to be introduced in \cref{sec:Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm}.
 
@@ -778,28 +769,28 @@ The AD-OSPR algorithm \cite{Kaczorowski2016} is a variant of the OSPR algorithm.
 
 \begin{algorithm}[H]
   \caption{Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}\label{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}
-  \textbf{Input:} Target image $T$, Propagation function $\mathcal{P}$, Number of sub-frames $S$, Quantisation function $\mathcal{Q}$\\
-  \textbf{Output:} List of phase holograms $H[1\ldots S]$
+  \textbf{Input:} Target image $\textbf{T}$, Propagation function $\mathcal{P}$, Number of sub-frames $S$, Quantisation function $\mathcal{Q}$\\
+  \textbf{Output:} List of phase holograms $\textbf{H}[1\ldots S]$
   \begin{algorithmic}
     \State // Compute a list of hologram sub-frames
-    \State $T[1] \gets T$
-    \State $R_{total} \gets 0$
+    \State $\textbf{T}[1] \gets \textbf{T}$
+    \State $\textbf{R}_{total} \gets 0$
     \For {$i$ = $1$ to $S$}
-    \State $E \gets \sqrt{T[i]} \cdot$ RandomPhase()
-    \State $A \gets \mathcal{P}^{-1}[E]$
-    \State $H[i] \gets \mathcal{Q}[\angle A]$
+    \State $\textbf{E} \gets \sqrt{\textbf{T}[i]} \cdot$ RandomPhase()
+    \State $\textbf{A} \gets \mathcal{P}^{-1}[\textbf{E}]$
+    \State $\textbf{H}[i] \gets \mathcal{Q}[\angle \textbf{A}]$
     \State // Compute the reconstruction intensity
-    \State $R \gets \vert \mathcal{P}[e^{jH[i]}] \vert ^2$
+    \State $\textbf{R} \gets \vert \mathcal{P}[\mathrm{e}^{j\textbf{H}[i]}] \vert ^2$
     \State // Carry out energy conservation to match the total energy of the target image
-    \State $R \gets R \cdot \sqrt{\frac{sum(T^2)}{sum(R^2)}} $ // squares and sums are taken element wise
+    \State $\textbf{R} \gets \textbf{R} \cdot \sqrt{\frac{sum(\textbf{T}^2)}{sum(\textbf{R}^2)}} $ // squares and sums are taken element wise
     \State // Compute the total reconstruction intensity so far
-    \State $R_{total} \gets R_{total} + R$
+    \State $\textbf{R}_{total} \gets \textbf{R}_{total} + \textbf{R}$
     \State // Compute the new target for the next iteration
-    \For {$[x, y]$ = $[1, 1]$ to size($T$)} // loop among all the pixels
-    \If {($i+1)\cdot T[x,y]$ > $R_{total}[x,y]$}
-    \State $T[i+1][x,y] \gets (i+1)\cdot T[x,y] - R_{total}[x,y]$
+    \For {$[x, y]$ = $[1, 1]$ to size($\textbf{T}$)} // loop among all the pixels
+    \If {($i+1)\cdot \textbf{T}[x,y]$ > $\textbf{R}_{total}[x,y]$}
+    \State $\textbf{T}[i+1][x,y] \gets (i+1)\cdot \textbf{T}[x,y] - \textbf{R}_{total}[x,y]$
     \Else
-    \State $T[i+1][x,y] \gets 0$
+    \State $\textbf{T}[i+1][x,y] \gets 0$
     \EndIf
     \EndFor
 
@@ -807,7 +798,7 @@ The AD-OSPR algorithm \cite{Kaczorowski2016} is a variant of the OSPR algorithm.
     \State // Then display the sub-frames on the phase modulator sequentially
     \State $i\gets 1$
     \While {True}
-    \State Display($H[i]$)
+    \State Display($\textbf{H}[i]$)
     \State $i\gets i + 1$
     \If {$i > S$}
     \State $i\gets 1$
@@ -816,7 +807,7 @@ The AD-OSPR algorithm \cite{Kaczorowski2016} is a variant of the OSPR algorithm.
   \end{algorithmic}
 \end{algorithm}
 
-In the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}, the target intensity for the first iteration ($T[1]$) is initialised as the input target image $T$, and the total reconstruction intensity for the holograms generated up to each iteration ($R_{total}$) is initialised as 0. Then the $\textbf{for}$ loop starts from the same routine as the OSPR algorithm, multiplying a random phase to the square root of target intensity, taking an inverse propagation, and applying the binary phase quantisation. Then, the total reconstruction is computed by forward propagating the quantised hologram, conserving the energy to match the target image, and adding to the total reconstruction of the last iteration. The total reconstruction is then used to compute the target intensity for the next iteration, by subtracting the total reconstruction from $(i+1)$ times the target image, with an $\textbf{if-else}$ statement to avoid negative intensity values. To provide a visual illustration, an example run of the AD-OSPR algorithm was carried out on the mandrill target as shown in \cref{fig:adospr_mandrill_2}.
+In the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}, the target intensity for the first iteration ($\textbf{T}[1]$) is initialised as the input target image $\textbf{T}$, and the total reconstruction intensity for the holograms generated up to each iteration ($\textbf{R}_{total}$) is initialised as 0. Then the $\textbf{for}$ loop starts from the same routine as the OSPR algorithm, multiplying a random phase to the square root of target intensity, taking an inverse propagation, and applying the binary phase quantisation. Then, the total reconstruction is computed by forward propagating the quantised hologram, conserving the energy to match the target image, and adding to the total reconstruction of the last iteration. The total reconstruction is then used to compute the target intensity for the next iteration, by subtracting the total reconstruction from $(i+1)$ times the target image, with an $\textbf{if-else}$ statement to avoid negative intensity values. To provide a visual illustration, an example run of the AD-OSPR algorithm was carried out on the mandrill target as shown in \cref{fig:adospr_mandrill_2}.
 
 \begin{figure}[H]
 	\centering
@@ -825,15 +816,15 @@ In the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algor
 	\label{fig:adospr_mandrill_2}
 \end{figure}
 
-In \cref{fig:adospr_mandrill_2}, each row of images correspond to one iteration that is indexed in the `i' column, where only iterations 1, 2, 3, 24 are shown here, while iterations 4-23 are omitted to save space. At each iteration, the binary-phase hologram $H_i$ is computed from its target $T_i$, and the corresponding reconstruction is shown in $R_i$. Instead of showing the $R_{total, i}$, the $R_{avg, i}=\frac{R_{total, i}}{i}$ is shown here as $R_{total, i}$ has increasing dynamic range at each iteration.
+In \cref{fig:adospr_mandrill_2}, each row of images correspond to one iteration that is indexed in the `i' column, where only iterations 1, 2, 3, 24 are shown here, while iterations 4-23 are omitted to save space. At each iteration, the binary-phase hologram $\textbf{H}_i$ is computed from its target $\textbf{T}_i$, and the corresponding reconstruction is shown in $\textbf{R}_i$. Instead of showing the $\textbf{R}_{total, i}$, the $\textbf{R}_{avg, i}=\frac{\textbf{R}_{total, i}}{i}$ is shown here as $\textbf{R}_{total, i}$ has increasing dynamic range at each iteration.
 
-For the first iteration, the target image of the same one as in \cref{fig:ospr_mandrill_2} is used, and the first average reconstruction $R_{avg, 1}$ is just the first reconstruction $R_1$. Then, from the second iteration onwards, the target intensity $T_i$ is updated following the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}. After 24 iterations, the 24 hologram sub-frames are computed and their average reconstruction ($R_{avg, 24}$) had an NMSE of \num{9.1161e-08} and a SSIM of 0.1992, which are both better than the OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} who achieved an NMSE of \num{9.8632e-08} and an SSIM of 0.1321.
+For the first iteration, the target image of the same one as in \cref{fig:ospr_mandrill_2} is used, and the first average reconstruction $\textbf{R}_{avg, 1}$ is just the first reconstruction $\textbf{R}_1$. Then, from the second iteration onwards, the target intensity $\textbf{T}_i$ is updated following the pseudocode in \cref{alg:Adaptive One-Step Phase Retrieval (AD-OSPR) algorithm}. After 24 iterations, the 24 hologram sub-frames are computed and their average reconstruction ($\textbf{R}_{avg, 24}$) had an NMSE of \num{9.1161e-08} and a SSIM of 0.1992, which are both better than the OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} who achieved an NMSE of \num{9.8632e-08} and an SSIM of 0.1321.
 
 The programme running time of the AD-OSPR algorithm is nearly the same as the OSPR algorithm, both being around 0.7 second. Therefore the AD-OSPR algorithm is quite an effective improvement on the original OSPR algorithm, achieving a 7.6\% reduction in NMSE and 50.8\% improvement in SSIM without adding much computation. The disadvantage is however, that it cannot be parallelised, unlike the OSPR algorithm, as it needs to have the total reconstruction intensity result from the previous iteration for use in the next iteration.
 
 
 \newpage
-\subsection{3D CGH}
+\subsection{3D CGH} \label{sec:3D CGH}
 \cref{sec:Naive algorithm} - \cref{sec:Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm} described several algorithms to generate a phase hologram for a single target image. However, the major benefit of holography is that it can produce a true 3D light field, much more than just a single slice 2D image. Then the problem arises as how to generate a hologram for 3D targets to make full use of the major benefit of holography. The simplest method is to slice the 3D target into a set of 2D layers, like computed tomography (CT) scanning, and then generate a hologram so that its Fresnel propagation (in \cref{eq:fresnel-diffraction}) at each depth ($z$) matches the according layer. This subsection therefore reviews how the current methods in \cref{sec:Naive algorithm} - \cref{sec:Adaptive One-Step Phase Retrieval (AD-OSPR) Algorithm} can be adapted to multi-depth hologram generation.
 
 \begin{figure}[H]
@@ -843,25 +834,25 @@ The programme running time of the AD-OSPR algorithm is nearly the same as the OS
 	\label{fig:ABCD_target}
 \end{figure}
 
-For fair tests on algorithms, an example 3D target field consisted of 4 slices has been created using alphabets, as shown in \cref{fig:ABCD_target}. $T_1$ to $T_4$ have the same resolution of $512px \times 512px$, and the distances $z_1$ to $z_4$ are set to $1, 2, 3, 4 cm$ respectively.
+For fair tests on algorithms, an example 3D target field consisted of 4 slices has been created using alphabets, as shown in \cref{fig:ABCD_target}. $\textbf{T}_1$ to $\textbf{T}_4$ have the same resolution of $512px \times 512px$, and the distances $z_1$ to $z_4$ are set to $1, 2, 3, 4 cm$ respectively.
 
 
-\subsubsection{Phase Unwrapping with Superposition}
-To adapt the Phase Unwrapping method in \cref{sec:Naive algorithm} to compute multi-depth hologram, firstly, a set of holograms are generated corresponding to each layer of the target field respectively, using the inverse of the Fresnel propagation function in \cref{eq:fresnel-diffraction}. Then, based on the principle of superposition, the set of holograms are added up to form the final hologram, whose phase is directly extracted to be the phase-only hologram while the amplitude component is discarded.
+\subsubsection{Direct Phase-Only Hologram Generation with Superposition}
+To adapt the direct phase-only hologram generation method in \cref{sec:Naive algorithm} to compute multi-depth hologram, firstly, a set of holograms are generated corresponding to each layer of the target field respectively, using the inverse of the Fresnel propagation function in \cref{eq:fresnel-diffraction}. Then, based on the principle of superposition, the set of holograms are added up to form the final hologram, whose phase is directly extracted to be the phase-only hologram while the amplitude component is discarded.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\textwidth]{ABCD/Naive_ABCD.pdf}
-	\caption{Phase Unwrapping with Superposition method's result on the 4-slice target}
+	\caption{Direct phase-only hologram generation with superposition on the 4-slice target}
 	\label{fig:Naive_ABCD}
 \end{figure}
 
-The simulation results shown in \cref{fig:Naive_ABCD} demonstrates the effectiveness of the Phase Unwrapping method. The reconstructions at each depth are legible, despite the presence of some noise. However, after applying a binary-phase quantisation on the hologram, the reconstruction quality deteriorates significantly, as shown in \cref{fig:Naive_ABCD_binary}.
+The simulation results shown in \cref{fig:Naive_ABCD} demonstrates the effectiveness of the direct phase-only hologram generation method. The reconstructions at each depth are legible, despite the presence of some noise. However, after applying a binary-phase quantisation on the hologram, the reconstruction quality deteriorates significantly, as shown in \cref{fig:Naive_ABCD_binary}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\textwidth]{ABCD/Naive_ABCD_binary.pdf}
-	\caption{Phase Unwrapping method's result on the 4-slice target after binary quantisation}
+	\caption{Direct phase-only hologram generation method method's result on the 4-slice target after binary quantisation}
 	\label{fig:Naive_ABCD_binary}
 \end{figure}
 
@@ -876,13 +867,13 @@ To improve the reconstruction quality, the time-multiplexed OSPR algorithm (in \
 	\label{fig:OSPR_ABCD}
 \end{figure}
 
-The OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} was adapted to generate multi-depth targets by doing the Phase Unwrapping method in the previous paragraph for a total of $S$ times to form $S$ sub-frames. The results of the example run with $S=24$ is shown in \cref{fig:OSPR_ABCD}. The average reconstruction has much less noise than the single frame one in \cref{fig:Naive_ABCD_binary}. However, the contrast is not high enough. Therefore, one of the major objective of this thesis is to search for time-multiplexed binary-phase holograms with better reconstruction quality than the existing methods, which will be further explored in \cref{chapter:Multi Frame Holograms Batched Optimisation}.
+The OSPR algorithm in \cref{sec:One Step Phase Retrieval (OSPR) Algorithm} was adapted to generate multi-depth targets by doing the direct phase-only hologram generation method in the previous paragraph for a total of $S$ times to form $S$ sub-frames. The results of the example run with $S=24$ is shown in \cref{fig:OSPR_ABCD}. The average reconstruction has much less noise than the single frame one in \cref{fig:Naive_ABCD_binary}. However, the contrast is not high enough. Therefore, one of the major objective of this thesis is to search for time-multiplexed binary-phase holograms with better reconstruction quality than the existing methods, which will be further explored in \cref{chapter:Multi Frame Holograms Batched Optimisation}.
 
 \subsubsection{GS algorithm adaptations} \label{sec:GS algorithm adaptation}
 The GS algorithm in \cref{sec:Gerchberg-Saxton (GS) Algorithm} can also be adapted to generate phase-only holograms for multi-depth 3D targets. Three different adaptations are reviewed in the following paragraphs.
 
 \textbf{GS algorithm adaptation 1 - Superposition: }
-Similar to the OSPR adaptation, the first method of adapting the GS algorithm for 3D CGH is by superposition. Firstly, a set of holograms are generated individually using the GS algorithm on each slice of the 3D target, and then those holograms are superposed into a total hologram whose phase is then unwrapped to be the final phase hologram.
+Similar to the OSPR adaptation, the first method of adapting the GS algorithm for 3D CGH is by superposition. Firstly, a set of holograms are generated individually using the GS algorithm on each slice of the 3D target, and then those holograms are superposed into a total hologram whose phase is then used as the final phase hologram.
 
 \begin{figure}[H]
   \centering
@@ -895,7 +886,7 @@ The GS with superposition method was run on the target field in \cref{fig:ABCD_t
 
 
 \textbf{GS algorithm adaptation 2 - GS with Sequential Slicing (GS-SS): }
-The second adaptation is called GS-SS, Instead of propagating to a fixed target image at each iteration, the GS algorithm is modified to propagate to a different distance at each iteration, and the target amplitude constraint of the according distance is applied (i.e. line $E \gets \sqrt{T} \times e^{j\angle E}$ in \cref{alg:Gerchberg-Saxton (GS) Algorithm} becomes $E \gets \sqrt{T_{i\%n}} \times e^{j\angle E}$, where $i$ is the iteration number, $n$ is the total number of slices and the $\%$ sign takes the remainder of the division). Such method is named sequential slicing, where the algorithm sweeps through the slices one by one sequentially during its iterations.
+The second adaptation is called GS-SS, Instead of propagating to a fixed target image at each iteration, the GS algorithm is modified to propagate to a different distance at each iteration, and the target amplitude constraint of the according distance is applied (i.e. line $\textbf{E} \gets \sqrt{\textbf{T}} \times \mathrm{e}^{j\angle \textbf{E}}$ in \cref{alg:Gerchberg-Saxton (GS) Algorithm} becomes $\textbf{E} \gets \sqrt{\textbf{T}_{i\%n}} \times \mathrm{e}^{j\angle \textbf{E}}$, where $i$ is the iteration number, $n$ is the total number of slices and the $\%$ sign takes the remainder of the division). Such method is named sequential slicing, where the algorithm sweeps through the slices one by one sequentially during its iterations.
 
 \begin{figure}[H]
   \centering
@@ -904,7 +895,7 @@ The second adaptation is called GS-SS, Instead of propagating to a fixed target 
   \label{fig:GS_SS_ABCD}
 \end{figure}
 
-The GS with sequential slicing (SS) algorithm was run on the target field in \cref{fig:ABCD_target} for 100 iterations, and the result is shown in \cref{fig:GS_SS_ABCD}. The interesting phenomena is that, as the 100 iterations terminated at the $4^{th}$ layer, the $4^{th}$ reconstruction ($R_4$) has the best quality among all slices, and the reconstruction quality deteriorates as the slice index reduces.
+The GS with sequential slicing (SS) algorithm was run on the target field in \cref{fig:ABCD_target} for 100 iterations, and the result is shown in \cref{fig:GS_SS_ABCD}. The interesting phenomena is that, as the 100 iterations terminated at the $4^{th}$ layer, the $4^{th}$ reconstruction ($\textbf{R}_4$) has the best quality among all slices, and the reconstruction quality deteriorates as the slice index reduces.
 
 \begin{figure}[H]
   \centering
@@ -917,7 +908,7 @@ As a further investigation, the NMSE of each slice is plotted against iteration 
 
 
 \textbf{GS algorithm adaptation 3 - Dynamic Compensatory GS (DCGS): }
-The DCGS algorithm `softens' the target field amplitude constraint \cite{Zhou2019}. Instead of forcing the amplitude of the reconstructed field to the target amplitude directly, it allows a fraction $\alpha$ of the original amplitude to be retained (i.e. $E \gets \sqrt{T_{i\%n}} \times e^{j\angle E}$ becomes $E \gets [\alpha \times \vert E \vert + (1-\alpha) \times \sqrt{T_{i\%n}}] \times e^{j\angle E}$), where $\alpha$ is adjusted dynamically at each iteration. The DCGS algorithm was implemented and run on the 4-slice target in \cref{fig:ABCD_target}. The result is shown in \cref{fig:DCGS_ABCD}.
+The DCGS algorithm `softens' the target field amplitude constraint \cite{Zhou2019}. Instead of forcing the amplitude of the reconstructed field to the target amplitude directly, it allows a fraction $\alpha$ of the original amplitude to be retained (i.e. $\textbf{E} \gets \sqrt{\textbf{T}_{i\%n}} \times \mathrm{e}^{j\angle \textbf{E}}$ becomes $\textbf{E} \gets [\alpha \times \vert \textbf{E} \vert + (1-\alpha) \times \sqrt{\textbf{T}_{i\%n}}] \times \mathrm{e}^{j\angle \textbf{E}}$), where $\alpha$ is adjusted dynamically at each iteration. The DCGS algorithm was implemented and run on the 4-slice target in \cref{fig:ABCD_target}. The result is shown in \cref{fig:DCGS_ABCD}.
 
 \begin{figure}[H]
   \centering

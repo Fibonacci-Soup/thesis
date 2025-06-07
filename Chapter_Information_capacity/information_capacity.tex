@@ -9,12 +9,12 @@
 
 \textit{Note: The work in this chapter has been published in Ref. \cite{Sha2024}}\\\\
 
-Despite many years of development in computer-generated holography, perfect phase-only holograms for most target images are still not yet possible to compute. All computational phase retrieval algorithms end up with some error between the target image and the reconstruction of the computer-generated hologram (CGH), except for certain specific targets. This chapter focuses on the fundamental limits of phase-only CGH quantised to limited bit-depth levels, from an information theory perspective. It explores the information capacity of a CGH and its impact on reconstruction quality, and aims to quantify the difficulty of computing a phase-only CGH for a target image.
+Despite many years of development in computer-generated holography, perfect phase-only holograms, whose reconstructions exactly match the targets with 0 error, are still not yet possible to compute. All computational phase retrieval algorithms end up with some error between the target image and the reconstruction of the computer-generated hologram (CGH), except for certain specific targets. This chapter focuses on the fundamental limits of phase-only CGH quantised to limited bit-depth levels, from an information theory perspective. It explores the information capacity of a CGH and its impact on reconstruction quality, and aims to quantify the difficulty of computing a phase-only CGH for a target image.
 
 
 
 \section{Introduction}
-	As introduced in the previous chapters, Holography is a technology that can fully reconstruct the wavefront of 3D objects. CGH is a technique for converting a 3D object scene into a 2D complex-valued hologram \cite{Tsang2018}, without the need for the 3D object to physically exist. However, despite many advancements in liquid crystals and micro mirrors technologies, complex-valued SLM's are still not available yet, and the currently available SLM's can only achieve either amplitude or phase modulation, among which the phase modulation is usually preferred in holographic projections for its lower zero order and higher energy efficiency due to less blockage of light. There are many algorithms available to compute good quality phase-only holograms as shown in the previous chapters; however, none of them can guarantee to compute a perfect phase hologram for a 3D scene or even a 2D image, where they always end up with some error between the reconstruction of the hologram and the target scene, especially when the phase holograms are quantised to be able to display on SLM with limited bit depth. An intuition therefore arose that the bit depth of the phase hologram is limiting the reconstruction quality, and that the target scene's entropy seems to denote how difficult it is for phase hologram generation. It is obvious that the entropy of the target can certainly never exceed the bit depth limit of its corresponded perfect hologram, otherwise a lossless compressor breaking the Shannon's information theory \cite{Shannon1948} would be invented; however, such statement is not quite useful in practice as perfect holograms are generally impossible to find.
+	As introduced in the previous chapters, Holography is a technology that can fully reconstruct the wavefront of 3D objects. CGH is a technique for converting a 3D object scene into a 2D complex-valued hologram \cite{Tsang2018}, without the need for the 3D object to physically exist. However, despite many advancements in liquid crystals and micro mirrors technologies, complex-valued SLM's are still not available yet, and the currently available SLM's can only achieve either amplitude or phase modulation, among which the phase modulation is usually preferred in holographic projections for its lower zero order and higher energy efficiency due to less blockage of light. There are many algorithms available to compute good quality phase-only holograms as shown in the previous chapters; however, none of them can guarantee to compute a perfect phase hologram having zero error between the reconstructions and the according 3D or 2D targets, where they always end up with some error between the reconstruction of the hologram and the target scene, especially when the phase holograms are quantised to be able to display on SLM with limited bit depth. An intuition therefore arose that the bit depth of the phase hologram is limiting the reconstruction quality, and that the target scene's entropy seems to denote how difficult it is for phase hologram generation. It is obvious that the entropy of the target can certainly never exceed the bit depth limit of its corresponded perfect hologram, otherwise a lossless compressor breaking the Shannon's information theory \cite{Shannon1948} would be invented; however, such statement is not quite useful in practice as perfect holograms are generally impossible to find.
 
 	The literature review had found no related work on the information entropy of computer-generated holograms, with the closest match being the research on hologram compression using optical method to achieve lossy compression \cite{Kollin1988}, which cannot be integrated in CGH processes. Therefore, this chapter aims to investigate how much information content can a bit-depth-limited phase hologram contain, taking from an information theory point of view. Previously, work had been done to investigate the effect of bit-depth in Stochastic Gradient Descent (SGD) performance for phase-only computer-generated holography displays \cite{Kadis2022}. This chapter extends on previous research onto the Gerchberg-Saxton (GS) \cite{Gerchberg1972} algorithms for hologram generation, and investigates the correlation between the quality of the reconstructed image from the hologram and the information entropy of the target image, with an aim to reduce the hologram's entropy during the CGH process, for smaller size holograms.
 
@@ -26,7 +26,7 @@ Despite many years of development in computer-generated holography, perfect phas
 
 	\begin{figure} [H]
 	   \begin{center}
-	   \includegraphics[width = 0.6\textwidth]{GS_flowchart.eps}
+	   \includegraphics[width = 0.8\textwidth]{GS_flowchart.eps}
 	   \end{center}
 	   \caption{\label{fig:GS_flowchart} Gerchberg-Saxton (GS) algorithm flowchart}
 	\end{figure}
@@ -35,9 +35,11 @@ Despite many years of development in computer-generated holography, perfect phas
 
 	\begin{figure} [H]
 		\begin{center}
-			\begin{tabular}{c c c c}
-				\includegraphics[width = 0.24\textwidth]{Quantization_bit_depth_1.jpg} & \includegraphics[width = 0.24\textwidth]{Quantization_bit_depth_2.jpg} & \includegraphics[width = 0.24\textwidth]{Quantization_bit_depth_4.jpg} & \includegraphics[width = 0.24\textwidth]{Quantization_bit_depth_8.jpg}\\
-				(a) bit depth = 1 & (b) bit depth = 2 & (c) bit depth = 4 & (d) bit depth = 8
+			\begin{tabular}{c c}
+				\includegraphics[width = 0.44\textwidth]{Quantization_bit_depth_1.jpg} & \includegraphics[width = 0.44\textwidth]{Quantization_bit_depth_2.jpg} \\ 
+				(a) bit depth = 1 & (b) bit depth = 2 \\
+				\includegraphics[width = 0.44\textwidth]{Quantization_bit_depth_4.jpg} & \includegraphics[width = 0.44\textwidth]{Quantization_bit_depth_8.jpg} \\
+				 (c) bit depth = 4 & (d) bit depth = 8
 			\end{tabular}
 			\caption{\label{fig:Quantisation_bit_depth} Quantisation of phase holograms}
 		\end{center}
@@ -45,7 +47,7 @@ Despite many years of development in computer-generated holography, perfect phas
 
 	\begin{figure} [H]
 	   \begin{center}
-	   \includegraphics[width = 0.6\textwidth]{GS_quantized_flowchart.eps}
+	   \includegraphics[width = 0.8\textwidth]{GS_quantized_flowchart.eps}
 	   \end{center}
 	   \caption{\label{fig:GS_quantised_flowchart} Quantised Gerchberg-Saxton (GS) algorithm flowchart}
 	\end{figure}

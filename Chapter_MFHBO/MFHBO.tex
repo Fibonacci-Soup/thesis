@@ -16,7 +16,7 @@ This chapter builds on the idea of time-averaging multiple hologram frames and p
 
 
 \section{Methods}
-	The use of the L-BFGS algorithm for single-frame hologram optimisation has been introduced in \cref{chapter:L-BFGS Optimisation of Phase-Only Hologram}. To implement it onto multi-frame holograms generation, the argument to optimise becomes the set of holograms with $n$ sub-frames ($\{\textbf{H}_1, \textbf{H}_2, ..., \textbf{H}_n\}$), each having a resolution of $X\times Y$ pixels matching the resolution of the target image, and the objective function to minimise is therefore the difference between the average reconstruction amplitude ($\textbf{R}_{avg}=\frac{1}{n}\sum_{i=1}^n\textbf{R}_i$) and the target image ($\textbf{T}$), which is denoted as $Loss(\textbf{T}, \textbf{R}_{avg})$, where $n$ is the total number of frames, $\textbf{R}_i$'s are reconstructions from individual hologram sub-frames $\textbf{H}_i$'s for $i\in[1,n]$. To compute each $\textbf{R}_i$ from the corresponding $\textbf{H}_i$, the Fresnel diffraction formula given in \cref{eq:fresnel-diffraction} is used. As we are generating holograms for phase-only SLM's, the hologram aperture $\textbf{A}$ in \cref{eq:fresnel-diffraction} is then comprised of a uniform amplitude with phase $\textbf{H}$, giving $\textbf{A} = e^{j\textbf{H}}$, where the exponential is taken element-wise, and the replay field($\textbf{E}$)'s amplitude is the reconstruction (i.e.$\textbf{R} = |\textbf{E}|$).
+	The use of the L-BFGS algorithm for single-frame hologram optimisation has been introduced in \cref{chapter:L-BFGS Optimisation of Phase-Only Hologram}. To extend it to multi-frame hologram generation, the optimisation variable becomes the set of $n$ hologram sub-frames ($\{\textbf{H}_1, \textbf{H}_2, ..., \textbf{H}_n\}$), each with a resolution of $X \times Y$ pixels matching that of the target image. The objective function to minimise is the difference between the average reconstruction amplitude ($\textbf{R}_{avg} = \frac{1}{n} \sum_{i=1}^n \textbf{R}_i$) and the target image ($\textbf{T}$), denoted as $Loss(\textbf{T}, \textbf{R}_{avg})$. Here, $\textbf{R}_i$ denotes the reconstruction from the individual sub-frame $\textbf{H}_i$, for $i \in [1, n]$. Each $\textbf{R}_i$ is computed from $\textbf{H}_i$ using the Fresnel diffraction formula in \cref{eq:fresnel-diffraction}. Since phase-only SLMs are used, the hologram aperture $\textbf{A}$ in \cref{eq:fresnel-diffraction} is given by a uniform amplitude with phase $\textbf{H}$, i.e., $\textbf{A} = \mathrm{e}^{j\textbf{H}}$, with the exponential applied element-wise. The amplitude of the replay field $\textbf{E}$ gives the reconstruction, i.e., $\textbf{R} = |\textbf{E}|$.
 
 	\begin{figure}[H]
 		\centering
@@ -25,7 +25,8 @@ This chapter builds on the idea of time-averaging multiple hologram frames and p
 		\label{fig:MFHO_flowchart}
 	\end{figure}
 
-	To help explain the optimisation process, a flow chart is drawn in \cref{fig:MFHO_flowchart}. As shown in the flowchart, the target image $\textbf{T}$ is first loaded, with a set of $n$ hologram sub-frames ($\{\textbf{H}_1, \textbf{H}_2, ..., \textbf{H}_n\}$) generated randomly. Then at every iteration, each hologram sub-frame $\textbf{H}_i$ is quantised to the bit-depth constraint of the SLM, and propagated to the reconstruction plane $\textbf{R}_i$, and the average of the amplitudes of all reconstructions $\textbf{R}_{avg}$ is computed and compared against the target image $\textbf{T}$ using a loss function $Loss(\textbf{T}, \textbf{R}_{avg})$, after which the search direction is computed using the L-BFGS optimiser and the hologram sub-frames are updated accordingly. Here the loss function selected is the relative entropy\cite{Kullback1951} given in \cref{eq:RE_holo}.
+	To illustrate the optimisation process, a flowchart is provided in \cref{fig:MFHO_flowchart}. Initially, the target image $\textbf{T}$ is loaded, and a set of $n$ hologram sub-frames $\{\textbf{H}_1, \textbf{H}_2, ..., \textbf{H}_n\}$ is randomly generated. In each iteration, the sub-frames $\textbf{H}_i$ are quantised to the SLM's bit-depth constraint. To improve the optimisation process, a sigmoid function is used to perform soft quantisation. This allows for a differentiable approximation to discrete phase levels, maintaining gradient flow and stabilising convergence. After quantisation, each $\textbf{H}_i$ is propagated to generate its reconstruction $\textbf{R}_i$, and the average amplitude $\textbf{R}_{avg}$ is computed. The loss $Loss(\textbf{T}, \textbf{R}_{avg})$ is then evaluated using the relative entropy metric \cite{Kullback1951}, as defined in \cref{eq:RE_holo}. Based on this loss, the L-BFGS optimiser computes the search direction and updates all hologram sub-frames accordingly. The optimisation process is repeated for a fixed number of iterations, after which it is terminated.	
+
 
 	% \begin{equation}
 	% 	Loss(\textbf{T}, \textbf{R}_{avg}) = -\sum_{x=1}^{X} \sum_{y=1}^{Y} \textbf{T}_{(x,y)}\log\left(\frac{\textbf{R}_{avg(x,y)}}{\textbf{T}_{(x,y)}}\right)
@@ -35,7 +36,7 @@ This chapter builds on the idea of time-averaging multiple hologram frames and p
 	Since fast SLM's available in the lab are binary-phase devices, the quantisation step in the flowchart in \cref{fig:MFHO_flowchart} is carried out with bit-depth limit of 1, hence producing binary-phase holograms. However, the optimisation algorithm does not converge with a straight binary quantisation as integers are discrete, therefore a Sigmoid function \cite{Bacaer2011} is used for a smoother and differentiable quantisation, as defined in \cref{eq:sigmoid}. The output of the Sigmoid function is then scaled by $\pi$ so that the binary phase levels are $0$ and $\pi$.
 
 	\begin{equation}
-		\mathrm{sigmoid}(x)=\frac{1}{1+e^{-x}}
+		\mathrm{sigmoid}(x)=\frac{1}{1+\mathrm{e}^{-x}}
 		\label{eq:sigmoid}
 	\end{equation}
 
@@ -95,7 +96,7 @@ This chapter builds on the idea of time-averaging multiple hologram frames and p
 	\label{tab:MFHBO runtime}
 	\end{table}
 
-	The programme runtime of the proposed MFHBO method has been measured on a laptop computer of model ASUS ROG Zephyrus M16 (GU603H) with a CPU of model i7-11800H and a GPU of model NVIDIA RTX3060 and the results for different combinations of number of frames and number of iterations are listed in \cref{tab:MFHBO runtime}. It can be concluded that the application of the proposed method is for pre-computed high-quality holograms, instead of real-time holographic projection.
+	The programme runtime of the proposed MFHBO method has been measured on a laptop computer of model ASUS ROG Zephyrus M16 (GU603H) with a CPU of model i7-11800H and a GPU of model NVIDIA RTX3060 and the results for different combinations of number of frames and number of iterations are listed in \cref{tab:MFHBO runtime}. It can be concluded that the application of the proposed method is for pre-computed high-quality holograms, instead of real-time holographic projection. 
 
 
 
@@ -173,6 +174,8 @@ This chapter builds on the idea of time-averaging multiple hologram frames and p
 
 	Then a quantitative analysis was carried out, with NMSE and SSIM values measured and shown in \cref{tab:quant_MFHO_OSPR_ABCD}. The proposed MFHBO method has shown a 10\% reduction in NMSE and a 8\% improvement in SSIM on average than the existing OSPR method, demonstrating the effectiveness of the proposed method.
 
+	On the laptop of model Mechrevo 16 Ultra, which has a CPU of model Intel Ultra 9 275HX and a GPU of model RTX5070Ti, using python with PyTorch and CUDA enabled, the optimisation took 31.249 seconds to complete for 1000 iterations with 24 frames, and the memory usage was 2GB. The runtime is much longer than the existing OSPR method, which takes < 0.5 seconds to complete for 1000 iterations with 24 frames, but the proposed MFHBO method achieves much better reconstruction quality, therefore it is suitable for pre-computed high-quality hologram applications.
+
 
 	\begin{figure}[H]
 		\centering
@@ -182,6 +185,8 @@ This chapter builds on the idea of time-averaging multiple hologram frames and p
 	\end{figure}
 
 	Lastly, a set of real-life scene was captured in the lab using near, middle and far focus, as shown in $\textbf{T}_1, \textbf{T}_2, \textbf{T}_3$ in \cref{fig:MFHO_OSPR_Pen_holder} respectively. The $z$ values were set to $1.1m, 1.2m, 1.3 m$ for hologram generation, and the reconstruction results of the existing OSPR and the proposed MFHBO methods are compared in \cref{fig:MFHO_OSPR_Pen_holder}. The proposed MFHBO method is shown to have achieved better reconstruction quality than the existing OSPR method.
+
+	
 
 	\begin{table}[H]
 	\centering
@@ -199,9 +204,11 @@ This chapter builds on the idea of time-averaging multiple hologram frames and p
 
 	A quantitative analysis was conducted again, with NMSE and SSIM values measured and listed in \cref{tab:quant_MFHO_Pen_holder}. The proposed MFHBO method has shown a 17\% reduction in NMSE and a 7\% improvement in SSIM on average than the existing OSPR method, proving the effectiveness of the proposed method.
 
+	On the laptop of model Mechrevo 16 Ultra, which has a CPU of model Intel Ultra 9 275HX and a GPU of model RTX5070Ti, using python with PyTorch and CUDA enabled, the optimisation took around half an hour to complete for 1000 iterations with 24 frames, and the memory usage was 20GB. Therefore the proposed method is not suitable for real-time holographic projection or computation resource limited situations, but it is suitable for pre-computed high-quality hologram applications.
+
 
 \section{Summary}
-	This chapter proposed the MFHBO method, which generates multi-frame binary-phase holograms that are displayed on a binary-phase SLM with a high refresh rate. The proposed MFHBO method was shown to achieve much better reconstruction quality and higher contrast compared to the existing multi-frame binary-phase hologram generation methods OSPR \cite{Cable2004} and AD-OSPR \cite{Kaczorowski2016} on the holographic projector with a binary-phase SLM, for all the single-slice far-field targets and the multi-slice near-field targets tested. Although the proposed MFHBO method is slower than the existing OSPR and AD-OSPR methods, its much better reconstruction quality makes it suitable for pre-computed high-quality hologram applications. Its strong advantage for high contrast targets (such as the `holography' ambigram in \cref{fig:holography_ambigram_smaller}, which has a much reduced background noise) makes the MFHBO method particularly well-suited for photo-lithography applications. The proposed method can also be adapted for multi-level SLMs by simply removing the quantisation step in \cref{fig:MFHO_flowchart}. This approach can be the suitable for applications such as photo-lithography, where the system's time response is much longer than that of human vision, and high refresh rates of the SLM are not required.
+	This chapter proposed the MFHBO method, which generates multi-frame binary-phase holograms that are displayed on a binary-phase SLM with a high refresh rate. The proposed MFHBO method was shown to achieve much better reconstruction quality and higher contrast compared to the existing multi-frame binary-phase hologram generation methods OSPR \cite{Cable2004} and AD-OSPR \cite{Kaczorowski2016} on the holographic projector with a binary-phase SLM, for all the single-slice far-field targets and the multi-slice near-field targets tested. Although the proposed MFHBO method takes much longer time to compute than the existing OSPR and AD-OSPR methods, its much better reconstruction quality makes it suitable for pre-computed high-quality hologram applications. Its strong advantage for high contrast targets (such as the `holography' ambigram in \cref{fig:holography_ambigram_smaller}, which has a much reduced background noise) makes the MFHBO method particularly well-suited for photo-lithography applications. The proposed method can also be adapted for multi-level SLMs by simply removing the quantisation step in \cref{fig:MFHO_flowchart}. This approach can be the suitable for applications such as photo-lithography, where the system's time response is much longer than that of human vision, and high refresh rates of the SLM are not required. Compared to the Lee's method \cite{LEE1978119}, the proposed MFHBO method is much more computationally heavy but it requires less optical components in the optical setup, the multi-frame technique can also exploit the high refresh rate of binary phase SLMs to average out the perceived speckle-like noise in the reconstruction.
 
 
 	% The results are compared to One-Step Phase-Retrieval and Adaptive One-Step Phase-Retrieval in simulation and experimentally, proving the superiority of the proposed approach. This technique can be easily extended to other spatial modulation methods.
